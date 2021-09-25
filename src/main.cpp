@@ -31,7 +31,13 @@ std::shared_ptr<okapi::OdomChassisController> chassisaut = okapi::ChassisControl
                                                                .withOdometry()   // use the same scales as the chassis (above)
                                                                .buildOdometry(); // build an odometry chassis
 
-
+auto motion =
+    ChassisControllerBuilder()
+        .withMotors({frontLeftPort, backLeftPort}, {frontRightPort, backRightPort})
+        .withDimensions(AbstractMotor::gearset::green, scales)
+        .withMaxVelocity(200)
+        .build();
+        
 /**
  * Runs while the robot is in the disabled state of Field Management System or
  * the VEX Competition Switch, following either autonomous or opcontrol. When
@@ -53,6 +59,12 @@ void competition_initialize()
 
 void autonomous()
 {
+
+  auto profileController = AsyncMotionProfileControllerBuilder().withLimits({ 0.5, 2.0, 10.0 }).withOutput(motion).buildMotionProfileController();
+  profileController->generatePath({ { 0_ft, 0_ft, 0_deg }, { 10_ft, 0_ft, 0_deg }}, "A");            
+
+  profileController->setTarget("A");
+  profileController->waitUntilSettled();
 
 }
 
