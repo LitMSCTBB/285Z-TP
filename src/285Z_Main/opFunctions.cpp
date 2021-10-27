@@ -5,6 +5,8 @@
 
 
 //***********************  INITIALIZE SUBSYSTEMS  ***************************//
+Lift lift;
+
 //           DRIVE         //
 /*void tankDrive(){
   model->tank(controller.getAnalog(okapi::ControllerAnalog::rightY),
@@ -29,4 +31,34 @@ void arcadeDrive(){
 //****************** ANGLER ********************//
 
 
+
+
 //*********************MACROS*******************************//
+
+// MANUAL DUAL CONTROL
+void liftControl()
+{
+  if (liftUpButton.isPressed())
+  {
+    lift.move(-200);
+  }
+  else if (liftDownButton.isPressed())
+  {
+    lift.move(170);
+  }
+  else
+  {
+    lift.move(0);
+  }
+}
+
+// TASK FOR LIFT CONTROL
+void liftTask(void *param)
+{
+  while (true)
+  {
+    liftMotor.setBrakeMode(AbstractMotor::brakeMode::hold);
+    liftControl();
+    pros::Task::delay(10);
+  }
+}

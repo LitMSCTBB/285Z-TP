@@ -35,7 +35,7 @@ auto motion =
     ChassisControllerBuilder()
         .withMotors({frontLeftPort, backLeftPort}, {frontRightPort, backRightPort})
         .withDimensions(AbstractMotor::gearset::green, scales)
-        .withMaxVelocity(200)
+        .withMaxVelocity(600)
         .build();
         
 /**
@@ -70,6 +70,12 @@ void autonomous()
 
 void opcontrol()
 {
+
+  // // LIFT TASK
+  // pros::Task intakeThread(liftTask, (void *)"PROS", TASK_PRIORITY_DEFAULT,
+  //                         TASK_STACK_DEPTH_DEFAULT, "Lift Task");
+
+  // Lift lift;
 
   while (1)
   {

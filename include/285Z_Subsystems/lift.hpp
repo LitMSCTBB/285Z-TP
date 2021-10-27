@@ -5,11 +5,23 @@
 
 extern int heightNow;
 
-class Lift{
+class TwoBar
+{
 
-  public:
-  void liftToggle(Tray);
+public:
+  void liftToggle();
   void deploy();
   void move(int);
   void moveTo(int);
+};
+
+class FourBar
+{
+
+public:
+  void liftToggle();
+  void deploy();
+  void move(int);
+  void moveTo(int);
+  void claw();
 };
