@@ -75,12 +75,14 @@ void opcontrol()
   // pros::Task intakeThread(liftTask, (void *)"PROS", TASK_PRIORITY_DEFAULT,
   //                         TASK_STACK_DEPTH_DEFAULT, "Lift Task");
 
-  // Lift lift;
+  TwoBar tb;
 
   while (1)
   {
 
-    chassisaut->getModel()->tank(controller.getAnalog(ControllerAnalog::leftY), controller.getAnalog(ControllerAnalog::rightY));
+    chassisaut->getModel()->arcade(controller.getAnalog(ControllerAnalog::leftY), controller.getAnalog(ControllerAnalog::rightY));
+
+    tb.liftToggle();
 
     pros::lcd::set_text(1, "hi");
     pros::delay(20);

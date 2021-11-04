@@ -7,19 +7,22 @@ auto clawController = AsyncPosControllerBuilder().withMotor(clawPort).build();
 
 // 2b
 
+const int NUM_HEIGHTS = 2;
+const int height0 = 0;
+const int height1 = 800;
+
+const int heights[NUM_HEIGHTS] = {height0, height1};
+int tbHeight = 0;
+
+
 void TwoBar::liftToggle()
 {
   if (twoBarButton.changedToPressed())
   {
-    // If the goal height is not at maximum and the up button is pressed, increase the setpoint
-    // heightNow++;
-    twoBarController->setTarget(2000);
+    tbHeight++; if (tbHeight == NUM_HEIGHTS) tbHeight = 0; 
   }
-  else
-  {
-    twoBarMotor.setBrakeMode(AbstractMotor::brakeMode::coast);
-    twoBarController->tarePosition();
-  }
+
+  twoBarController->setTarget(heights[tbHeight]);
 }
 
 // 4b
