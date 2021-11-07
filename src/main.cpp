@@ -37,7 +37,7 @@ auto motion =
         .withDimensions(AbstractMotor::gearset::green, scales)
         .withMaxVelocity(600)
         .build();
-        
+
 /**
  * Runs while the robot is in the disabled state of Field Management System or
  * the VEX Competition Switch, following either autonomous or opcontrol. When
@@ -61,10 +61,12 @@ void autonomous()
 {
 
   auto profileController = AsyncMotionProfileControllerBuilder().withLimits({ 0.5, 2.0, 10.0 }).withOutput(motion).buildMotionProfileController();
-  profileController->generatePath({ { 0_ft, 0_ft, 0_deg }, { 10_ft, 0_ft, 0_deg }}, "A");            
+  profileController->generatePath({ { 0_ft, 0_ft, 0_deg }, { 10_ft, 0_ft, 0_deg }}, "A");
 
   profileController->setTarget("A");
   profileController->waitUntilSettled();
+
+
 
 }
 
@@ -76,6 +78,7 @@ void opcontrol()
   //                         TASK_STACK_DEPTH_DEFAULT, "Lift Task");
 
   TwoBar tb;
+  FourBar fb;
 
   while (1)
   {
@@ -83,9 +86,10 @@ void opcontrol()
     chassisaut->getModel()->arcade(controller.getAnalog(ControllerAnalog::leftY), controller.getAnalog(ControllerAnalog::rightY));
 
     tb.liftToggle();
+    fb.liftToggle();
 
     pros::lcd::set_text(1, "hi");
     pros::delay(20);
-    
+
   }
-}
+})

@@ -19,7 +19,7 @@ void TwoBar::liftToggle()
 {
   if (twoBarButton.changedToPressed())
   {
-    tbHeight++; if (tbHeight == NUM_HEIGHTS) tbHeight = 0; 
+    tbHeight++; if (tbHeight == NUM_HEIGHTS) tbHeight = 0;
   }
 
   twoBarController->setTarget(heights[tbHeight]);

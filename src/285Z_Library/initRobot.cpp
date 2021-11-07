@@ -11,13 +11,13 @@ okapi::ControllerButton twoBarButton = okapi::ControllerDigital::L1;
 //drive motor points
 int frontLeftPort = 11;
 int backLeftPort = 20;
-int frontRightPort = -1; //reversed
+int frontRightPort = -2; //reversed
 int backRightPort = -9; //reversed
 
-int fourBarPort = 15;
-int twoBarPort = 16;
-int intakePort = 17;
-int clawPort = 3;
+int fourBarPort = 3;
+int twoBarPort = 4;
+int intakePort = 7;
+int clawPort = 8;
 
 Motor frontLeftMotor(frontLeftPort);
 Motor backLeftMotor(backLeftPort);
