@@ -9,7 +9,7 @@ void Intake::normal()
   {
     // If the goal height is not at maximum and the up button is pressed, increase the setpoint
     // heightNow++;
-    intakeController->setTarget(50);
+    intakeController->setTarget(200);
   }
   else
   {
@@ -24,7 +24,7 @@ void Intake::reverse()
   {
     // If the goal height is not at maximum and the up button is pressed, increase the setpoint
     // heightNow++;
-    intakeController->setTarget(-50);
+    intakeController->setTarget(-200);
   }
   else
   {

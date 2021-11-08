@@ -3,6 +3,7 @@
 #include "285Z_Subsystems/tray.hpp"
 #include "285Z_Subsystems/lift.hpp"
 #include "285Z_Subsystems/pid.hpp"
+#include "285Z_Subsystems/intake.hpp"
 #include "../include/285z/initSensors.hpp"
 #include "../include/285Z_Aux/gui.hpp"
 #include "../include/pros/llemu.hpp"
@@ -79,6 +80,7 @@ void opcontrol()
 
   TwoBar tb;
   FourBar fb;
+  Intake in;
 
   while (1)
   {
@@ -87,9 +89,10 @@ void opcontrol()
 
     tb.liftToggle();
     fb.liftToggle();
+    in.normal(); in.reverse();
 
     pros::lcd::set_text(1, "hi");
     pros::delay(20);
 
   }
-})
+}

@@ -7,39 +7,47 @@ auto clawController = AsyncPosControllerBuilder().withMotor(clawPort).build();
 
 // 2b
 
-const int NUM_HEIGHTS = 2;
-const int height0 = 0;
-const int height1 = 800;
+const int TB_NUM_HEIGHTS = 2;
+const int tb_height0 = -2950;
+const int tb_height1 = -1450;
+const int tb_height2 = 0; // when tb is at highest at match start to satisfy height reqs
 
-const int heights[NUM_HEIGHTS] = {height0, height1};
-int tbHeight = 0;
+const int tbHeights[TB_NUM_HEIGHTS] = {tb_height0, tb_height1};
+int tbHeight = 2; // tbHeight will only ever be 2 at the beginning of the match before the lift is triggered for the first time
 
 
 void TwoBar::liftToggle()
 {
   if (twoBarButton.changedToPressed())
   {
-    tbHeight++; if (tbHeight == NUM_HEIGHTS) tbHeight = 0;
+    if (tbHeight == 2) tbHeight = 0;
+    else { 
+      tbHeight++; if (tbHeight == 2) tbHeight = 0;
+    }
   }
 
-  twoBarController->setTarget(heights[tbHeight]);
+  if (tbHeight != 2) twoBarController->setTarget(tbHeights[tbHeight]);
 }
 
 // 4b
+
+const int FB_NUM_HEIGHTS = 2;
+const int fb_height0 = 0;
+const int fb_height1 = 4700;
+
+const int fbHeights[FB_NUM_HEIGHTS] = {fb_height0, fb_height1};
+int fbHeight = 0;
 
 void FourBar::liftToggle()
 {
   if (fourBarButton.changedToPressed())
   {
-    // If the goal height is not at maximum and the up button is pressed, increase the setpoint
-    // heightNow++;
-    fourBarController->setTarget(2000);
+    fbHeight++;
+    if (fbHeight == FB_NUM_HEIGHTS)
+      fbHeight = 0;
   }
-  else
-  {
-    fourBarMotor.setBrakeMode(AbstractMotor::brakeMode::coast);
-    fourBarController->tarePosition();
-  }
+
+  fourBarController->setTarget(fbHeights[fbHeight]);
 }
 
 void FourBar::claw()
