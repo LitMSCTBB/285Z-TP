@@ -7,6 +7,5 @@ class Intake
 {
 
 public:
-  void normal();
-  void reverse();
+  void run();
 };

@@ -89,9 +89,8 @@ void opcontrol()
 
     tb.liftToggle();
     fb.liftToggle();
-    in.normal(); in.reverse();
-
-    pros::lcd::set_text(1, "hi");
+    in.run();
+    
     pros::delay(20);
 
   }

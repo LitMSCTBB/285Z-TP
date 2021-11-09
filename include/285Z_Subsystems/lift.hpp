@@ -3,8 +3,6 @@
 #include "../include/285z/initRobot.hpp"
 #include "../include/285Z_Subsystems/tray.hpp"
 
-extern int heightNow;
-
 class TwoBar
 {
 
