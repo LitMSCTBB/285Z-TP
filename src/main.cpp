@@ -36,7 +36,7 @@ auto motion =
     ChassisControllerBuilder()
         .withMotors({frontLeftPort, backLeftPort}, {frontRightPort, backRightPort})
         .withDimensions(AbstractMotor::gearset::green, scales)
-        .withMaxVelocity(600)
+        .withMaxVelocity(200)
         .build();
 
 /**
