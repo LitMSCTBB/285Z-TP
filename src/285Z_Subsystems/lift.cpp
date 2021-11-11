@@ -41,7 +41,7 @@ void FourBar::liftToggle()
   fourBarController->setTarget(fbHeights[fbH]);
 }
 
-const int clawHeights[2] = {0, -420};
+const int clawHeights[2] = {0, -120};
 int clawH = 0;
 
 void FourBar::claw()

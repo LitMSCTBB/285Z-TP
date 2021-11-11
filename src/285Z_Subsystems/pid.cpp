@@ -82,6 +82,6 @@ void turn(double degrees){
 
     TURN_NOT_FINISH = !((abs(error) < errorThreshold) && (abs(changeInError) < velocityThreshold));
   }
-  driveL.moveVelocity(0);
-  driveR.moveVelocity(0);
+  driveL.moveVoltage(0);
+  driveR.moveVoltage(0);
 }

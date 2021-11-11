@@ -19,24 +19,24 @@
 
 // okapi::DefaultOdomChassisController chassisauto = DefaultOdomChassisController();
 std::shared_ptr<okapi::OdomChassisController> chassisaut = okapi::ChassisControllerBuilder()
-                                                               .withMotors(driveL, driveR) // left motor is 1, right motor is 2 (reversed)
-                                                               .withGains(
-                                                                   {0.001, 0, 0.0001},        // Distance controller gains
-                                                                   {0.00075, 0.001, 0.00009}, // Turn controller gains //try 0.00075, 0.001, 0.00009
-                                                                   {0.001, 0, 0.0001}         // Angle controller gains (helps drive straight)
-                                                                   )
-                                                               .withDimensions(AbstractMotor::gearset::green, scales)
-                                                               .withMaxVelocity(90)
-                                                               .withOdometryTimeUtilFactory(TimeUtilFactory())
-                                                               .withClosedLoopControllerTimeUtil(80, 10, 250_ms)
-                                                               .withOdometry()   // use the same scales as the chassis (above)
-                                                               .buildOdometry(); // build an odometry chassis
+        .withMotors(driveL, driveR) // left motor is 1, right motor is 2 (reversed)
+        .withGains(
+            {0.001, 0, 0.0001},        // Distance controller gains
+            {0.00075, 0.001, 0.00009}, // Turn controller gains //try 0.00075, 0.001, 0.00009
+            {0.001, 0, 0.0001}         // Angle controller gains (helps drive straight)
+            )
+        .withDimensions(AbstractMotor::gearset::green, scales)
+        .withMaxVelocity(90)
+        .withOdometryTimeUtilFactory(TimeUtilFactory())
+        .withClosedLoopControllerTimeUtil(80, 10, 250_ms)
+        .withOdometry()   // use the same scales as the chassis (above)
+        .buildOdometry(); // build an odometry chassis
 
 auto motion =
     ChassisControllerBuilder()
         .withMotors({frontLeftPort, backLeftPort}, {frontRightPort, backRightPort})
         .withDimensions(AbstractMotor::gearset::green, scales)
-        .withMaxVelocity(600)
+        .withMaxVelocity(200)
         .build();
 
 /**
@@ -90,7 +90,7 @@ void opcontrol()
     tb.liftToggle();
     fb.liftToggle(); fb.claw();
     in.run();
-    
+
     pros::delay(20);
 
   }
