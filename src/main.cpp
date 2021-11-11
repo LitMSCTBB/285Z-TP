@@ -85,7 +85,7 @@ void opcontrol()
   while (1)
   {
 
-    chassisaut->getModel()->arcade(controller.getAnalog(ControllerAnalog::leftY), controller.getAnalog(ControllerAnalog::rightY));
+    chassisaut->getModel()->arcade(controller.getAnalog(ControllerAnalog::leftY), controller.getAnalog(ControllerAnalog::rightX));
 
     tb.liftToggle();
     fb.liftToggle(); fb.claw();
