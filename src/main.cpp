@@ -88,7 +88,7 @@ void opcontrol()
     chassisaut->getModel()->arcade(controller.getAnalog(ControllerAnalog::leftY), controller.getAnalog(ControllerAnalog::rightY));
 
     tb.liftToggle();
-    fb.liftToggle();
+    fb.liftToggle(); fb.claw();
     in.run();
     
     pros::delay(20);
