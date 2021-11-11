@@ -15,6 +15,19 @@
 
  */
 
+ std::string autStringList [] =
+ {
+   "Red Left", 
+   "Red Right", 
+   "Blue Left", 
+   "Blue Right",
+   "No Auton",
+   "Skills Auto"
+ };
+ 
+int i = 0;
+bool isPressed = 0;
+
 //**************** INITIALIZE ALL CHASSIS FOR AUTON ********************//
 
 // okapi::DefaultOdomChassisController chassisauto = DefaultOdomChassisController();
@@ -45,29 +58,53 @@ auto motion =
  * the robot is enabled, this task will exit.
 -+
  */
-void disabled()
-{
-}
+ 
+ void initialize() {
+ 
+   imuSensor.reset();
+   while(imuSensor.is_calibrating()){
+     pros::delay(15);
+   }
+ 
+ }
+ 
+void disabled() {}
 
 void competition_initialize()
 {
-  //Calibrate IMU Sensor
-  while (true)
-  {
-    pros::delay(10);
-  }
+  
+  pros::lcd::initialize();
+
+    imuSensor.reset();
+    while(imuSensor.is_calibrating()){
+      pros::delay(15);
+    }
+
+    pros::delay(20);
+
+    while (true) {
+    if (autoSelectorLeft.get_value() and !isPressed) {
+      if (i > 0) {i -= 1; isPressed = true;}}
+    else if (autoSelectorRight.get_value() and !isPressed) {
+      if (i < 7) {i += 1; isPressed = true;}}
+    else if(!autoSelectorLeft.get_value() && !autoSelectorRight.get_value()){isPressed = false;
+    }
+
+      pros::lcd::set_text(1, autStringList[i]);
+      pros::delay(30);
+    }
+    
 }
 
 void autonomous()
 {
 
-  auto profileController = AsyncMotionProfileControllerBuilder().withLimits({ 0.5, 2.0, 10.0 }).withOutput(motion).buildMotionProfileController();
-  profileController->generatePath({ { 0_ft, 0_ft, 0_deg }, { 10_ft, 0_ft, 0_deg }}, "A");
-
-  profileController->setTarget("A");
-  profileController->waitUntilSettled();
-
-
+  if(i == 0){redLeft();}
+  else if(i == 1){redRight();}
+  else if(i == 2){blueLeft();}
+  else if(i == 3){blueRight();}
+  else if(i == 4){noAuton();}
+  else if(i == 7){skillsAuto();}
 
 }
 
@@ -85,10 +122,10 @@ void opcontrol()
   while (1)
   {
 
-    chassisaut->getModel()->arcade(controller.getAnalog(ControllerAnalog::leftY), controller.getAnalog(ControllerAnalog::rightX));
-
     tb.liftToggle();
-    fb.liftToggle(); fb.claw();
+    chassisaut->getModel()->arcade(controller.getAnalog(ControllerAnalog::leftY), controller.getAnalog(ControllerAnalog::rightX));
+    fb.liftToggle(); 
+    fb.claw();
     in.run();
 
     pros::delay(20);

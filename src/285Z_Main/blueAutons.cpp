@@ -6,3 +6,6 @@
 #include "../include/285Z_Subsystems/pid.hpp"
 
 //*************BLUE AUTONOMOUS PROGRAMS********************//
+
+void blueLeft(){}
+void blueRight(){}

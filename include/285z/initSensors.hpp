@@ -2,4 +2,5 @@
 #include "main.h"
 
 extern pros::Imu imuSensor;
-extern pros::ADILineSensor cubeSensor;
+extern pros::ADIDigitalIn autoSelectorLeft;
+extern pros::ADIDigitalIn autoSelectorRight;

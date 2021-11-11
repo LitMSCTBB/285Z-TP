@@ -19,8 +19,10 @@ void move(std::shared_ptr<okapi::AsyncMotionProfileController> profile, okapi::Q
 }
 
 //****************** SKILLS ***********************************//
+void skillsAuto() {
+  pros::delay(15000);
+}
 
-//****************** ONE CUBE ***********************************//
-void one(std::shared_ptr<okapi::AsyncMotionProfileController> slow, std::shared_ptr<okapi::AsyncMotionProfileController> medium, std::shared_ptr<okapi::AsyncMotionProfileController> fast){
-  move(slow, 1_ft, bwd);
+void noAuton() {
+  pros::delay(15000);
 }

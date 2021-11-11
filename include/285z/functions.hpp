@@ -38,6 +38,13 @@ void robotDeploy();
 void stackDeploy();
 
 //   **AUTON FUNCTIONS**    //
+void blueLeft();
+void blueRight();
+void redLeft();
+void redRight();
+void noAuton();
+void skillsAuto();
+
 
 const bool fwd {false};
 const bool bwd {true};

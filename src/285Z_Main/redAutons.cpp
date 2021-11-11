@@ -7,3 +7,5 @@
 
 
 //*****************************   RED: FIVE CUBES    **********************//
+void redLeft(){}
+void redRight(){}
