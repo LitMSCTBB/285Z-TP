@@ -7,7 +7,7 @@ auto clawController = AsyncPosControllerBuilder().withMotor(clawPort).build();
 
 // 2b
 
-const int tbHeights[2] = {-3000, -1300};
+const int tbHeights[2] = {-3000, -1400};
 int tbH = 2; // tbH will only ever be 2 at the beginning of the match (max height because needs to satisfy size reqs) before the lift is triggered for the first time
 
 
@@ -26,7 +26,7 @@ void TwoBar::liftToggle()
 
 // 4b
 
-const int fbHeights[2] = {0, 4700};
+const int fbHeights[2] = {0, -4700};
 int fbH = 0;
 
 void FourBar::liftToggle()

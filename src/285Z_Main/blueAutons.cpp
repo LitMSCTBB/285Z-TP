@@ -5,7 +5,10 @@
 #include "../include/285Z_Aux/gui.hpp"
 #include "../include/285Z_Subsystems/pid.hpp"
 
-//*************BLUE AUTONOMOUS PROGRAMS********************//
+//*************BLUE AUTONOMOUS ********************//
 
-void blueLeft(){}
+void blueLeft(){
+turn(45);
+
+}
 void blueRight(){}

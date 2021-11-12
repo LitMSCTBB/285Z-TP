@@ -3,7 +3,10 @@
 #include "../include/285z/initRobot.hpp"
 #include "../include/285Z_Subsystems/tray.hpp"
 
-class TwoBar
+std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarController;
+std::shared_ptr<okapi::AsyncPositionController<double, double>> twoBarController;
+std::shared_ptr<okapi::AsyncPositionController<double, double>> clawController;
+    class TwoBar
 {
 
 public:
