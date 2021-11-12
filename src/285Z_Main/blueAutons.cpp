@@ -8,7 +8,21 @@
 //*************BLUE AUTONOMOUS ********************//
 
 void blueLeft(){
-turn(45);
 
+  // twoBarController->setTarget(-3000);
+  // move(profileController, 6_ft, false);
+  // fourBarController->setTarget(-4700);
+  // clawController->setTarget(-120);
+  // move(profileController, 3_ft, true);
+  // turn(90.0);
+  // move(profileController, 2_ft, true);
+  // twoBarController->setTarget(-1400);
+  // intakeMotor.moveRelative(100, 100);
 }
-void blueRight(){}
+void blueRight(){
+  // twoBarController->setTarget(-3000);
+  // move(profileController, 6_ft, false);
+  // fourBarController->setTarget(-4700);
+  // clawController->setTarget(-120);
+  // move(profileController, 3_ft, true);
+}

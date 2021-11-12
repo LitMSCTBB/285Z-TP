@@ -43,7 +43,7 @@ std::shared_ptr<okapi::OdomChassisController> chassisaut = okapi::ChassisControl
                                                                .withOdometry()   // use the same scales as the chassis (above)
                                                                .buildOdometry(); // build an odometry chassis
 
-auto motion =
+std::shared_ptr<okapi::ChassisController> motion =
     ChassisControllerBuilder()
         .withMotors({frontLeftPort, backLeftPort}, {frontRightPort, backRightPort})
         .withDimensions(AbstractMotor::gearset::green, scales)
