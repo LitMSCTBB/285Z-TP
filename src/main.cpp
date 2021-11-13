@@ -1,6 +1,5 @@
 #include "285z/initRobot.hpp"
 #include "285z/functions.hpp"
-#include "285Z_Subsystems/tray.hpp"
 #include "285Z_Subsystems/lift.hpp"
 #include "285Z_Subsystems/pid.hpp"
 #include "285Z_Subsystems/intake.hpp"
@@ -28,6 +27,18 @@ bool isPressed = 0;
 
 //**************** INITIALIZE ALL CHASSIS FOR AUTON ********************//
 
+std::string autStringList[] =
+    {
+        "Red Left",
+        "Red Right",
+        "Blue Left",
+        "Blue Right",
+        "No Auton",
+        "Skills Auto"};
+
+int i = 0;
+bool isPressed = 0;
+
 // okapi::DefaultOdomChassisController chassisauto = DefaultOdomChassisController();
 std::shared_ptr<okapi::OdomChassisController> chassisaut = okapi::ChassisControllerBuilder()
                                                                .withMotors(driveL, driveR) // left motor is 1, right motor is 2 (reversed)
@@ -50,6 +61,8 @@ std::shared_ptr<okapi::ChassisController> motion =
         .withMaxVelocity(200)
         .build();
 
+auto profileController = AsyncMotionProfileControllerBuilder().withLimits({0.5, 2.0, 10.0}).withOutput(motion).buildMotionProfileController();
+
 /**
  * Runs while the robot is in the disabled state of Field Management System or
  * the VEX Competition Switch, following either autonomous or opcontrol. When
@@ -64,6 +77,7 @@ void initialize()
   while (imuSensor.is_calibrating())
   {
     pros::delay(15);
+
   }
 }
 
@@ -88,15 +102,15 @@ void competition_initialize()
     {
       if (i > 0)
       {
-        i -= 1;
+        i = (i-1) % 6;
         isPressed = true;
       }
     }
     else if (autoSelectorRight.get_value() and !isPressed)
     {
-      if (i < 7)
+      if (i < 6)
       {
-        i += 1;
+        i = (i+1) % 6;
         isPressed = true;
       }
     }
@@ -112,30 +126,25 @@ void competition_initialize()
 
 void autonomous()
 {
-
-  if (i == 0)
-  {
-    redLeft();
-  }
-  else if (i == 1)
-  {
-    redRight();
-  }
-  else if (i == 2)
-  {
-    blueLeft();
-  }
-  else if (i == 3)
-  {
-    blueRight();
-  }
-  else if (i == 4)
-  {
-    noAuton();
-  }
-  else if (i == 7)
-  {
-    skillsAuto();
+  switch(i) {
+    case 0:
+      redLeft(profileController);
+      break;
+    case 1:
+      redRight(profileController);
+      break;
+    case 2:
+      blueLeft(profileController);
+      break;
+    case 3:
+      blueRight(profileController);
+      break;
+    case 4:
+      noAuton();
+      break;
+    case 5:
+      skillsAuto();
+      break;
   }
 }
 
@@ -152,6 +161,10 @@ void opcontrol()
 
   while (1)
   {
+
+    pros::lcd::print(1, "Lift: hi");
+
+    chassisaut->getModel()->arcade(controller.getAnalog(ControllerAnalog::leftY), controller.getAnalog(ControllerAnalog::rightX));
 
     tb.liftToggle();
     chassisaut->getModel()->arcade(controller.getAnalog(ControllerAnalog::leftY), controller.getAnalog(ControllerAnalog::rightX));

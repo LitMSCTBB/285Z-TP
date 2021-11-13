@@ -50,6 +50,3 @@ extern std::shared_ptr<okapi::OdomChassisController> chassisaut;
 
 extern ChassisControllerBuilder aut;
 extern ChassisControllerBuilder chassis;
-
-// TASKS
-void liftTask(void *);

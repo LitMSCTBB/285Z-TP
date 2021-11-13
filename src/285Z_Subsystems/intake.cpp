@@ -10,11 +10,11 @@ void Intake::run()
   if (intakeNormalButton.isPressed())
   {
 
-    intakeMotor.moveVoltage(12000);
+    intakeMotor.moveVoltage(9500);
   }
   else if (intakeReverseButton.isPressed())
   {
-    intakeMotor.moveVoltage(-12000);
+    intakeMotor.moveVoltage(-9500);
   }
   else
   {
