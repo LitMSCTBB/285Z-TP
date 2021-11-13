@@ -1,5 +1,4 @@
 #include "../include/285z/initRobot.hpp"
-#include "../include/285Z_Subsystems/tray.hpp"
 #include "../include/285Z_Subsystems/lift.hpp"
 #include "../include/285z/functions.hpp"
 #include "../include/285Z_Aux/gui.hpp"
@@ -20,7 +19,12 @@ void move(std::shared_ptr<okapi::AsyncMotionProfileController> profile, okapi::Q
 
 //****************** SKILLS ***********************************//
 
-//****************** ONE CUBE ***********************************//
-void one(std::shared_ptr<okapi::AsyncMotionProfileController> slow, std::shared_ptr<okapi::AsyncMotionProfileController> medium, std::shared_ptr<okapi::AsyncMotionProfileController> fast){
-  move(slow, 1_ft, bwd);
+void skillsAuto()
+{
+  turn(45);
+}
+
+void noAuton()
+{
+  pros::delay(15000);
 }

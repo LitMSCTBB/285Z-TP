@@ -1,9 +1,9 @@
 #include "../../include/285z/initRobot.hpp"
 #include "../../include/285Z_Subsystems/lift.hpp"
 
-auto fourBarController = AsyncPosControllerBuilder().withMotor(fourBarPort).build();
-auto twoBarController = AsyncPosControllerBuilder().withMotor(twoBarPort).build();
-auto clawController = AsyncPosControllerBuilder().withMotor(clawPort).build();
+std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarController = AsyncPosControllerBuilder().withMotor(fourBarPort).build();
+std::shared_ptr<okapi::AsyncPositionController<double, double>> twoBarController = AsyncPosControllerBuilder().withMotor(twoBarPort).build();
+std::shared_ptr<okapi::AsyncPositionController<double, double>> clawController = AsyncPosControllerBuilder().withMotor(clawPort).build();
 
 // 2b
 
@@ -26,32 +26,23 @@ void TwoBar::liftToggle()
 
 // 4b
 
-const int fbHeights[2] = {0, -4700};
-int fbH = 0;
+int fbB = false;
 
 void FourBar::liftToggle()
 {
   if (fourBarButton.changedToPressed())
   {
-    fbH = (fbH + 1) % sizeof(fbHeights);
+    fbB = !fbB; fourBarController->setTarget(fbB ? -4750 : 0);
   }
-
-  fourBarController->setTarget(fbHeights[fbH]);
 }
 
-const int clawHeights[2] = {0, -480};
-int clawH = 0; int i = 0;
+int clawB = false;
 
 void FourBar::claw()
 {
   if (clawButton.changedToPressed())
   {
-    clawH = (clawH + 1) %  sizeof(clawHeights);
-
-    pros::lcd::print(i, "enc: %d", clawController->getTarget()); i++;
-    clawController->setTarget(clawHeights[clawH]);
+    clawB = !clawB; clawController->setTarget(clawB ? -820 : 0);
   }
-
-  
 }
  
