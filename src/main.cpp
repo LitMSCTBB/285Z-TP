@@ -65,45 +65,48 @@ void competition_initialize()
 
   pros::lcd::initialize();
 
-  imuSensor.reset();
-  while (imuSensor.is_calibrating())
-  {
-    pros::delay(15);
-  }
+  // imuSensor.reset();
+  // while (imuSensor.is_calibrating())
+  // {
+  //   pros::delay(15);
+  // }
 
-  pros::delay(20);
+  // pros::delay(20);
 
-  while (true)
-  {
-    if (autoSelectorLeft.get_value() and !isPressed)
-    {
-      if (i > 0)
-      {
-        i = (i-1) % 6;
-        isPressed = true;
-      }
-    }
-    else if (autoSelectorRight.get_value() and !isPressed)
-    {
-      if (i < 6)
-      {
-        i = (i+1) % 6;
-        isPressed = true;
-      }
-    }
-    else if (!autoSelectorLeft.get_value() && !autoSelectorRight.get_value())
-    {
-      isPressed = false;
-    }
+  // while (true)
+  // {
+  //   if (autoSelectorLeft.get_value() and !isPressed)
+  //   {
+  //     if (i > 0)
+  //     {
+  //       i = (i-1) % 6;
+  //       isPressed = true;
+  //     }
+  //   }
+  //   else if (autoSelectorRight.get_value() and !isPressed)
+  //   {
+  //     if (i < 6)
+  //     {
+  //       i = (i+1) % 6;
+  //       isPressed = true;
+  //     }
+  //   }
+  //   else if (!autoSelectorLeft.get_value() && !autoSelectorRight.get_value())
+  //   {
+  //     isPressed = false;
+  //   }
 
-    pros::lcd::set_text(1, autStringList[i]);
-    pros::delay(30);
-  }
+  //   pros::lcd::set_text(1, autStringList[i]);
+  //   pros::delay(30);
+  // }
 }
 
 void autonomous()
 {
+  chassisaut->setState({0_ft, 0_ft, 0_deg});
+  twoBarController->setTarget(-3000);
   move(profileController, 6_ft, fwd);
+  clawController->setTarget(-820);
   // switch(i) {
   //   case 0:
   //     redLeft(profileController);
