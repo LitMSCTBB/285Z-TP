@@ -7,7 +7,7 @@ auto clawController = AsyncPosControllerBuilder().withMotor(clawPort).build();
 
 // 2b
 
-const int tbHeights[2] = {-3000, -1300};
+const int tbHeights[2] = {-3000, -1520};
 int tbH = 2; // tbH will only ever be 2 at the beginning of the match (max height because needs to satisfy size reqs) before the lift is triggered for the first time
 
 
@@ -26,32 +26,32 @@ void TwoBar::liftToggle()
 
 // 4b
 
-const int fbHeights[2] = {0, 4700};
+const int fbHeights[2] = {0, -4700};
 int fbH = 0;
 
 void FourBar::liftToggle()
 {
   if (fourBarButton.changedToPressed())
   {
-    fbH++;
-    if (fbH == sizeof(fbHeights))
-      fbH = 0;
+    fbH = (fbH + 1) % sizeof(fbHeights);
   }
 
   fourBarController->setTarget(fbHeights[fbH]);
 }
 
-const int clawHeights[2] = {0, -120};
-int clawH = 0;
+const int clawHeights[2] = {0, -480};
+int clawH = 0; int i = 0;
 
 void FourBar::claw()
 {
   if (clawButton.changedToPressed())
   {
-    clawH++;
-    if (clawH == sizeof(clawHeights))
-      clawH = 0;
+    clawH = (clawH + 1) %  sizeof(clawHeights);
+
+    pros::lcd::print(i, "enc: %d", clawController->getTarget()); i++;
+    clawController->setTarget(clawHeights[clawH]);
   }
 
-  clawController->setTarget(clawHeights[clawH]);
+  
 }
+ 

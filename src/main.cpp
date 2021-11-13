@@ -61,11 +61,7 @@ void competition_initialize()
 void autonomous()
 {
 
-  auto profileController = AsyncMotionProfileControllerBuilder().withLimits({ 0.5, 2.0, 10.0 }).withOutput(motion).buildMotionProfileController();
-  profileController->generatePath({ { 0_ft, 0_ft, 0_deg }, { 10_ft, 0_ft, 0_deg }}, "A");
-
-  profileController->setTarget("A");
-  profileController->waitUntilSettled();
+  pros::delay(15000);
 
 
 
@@ -84,6 +80,8 @@ void opcontrol()
 
   while (1)
   {
+
+    pros::lcd::print(1, "Lift: hi");
 
     chassisaut->getModel()->arcade(controller.getAnalog(ControllerAnalog::leftY), controller.getAnalog(ControllerAnalog::rightX));
 
