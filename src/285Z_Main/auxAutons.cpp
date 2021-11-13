@@ -13,24 +13,31 @@
 //         .build();
 // std::shared_ptr<okapi::AsyncMotionProfileController> profileController = AsyncMotionProfileControllerBuilder().withLimits({0.5, 2.0, 10.0}).withOutput(motion).buildMotionProfileController();
 
-// void move(std::shared_ptr<okapi::AsyncMotionProfileController> profile, okapi::QLength distance, bool dir){
-//   profile->generatePath({
-//     {0_ft,0_ft,0_deg},
-//     {distance, 0_ft,0_deg}},
-//     "M"
-//   );
+void move(std::shared_ptr<okapi::AsyncMotionProfileController> profile, okapi::QLength distance, bool dir){
+  profile->generatePath({
+    {0_ft,0_ft,0_deg},
+    {distance, 0_ft,0_deg}},
+    "M"
+  );
 
-//   profile->setTarget("M", dir);
-//   profile->waitUntilSettled();
-//   profile->removePath("M");
-// }
+  profile->setTarget("M", dir);
+  profile->waitUntilSettled();
+  profile->removePath("M");
+}
 
 //****************** SKILLS ***********************************//
 void skillsAuto()
 {
+  imuSensor.reset();
+  while (imuSensor.is_calibrating())
+  {
+    pros::delay(15);
+  }
+
   turn(45);
 }
 
-void noAuton() {
+void noAuton() 
+{
   pros::delay(15000);
 }

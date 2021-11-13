@@ -13,18 +13,6 @@
  * to keep execution time for this mode under a few seconds.
  */
 
-std::string autStringList[] =
-    {
-        "Red Left",
-        "Red Right",
-        "Blue Left",
-        "Blue Right",
-        "No Auton",
-        "Skills Auto"};
-
-int i = 0;
-bool isPressed = 0;
-
 //**************** INITIALIZE ALL CHASSIS FOR AUTON ********************//
 
 std::string autStringList[] =
@@ -61,7 +49,7 @@ std::shared_ptr<okapi::ChassisController> motion =
         .withMaxVelocity(200)
         .build();
 
-auto profileController = AsyncMotionProfileControllerBuilder().withLimits({0.5, 2.0, 10.0}).withOutput(motion).buildMotionProfileController();
+std::shared_ptr<okapi::AsyncMotionProfileController> profileController = AsyncMotionProfileControllerBuilder().withLimits({0.5, 2.0, 10.0}).withOutput(motion).buildMotionProfileController();
 
 /**
  * Runs while the robot is in the disabled state of Field Management System or
@@ -69,17 +57,6 @@ auto profileController = AsyncMotionProfileControllerBuilder().withLimits({0.5, 
  * the robot is enabled, this task will exit.
 -+
  */
-
-void initialize()
-{
-
-  imuSensor.reset();
-  while (imuSensor.is_calibrating())
-  {
-    pros::delay(15);
-
-  }
-}
 
 void disabled() {}
 
@@ -126,26 +103,27 @@ void competition_initialize()
 
 void autonomous()
 {
-  switch(i) {
-    case 0:
-      redLeft(profileController);
-      break;
-    case 1:
-      redRight(profileController);
-      break;
-    case 2:
-      blueLeft(profileController);
-      break;
-    case 3:
-      blueRight(profileController);
-      break;
-    case 4:
-      noAuton();
-      break;
-    case 5:
-      skillsAuto();
-      break;
-  }
+  move(profileController, 6_ft, fwd);
+  // switch(i) {
+  //   case 0:
+  //     redLeft(profileController);
+  //     break;
+  //   case 1:
+  //     redRight(profileController);
+  //     break;
+  //   case 2:
+  //     blueLeft(profileController);
+  //     break;
+  //   case 3:
+  //     blueRight(profileController);
+  //     break;
+  //   case 4:
+  //     noAuton();
+  //     break;
+  //   case 5:
+  //     skillsAuto();
+  //     break;
+  // }
 }
 
 void opcontrol()
@@ -159,19 +137,19 @@ void opcontrol()
   FourBar fb;
   Intake in;
 
-  while (1)
-  {
+ 
 
-    pros::lcd::print(1, "Lift: hi");
+    while (1)
+    {
 
-    chassisaut->getModel()->arcade(controller.getAnalog(ControllerAnalog::leftY), controller.getAnalog(ControllerAnalog::rightX));
+      pros::lcd::print(1, "Lift: hi");
 
-    tb.liftToggle();
-    chassisaut->getModel()->arcade(controller.getAnalog(ControllerAnalog::leftY), controller.getAnalog(ControllerAnalog::rightX));
-    fb.liftToggle();
-    fb.claw();
-    in.run();
+      tb.liftToggle();
+      chassisaut->getModel()->arcade(controller.getAnalog(ControllerAnalog::leftY), controller.getAnalog(ControllerAnalog::rightX));
+      fb.liftToggle();
+      fb.claw();
+      in.run();
 
-    pros::delay(20);
+      pros::delay(20);
+    }
   }
-}
