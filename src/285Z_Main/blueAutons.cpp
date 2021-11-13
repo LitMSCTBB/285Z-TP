@@ -27,3 +27,4 @@ void blueRight(std::shared_ptr<okapi::AsyncMotionProfileController> profileContr
   clawController->setTarget(-120);
   move(profileController, 3_ft, true);
 }
+

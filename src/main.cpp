@@ -11,8 +11,19 @@
  *
  * All other competition modes are blocked by initialize; it is recommended
  * to keep execution time for this mode under a few seconds.
-
  */
+
+std::string autStringList[] =
+    {
+        "Red Left",
+        "Red Right",
+        "Blue Left",
+        "Blue Right",
+        "No Auton",
+        "Skills Auto"};
+
+int i = 0;
+bool isPressed = 0;
 
 //**************** INITIALIZE ALL CHASSIS FOR AUTON ********************//
 
@@ -30,20 +41,20 @@ bool isPressed = 0;
 
 // okapi::DefaultOdomChassisController chassisauto = DefaultOdomChassisController();
 std::shared_ptr<okapi::OdomChassisController> chassisaut = okapi::ChassisControllerBuilder()
-        .withMotors(driveL, driveR) // left motor is 1, right motor is 2 (reversed)
-        .withGains(
-            {0.001, 0, 0.0001},        // Distance controller gains
-            {0.00075, 0.001, 0.00009}, // Turn controller gains //try 0.00075, 0.001, 0.00009
-            {0.001, 0, 0.0001}         // Angle controller gains (helps drive straight)
-            )
-        .withDimensions(AbstractMotor::gearset::green, scales)
-        .withMaxVelocity(90)
-        .withOdometryTimeUtilFactory(TimeUtilFactory())
-        .withClosedLoopControllerTimeUtil(80, 10, 250_ms)
-        .withOdometry()   // use the same scales as the chassis (above)
-        .buildOdometry(); // build an odometry chassis
+                                                               .withMotors(driveL, driveR) // left motor is 1, right motor is 2 (reversed)
+                                                               .withGains(
+                                                                   {0.001, 0, 0.0001},        // Distance controller gains
+                                                                   {0.00075, 0.001, 0.00009}, // Turn controller gains //try 0.00075, 0.001, 0.00009
+                                                                   {0.001, 0, 0.0001}         // Angle controller gains (helps drive straight)
+                                                                   )
+                                                               .withDimensions(AbstractMotor::gearset::green, scales)
+                                                               .withMaxVelocity(90)
+                                                               .withOdometryTimeUtilFactory(TimeUtilFactory())
+                                                               .withClosedLoopControllerTimeUtil(80, 10, 250_ms)
+                                                               .withOdometry()   // use the same scales as the chassis (above)
+                                                               .buildOdometry(); // build an odometry chassis
 
-auto motion =
+std::shared_ptr<okapi::ChassisController> motion =
     ChassisControllerBuilder()
         .withMotors({frontLeftPort, backLeftPort}, {frontRightPort, backRightPort})
         .withDimensions(AbstractMotor::gearset::green, scales)
@@ -58,6 +69,7 @@ auto profileController = AsyncMotionProfileControllerBuilder().withLimits({0.5, 
  * the robot is enabled, this task will exit.
 -+
  */
+
 void initialize()
 {
 
@@ -65,6 +77,7 @@ void initialize()
   while (imuSensor.is_calibrating())
   {
     pros::delay(15);
+
   }
 }
 
@@ -154,10 +167,11 @@ void opcontrol()
     chassisaut->getModel()->arcade(controller.getAnalog(ControllerAnalog::leftY), controller.getAnalog(ControllerAnalog::rightX));
 
     tb.liftToggle();
-    fb.liftToggle(); fb.claw();
+    chassisaut->getModel()->arcade(controller.getAnalog(ControllerAnalog::leftY), controller.getAnalog(ControllerAnalog::rightX));
+    fb.liftToggle();
+    fb.claw();
     in.run();
 
     pros::delay(20);
-
   }
 }

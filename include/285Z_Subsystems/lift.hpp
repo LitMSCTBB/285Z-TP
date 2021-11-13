@@ -6,7 +6,7 @@ extern std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarCo
 extern std::shared_ptr<okapi::AsyncPositionController<double, double>> twoBarController;
 extern std::shared_ptr<okapi::AsyncPositionController<double, double>> clawController;
 
-    class TwoBar
+class TwoBar
 {
 
 public:

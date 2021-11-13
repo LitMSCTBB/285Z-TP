@@ -1,7 +1,10 @@
 #pragma once
 #include "../include/285z/initRobot.hpp"
 
-//  **TELEOP FUNCTIONS**   //
+extern std::shared_ptr<okapi::ChassisController> motion;
+extern std::shared_ptr<okapi::AsyncMotionProfileController> profileController;
+
+    //  **TELEOP FUNCTIONS**   //
 void lcdStart();
 void displayAuton();
 //Drive
@@ -44,8 +47,6 @@ void redLeft(std::shared_ptr<okapi::AsyncMotionProfileController> profileControl
 void redRight(std::shared_ptr<okapi::AsyncMotionProfileController> profileController);
 void noAuton();
 void skillsAuto();
-
-//   **AUTON FUNCTIONS**    //
 
 const bool fwd {false};
 const bool bwd {true};
