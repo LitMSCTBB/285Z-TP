@@ -6,37 +6,28 @@ std::shared_ptr<okapi::AsyncPositionController<double, double>> twoBarController
 std::shared_ptr<okapi::AsyncPositionController<double, double>> clawController = AsyncPosControllerBuilder().withMotor(clawPort).build();
 
 // 2b
-
-const int tbHeights[2] = {-3000, -1520};
-int tbH = 2; // tbH will only ever be 2 at the beginning of the match (max height because needs to satisfy size reqs) before the lift is triggered for the first time
-
+bool tbB = true; // tbH will only ever be 2 at the beginning of the match (max height because needs to satisfy size reqs) before the lift is triggered for the first time
 
 void TwoBar::liftToggle()
 {
   if (twoBarButton.changedToPressed())
   {
-    if (tbH == 2) tbH = 0;
-    else {
-      tbH++; if (tbH == sizeof(tbHeights)) tbH = 0;
-    }
+    tbB = !tbB; twoBarController->setTarget(tbB ? -1495 : -3100); // up position (0) will be 1495 from rest position
   }
-
-  if (tbH != 2) twoBarController->setTarget(tbHeights[tbH]);
 }
 
 // 4b
-
-int fbB = false;
+bool fbB = false;
 
 void FourBar::liftToggle()
 {
   if (fourBarButton.changedToPressed())
   {
-    fbB = !fbB; fourBarController->setTarget(fbB ? -4750 : 0);
+    fbB = !fbB; fourBarController->setTarget(fbB ? -4350 : 0);
   }
 }
 
-int clawB = false;
+bool clawB = true;
 
 void FourBar::claw()
 {

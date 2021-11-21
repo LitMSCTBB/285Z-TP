@@ -3,6 +3,7 @@
 
 extern std::shared_ptr<okapi::ChassisController> motion;
 extern std::shared_ptr<okapi::AsyncMotionProfileController> profileController;
+extern std::shared_ptr<okapi::OdomChassisController> chassisaut;
 
     //  **TELEOP FUNCTIONS**   //
 void lcdStart();

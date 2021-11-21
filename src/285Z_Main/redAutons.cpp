@@ -9,21 +9,29 @@
 
 void redLeft(std::shared_ptr<okapi::AsyncMotionProfileController> profileController)
 {
-  twoBarController->setTarget(-3000);
-  move(profileController, 6_ft, false);
-  fourBarController->setTarget(-4700);
-  clawController->setTarget(-120);
-  move(profileController, 3_ft, true);
+  chassisaut->turnAngle(-20_deg);
+  twoBarController->setTarget(-3100);
+  pros::delay(1500);
+  move(profileController, 0.4_ft, bwd);
+  pros::delay(1500);
+  twoBarController->setTarget(-1495);
+  pros::delay(1500);
+  move(profileController, 0.35_ft, fwd);
+  pros::delay(1500);
+  intakeMotor.moveVoltage(9500);
 }
 void redRight(std::shared_ptr<okapi::AsyncMotionProfileController> profileController)
 {
-  twoBarController->setTarget(-3000);
-  move(profileController, 6_ft, fwd);
-  fourBarController->setTarget(-4700);
-  clawController->setTarget(-120);
-  move(profileController, 3_ft, bwd);
-  turn(90.0);
-  move(profileController, 2_ft, bwd);
-  twoBarController->setTarget(-1400);
-  intakeMotor.moveRelative(100, 100);
+  move(profileController, 2_ft, fwd);
+  pros::delay(200);
+  // move(profileController, 0.065_ft, fwd);
+  clawController->setTarget(-820);
+  twoBarController->setTarget(-3100);
+  move(profileController, 1_ft, bwd);
+  chassisaut->turnAngle(-130_deg);
+  move(profileController, 0.33_ft, bwd);
+  twoBarController->setTarget(-1495);
+  pros::delay(200);
+  move(profileController, 0.33_ft, fwd);
+  intakeMotor.moveVoltage(9500);
 }

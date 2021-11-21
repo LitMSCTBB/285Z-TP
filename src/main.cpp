@@ -46,7 +46,7 @@ std::shared_ptr<okapi::ChassisController> motion =
     ChassisControllerBuilder()
         .withMotors({frontLeftPort, backLeftPort}, {frontRightPort, backRightPort})
         .withDimensions(AbstractMotor::gearset::green, scales)
-        .withMaxVelocity(200)
+        .withMaxVelocity(600)
         .build();
 
 std::shared_ptr<okapi::AsyncMotionProfileController> profileController = AsyncMotionProfileControllerBuilder().withLimits({0.5, 2.0, 10.0}).withOutput(motion).buildMotionProfileController();
@@ -103,10 +103,7 @@ void competition_initialize()
 
 void autonomous()
 {
-  chassisaut->setState({0_ft, 0_ft, 0_deg});
-  twoBarController->setTarget(-3000);
-  move(profileController, 6_ft, fwd);
-  clawController->setTarget(-820);
+  blueLeft(profileController);
   // switch(i) {
   //   case 0:
   //     redLeft(profileController);
