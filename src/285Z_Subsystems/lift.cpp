@@ -1,4 +1,5 @@
 #include "../../include/285z/initRobot.hpp"
+#include "../../include/285z/initSensors.hpp"
 #include "../../include/285Z_Subsystems/lift.hpp"
 
 std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarController = AsyncPosControllerBuilder().withMotor(fourBarPort).build();
@@ -33,7 +34,7 @@ void FourBar::claw()
 {
   if (clawButton.changedToPressed())
   {
-    clawB = !clawB; clawController->setTarget(clawB ? -820 : 0);
+    clawB = !clawB; clawPiston.set_value(clawB);
   }
 }
  

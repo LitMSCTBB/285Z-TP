@@ -137,19 +137,16 @@ void opcontrol()
   FourBar fb;
   Intake in;
 
- 
+  while (1)
+  {
+    pros::lcd::print(1, "Lift: hi");
 
-    while (1)
-    {
+    tb.liftToggle();
+    chassisaut->getModel()->arcade(controller.getAnalog(ControllerAnalog::leftY), controller.getAnalog(ControllerAnalog::rightX));
+    fb.liftToggle();
+    fb.claw();
+    in.run();
 
-      pros::lcd::print(1, "Lift: hi");
-
-      tb.liftToggle();
-      chassisaut->getModel()->arcade(controller.getAnalog(ControllerAnalog::leftY), controller.getAnalog(ControllerAnalog::rightX));
-      fb.liftToggle();
-      fb.claw();
-      in.run();
-
-      pros::delay(20);
-    }
+    pros::delay(20);
   }
+}

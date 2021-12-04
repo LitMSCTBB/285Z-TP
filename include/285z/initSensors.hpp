@@ -5,4 +5,5 @@
 extern pros::Imu imuSensor;
 extern pros::ADIDigitalIn autoSelectorLeft;
 extern pros::ADIDigitalIn autoSelectorRight;
+extern pros::ADIDigitalOut clawPiston;
 

@@ -1,4 +1,5 @@
 #include "../include/285z/initRobot.hpp"
+#include "../include/285z/initSensors.hpp"
 #include "../include/285Z_Subsystems/lift.hpp"
 #include "../include/285z/functions.hpp"
 #include "../include/285Z_Aux/gui.hpp"
