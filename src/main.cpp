@@ -6,6 +6,7 @@
 #include "../include/285z/initSensors.hpp"
 #include "../include/285Z_Aux/gui.hpp"
 #include "../include/pros/llemu.hpp"
+
 //
 /** Runs initialization code. This occurs as soon as the program is started.
  *
@@ -29,27 +30,34 @@ bool isPressed = 0;
 
 // okapi::DefaultOdomChassisController chassisauto = DefaultOdomChassisController();
 std::shared_ptr<okapi::OdomChassisController> chassisaut = okapi::ChassisControllerBuilder()
-                                                               .withMotors(driveL, driveR) // left motor is 1, right motor is 2 (reversed)
-                                                               .withGains(
-                                                                   {0.001, 0, 0.0001},        // Distance controller gains
-                                                                   {0.00075, 0.001, 0.00009}, // Turn controller gains //try 0.00075, 0.001, 0.00009
-                                                                   {0.001, 0, 0.0001}         // Angle controller gains (helps drive straight)
-                                                                   )
-                                                               .withDimensions(AbstractMotor::gearset::green, scales)
-                                                               .withMaxVelocity(90)
-                                                               .withOdometryTimeUtilFactory(TimeUtilFactory())
-                                                               .withClosedLoopControllerTimeUtil(80, 10, 250_ms)
-                                                               .withOdometry()   // use the same scales as the chassis (above)
-                                                               .buildOdometry(); // build an odometry chassis
+        .withMotors(driveL, driveR) // left motor is 1, right motor is 2 (reversed
+        .withGains(
+              {0.001, 0, 0.0001},        // Distance controller gains
+              {0.00075, 0.001, 0.00009}, // Turn controller gains //try 0.00075, 0.001, 0.00009
+              {0.001, 0, 0.0001}         // Angle controller gains (helps drive straight)
+            )
+        .withDimensions(AbstractMotor::gearset::blue, scales)
+        .withMaxVelocity(90)
+        .withOdometryTimeUtilFactory(TimeUtilFactory())
+        .withClosedLoopControllerTimeUtil(80, 10, 250_ms)
+        .withOdometry()   // use the same scales as the chassis (above)
+        .buildOdometry(); // build an odometry chassis
 
 std::shared_ptr<okapi::ChassisController> motion =
     ChassisControllerBuilder()
-        .withMotors({frontLeftPort, backLeftPort}, {frontRightPort, backRightPort})
-        .withDimensions(AbstractMotor::gearset::green, scales)
+        .withMotors(driveL, driveR)
+        .withDimensions(AbstractMotor::gearset::blue, scales)
         .withMaxVelocity(600)
         .build();
 
-std::shared_ptr<okapi::AsyncMotionProfileController> profileController = AsyncMotionProfileControllerBuilder().withLimits({0.5, 2.0, 10.0}).withOutput(motion).buildMotionProfileController();
+std::shared_ptr<okapi::AsyncMotionProfileController> profileController = AsyncMotionProfileControllerBuilder()
+.withLimits({
+  1.1,  //max velocity
+  2.0,  //max acceleration
+  10.0  //max jerk
+})
+.withOutput(motion)
+.buildMotionProfileController();
 
 /**
  * Runs while the robot is in the disabled state of Field Management System or
@@ -142,7 +150,8 @@ void opcontrol()
     pros::lcd::print(1, "Lift: hi");
 
     tb.liftToggle();
-    chassisaut->getModel()->arcade(controller.getAnalog(ControllerAnalog::leftY), controller.getAnalog(ControllerAnalog::rightX));
+    chassisaut->getModel()->tank(controller.getAnalog(okapi::ControllerAnalog::leftY),
+              controller.getAnalog(okapi::ControllerAnalog::rightY));
     fb.liftToggle();
     fb.claw();
     in.run();

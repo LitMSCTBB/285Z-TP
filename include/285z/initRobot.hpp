@@ -47,6 +47,3 @@ extern ChassisScales scales;
 
 //Chassis controllers
 extern std::shared_ptr<okapi::OdomChassisController> chassisaut;
-
-extern ChassisControllerBuilder aut;
-extern ChassisControllerBuilder chassis;
