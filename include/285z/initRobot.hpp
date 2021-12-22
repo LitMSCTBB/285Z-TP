@@ -13,10 +13,10 @@ extern ControllerButton stopPIDButton;
 extern ControllerButton liftUpButton;
 extern ControllerButton liftDownButton;
 extern ControllerButton liftToggleButton;
-extern ControllerButton intakeNormalButton;
-extern ControllerButton intakeReverseButton;
+extern ControllerButton intakeButton;
 extern ControllerButton clawButton;
-extern ControllerButton fourBarButton;
+extern ControllerButton fourBarNormal;
+extern ControllerButton fourBarReverse;
 extern ControllerButton twoBarButton;
 
 //drive motor points
@@ -47,6 +47,3 @@ extern ChassisScales scales;
 
 //Chassis controllers
 extern std::shared_ptr<okapi::OdomChassisController> chassisaut;
-
-extern ChassisControllerBuilder aut;
-extern ChassisControllerBuilder chassis;

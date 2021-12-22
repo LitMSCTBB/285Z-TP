@@ -2,11 +2,11 @@
 
 okapi::Controller controller;
 
-okapi::ControllerButton intakeNormalButton = okapi::ControllerDigital::R1;
-okapi::ControllerButton intakeReverseButton = okapi::ControllerDigital::R2;
-okapi::ControllerButton clawButton = okapi::ControllerDigital::right;
-okapi::ControllerButton fourBarButton = okapi::ControllerDigital::L2;
-okapi::ControllerButton twoBarButton = okapi::ControllerDigital::L1;
+okapi::ControllerButton intakeButton = okapi::ControllerDigital::R1;
+okapi::ControllerButton clawButton = okapi::ControllerDigital::Y;
+okapi::ControllerButton fourBarReverse = okapi::ControllerDigital::L1;
+okapi::ControllerButton fourBarNormal = okapi::ControllerDigital::R1;
+okapi::ControllerButton twoBarButton = okapi::ControllerDigital::right;
 
 //drive motor points
 int frontLeftPort = 4;
@@ -35,8 +35,8 @@ double wheelBase = 9.75;
 
 okapi::ChassisScales scales{
     //4.125 is the wheelsize and 9.75 is the wheelbase
-    {4.125_in, 9.75_in}, //dimensions of the chassis
-    imev5GreenTPR};
+    {4.125_in, 11.5_in}, //dimensions of the chassis
+    imev5BlueTPR};
 
 //**************** INITIALIZE CHASSIS FOR TELEOP ***********************//
 
