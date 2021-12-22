@@ -9,10 +9,10 @@ okapi::ControllerButton fourBarNormal = okapi::ControllerDigital::R1;
 okapi::ControllerButton twoBarButton = okapi::ControllerDigital::right;
 
 //drive motor points
-int frontLeftPort = 4;
-int backLeftPort = 2;
-int frontRightPort = -3; //reversed
-int backRightPort = -1; //reversed
+int frontLeftPort = -1; //reversed
+int backLeftPort = -2; //reversed
+int frontRightPort = 4;
+int backRightPort = 3;
 
 int fourBarPort = 11;
 int twoBarPort = 8;
@@ -29,9 +29,6 @@ Motor intakeMotor(intakePort);
 
 MotorGroup driveL({frontLeftPort, backLeftPort});
 MotorGroup driveR({frontRightPort, backRightPort});
-
-double wheelSize = 4.125;
-double wheelBase = 9.75;
 
 okapi::ChassisScales scales{
     //4.125 is the wheelsize and 9.75 is the wheelbase
