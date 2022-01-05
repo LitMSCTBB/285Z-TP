@@ -29,25 +29,25 @@ int i = 0;
 bool isPressed = 0;
 
 std::shared_ptr<okapi::OdomChassisController> chassisaut = okapi::ChassisControllerBuilder()
-                                                               .withMotors(driveL, driveR) // left motor is 0, right motor is 2 (reversed)
-                                                               .withGains(
-                                                                   {0.001, 0, 0.0001},        // Distance controller gains
-                                                                   {0.00075, 0.001, 0.00009}, // Turn controller gains //try 0.00075, 0.001, 0.00009
-                                                                   {0.001, 0, 0.0001}         // Angle controller gains (helps drive straight)
-                                                                   )
-                                                               .withDimensions(AbstractMotor::gearset::blue, scales)
-                                                               .withMaxVelocity(89)
-                                                               .withOdometryTimeUtilFactory(TimeUtilFactory())
-                                                               .withClosedLoopControllerTimeUtil(80, 10, 250_ms)
-                                                               .withOdometry()   // use the same scales as the chassis (above)
-                                                               .buildOdometry(); // build an odometry chassis
+  .withMotors(driveL, driveR) // left motor is 0, right motor is 2 (reversed)
+  .withGains(
+      {0.001, 0, 0.0001},        // Distance controller gains
+      {0.00075, 0.001, 0.00009}, // Turn controller gains //try 0.00075, 0.001, 0.00009
+      {0.001, 0, 0.0001}         // Angle controller gains (helps drive straight)
+      )
+  .withDimensions(AbstractMotor::gearset::blue, scales)
+  .withMaxVelocity(89)
+  .withOdometryTimeUtilFactory(TimeUtilFactory())
+  .withClosedLoopControllerTimeUtil(80, 10, 250_ms)
+  .withOdometry()   // use the same scales as the chassis (above)
+  .buildOdometry(); // build an odometry chassis
 
 std::shared_ptr<okapi::ChassisController> motion =
     ChassisControllerBuilder()
-        .withMotors(driveL, driveR)
-        .withDimensions(AbstractMotor::gearset::blue, scales)
-        .withMaxVelocity(600)
-        .build();
+      .withMotors(driveL, driveR)
+      .withDimensions(AbstractMotor::gearset::blue, scales)
+      .withMaxVelocity(600)
+      .build();
 
 std::shared_ptr<okapi::AsyncMotionProfileController> profileController = AsyncMotionProfileControllerBuilder().withLimits({1.1, 2.0, 10.0}).withOutput(motion).buildMotionProfileController();
 
