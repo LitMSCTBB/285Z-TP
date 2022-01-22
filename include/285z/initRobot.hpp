@@ -8,11 +8,7 @@ extern Controller controller;
 int GUI();
 void flat();
 
-//Controller Buttons
-extern ControllerButton stopPIDButton;
-extern ControllerButton liftUpButton;
-extern ControllerButton liftDownButton;
-extern ControllerButton liftToggleButton;
+//Controller Button
 extern ControllerButton intakeButton;
 extern ControllerButton clawButton;
 extern ControllerButton fourBarNormal;
@@ -24,20 +20,20 @@ extern int frontLeftPort;
 extern int backLeftPort;
 extern int frontRightPort;
 extern int backRightPort;
-extern int fourBarPort;
+extern int fourBarPortLeft;
 extern int twoBarPort;
+extern int fourBarPortRight;
 extern int intakePort;
-extern int clawPort;
 
-//Drivetrain motors
+//Motors
 extern Motor frontLeftMotor;
 extern Motor backLeftMotor;
 extern Motor frontRightMotor;
 extern Motor backRightMotor;
-extern Motor fourBarMotor;
+extern Motor fourBarMotor1;
+extern Motor fourBarMotor2;
 extern Motor twoBarMotor;
 extern Motor intakeMotor;
-extern Motor clawMotor;
 
 //Drive motor groups
 extern MotorGroup driveL;

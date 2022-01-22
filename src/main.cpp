@@ -143,7 +143,7 @@ void opcontrol()
     tb.liftToggle();
     chassisaut->getModel()->tank(controller.getAnalog(ControllerAnalog::leftY), controller.getAnalog(ControllerAnalog::rightY));
     fb.liftToggle();
-    fb.claw();
+    //fb.claw();
     in.run();
 
     pros::delay(20);
