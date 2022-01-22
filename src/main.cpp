@@ -147,7 +147,6 @@ void opcontrol()
 
   while (1)
   {
-    pros::lcd::print(1, "Lift: hi");
 
     tb.liftToggle();
     chassisaut->getModel()->tank(controller.getAnalog(okapi::ControllerAnalog::leftY),
@@ -157,5 +156,6 @@ void opcontrol()
     in.run();
 
     pros::delay(20);
+
   }
 }
