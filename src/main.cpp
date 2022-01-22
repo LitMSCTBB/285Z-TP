@@ -28,36 +28,28 @@ std::string autStringList[] =
 int i = 0;
 bool isPressed = 0;
 
-// okapi::DefaultOdomChassisController chassisauto = DefaultOdomChassisController();
 std::shared_ptr<okapi::OdomChassisController> chassisaut = okapi::ChassisControllerBuilder()
-        .withMotors(driveL, driveR) // left motor is 1, right motor is 2 (reversed
-        .withGains(
-              {0.001, 0, 0.0001},        // Distance controller gains
-              {0.00075, 0.001, 0.00009}, // Turn controller gains //try 0.00075, 0.001, 0.00009
-              {0.001, 0, 0.0001}         // Angle controller gains (helps drive straight)
-            )
-        .withDimensions(AbstractMotor::gearset::blue, scales)
-        .withMaxVelocity(90)
-        .withOdometryTimeUtilFactory(TimeUtilFactory())
-        .withClosedLoopControllerTimeUtil(80, 10, 250_ms)
-        .withOdometry()   // use the same scales as the chassis (above)
-        .buildOdometry(); // build an odometry chassis
+  .withMotors(driveL, driveR) // left motor is 0, right motor is 2 (reversed)
+  .withGains(
+      {0.001, 0, 0.0001},        // Distance controller gains
+      {0.00075, 0.001, 0.00009}, // Turn controller gains //try 0.00075, 0.001, 0.00009
+      {0.001, 0, 0.0001}         // Angle controller gains (helps drive straight)
+      )
+  .withDimensions(AbstractMotor::gearset::blue, scales)
+  .withMaxVelocity(89)
+  .withOdometryTimeUtilFactory(TimeUtilFactory())
+  .withClosedLoopControllerTimeUtil(80, 10, 250_ms)
+  .withOdometry()   // use the same scales as the chassis (above)
+  .buildOdometry(); // build an odometry chassis
 
 std::shared_ptr<okapi::ChassisController> motion =
     ChassisControllerBuilder()
-        .withMotors(driveL, driveR)
-        .withDimensions(AbstractMotor::gearset::blue, scales)
-        .withMaxVelocity(600)
-        .build();
+      .withMotors(driveL, driveR)
+      .withDimensions(AbstractMotor::gearset::blue, scales)
+      .withMaxVelocity(600)
+      .build();
 
-std::shared_ptr<okapi::AsyncMotionProfileController> profileController = AsyncMotionProfileControllerBuilder()
-.withLimits({
-  1.1,  //max velocity
-  2.0,  //max acceleration
-  10.0  //max jerk
-})
-.withOutput(motion)
-.buildMotionProfileController();
+std::shared_ptr<okapi::AsyncMotionProfileController> profileController = AsyncMotionProfileControllerBuilder().withLimits({1.1, 2.0, 10.0}).withOutput(motion).buildMotionProfileController();
 
 /**
  * Runs while the robot is in the disabled state of Field Management System or
@@ -149,8 +141,7 @@ void opcontrol()
   {
 
     tb.liftToggle();
-    chassisaut->getModel()->tank(controller.getAnalog(okapi::ControllerAnalog::leftY),
-              controller.getAnalog(okapi::ControllerAnalog::rightY));
+    chassisaut->getModel()->tank(controller.getAnalog(ControllerAnalog::leftY), controller.getAnalog(ControllerAnalog::rightY));
     fb.liftToggle();
     fb.claw();
     in.run();

@@ -7,14 +7,10 @@ void Intake::run()
 {
   intakeMotor.setBrakeMode(AbstractMotor::brakeMode::coast);
 
-  if (intakeNormalButton.isPressed())
+  if (intakeButton.isPressed())
   {
 
     intakeMotor.moveVoltage(9500);
-  }
-  else if (intakeReverseButton.isPressed())
-  {
-    intakeMotor.moveVoltage(-9500);
   }
   else
   {

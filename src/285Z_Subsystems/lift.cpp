@@ -22,10 +22,9 @@ bool fbB = false;
 
 void FourBar::liftToggle()
 {
-  if (fourBarButton.changedToPressed())
-  {
-    fbB = !fbB; fourBarController->setTarget(fbB ? -4350 : 0);
-  }
+  if (fourBarNormal.isPressed()) fourBarMotor.moveVelocity(200);
+  else if (fourBarReverse.isPressed()) fourBarMotor.moveVelocity(-200);
+  else fourBarMotor.moveVelocity(0);
 }
 
 bool clawB = true;
