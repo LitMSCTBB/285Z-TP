@@ -36,7 +36,7 @@ std::shared_ptr<okapi::OdomChassisController> chassisaut = okapi::ChassisControl
       {0.001, 0, 0.0001}         // Angle controller gains (helps drive straight)
       )
   .withDimensions(AbstractMotor::gearset::blue, scales)
-  .withMaxVelocity(89)
+  .withMaxVelocity(600)
   .withOdometryTimeUtilFactory(TimeUtilFactory())
   .withClosedLoopControllerTimeUtil(80, 10, 250_ms)
   .withOdometry()   // use the same scales as the chassis (above)
@@ -142,7 +142,7 @@ void opcontrol()
 
     tb.liftToggle();
     chassisaut->getModel()->tank(controller.getAnalog(ControllerAnalog::leftY), controller.getAnalog(ControllerAnalog::rightY));
-    fb.liftToggle();
+    //fb.liftToggle();
     //fb.claw();
     in.run();
 

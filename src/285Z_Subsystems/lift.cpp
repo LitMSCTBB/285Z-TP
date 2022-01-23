@@ -38,5 +38,5 @@ void FourBar::claw()
   }
   */
 
-  pros::delay(15000);
+  pros::delay(100);
 }
