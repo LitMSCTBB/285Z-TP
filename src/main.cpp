@@ -130,11 +130,6 @@ void autonomous()
 
 void opcontrol()
 {
-
-  // // LIFT TASK
-  // pros::Task intakeThread(liftTask, (void *)"PROS", TASK_PRIORITY_DEFAULT,
-  //                         TASK_STACK_DEPTH_DEFAULT, "Lift Task");
-
   TwoBar tb;
   FourBar fb;
   Intake in;

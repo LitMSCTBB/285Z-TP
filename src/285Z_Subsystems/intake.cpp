@@ -3,18 +3,11 @@
 
 auto intakeController = AsyncPosControllerBuilder().withMotor(intakeMotor).build();
 
+bool intakeB = false;
+
 void Intake::run()
 {
   intakeMotor.setBrakeMode(AbstractMotor::brakeMode::coast);
-
-  if (intakeButton.isPressed())
-  {
-
-    intakeMotor.moveVoltage(-12000);
-  }
-  else
-  {
-    intakeMotor.moveVoltage(0);
-  }
-
+  if (intakeButton.changedToPressed()) intakeB = !intakeB;
+  intakeMotor.moveVoltage(intakeB ? -12000 : 0);
 }
