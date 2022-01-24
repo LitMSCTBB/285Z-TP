@@ -14,7 +14,9 @@ void TwoBar::liftToggle()
 {
   if (twoBarButton.changedToPressed())
   {
-    tbB = !tbB; twoBarController->setTarget(tbB ? -1495 : -3100); // up position (0) will be 1495 from rest position
+    tbB = !tbB;
+    twoBarController->setTarget(tbB ? -1430 : -3000);
+    // up position (0) will be 1495 from rest position
   }
 }
 
@@ -23,9 +25,19 @@ bool fbB = false;
 
 void FourBar::liftToggle()
 {
-  /*if (fourBarNormal.isPressed()) fourBarMotor.moveVelocity(200);
-  else if (fourBarReverse.isPressed()) fourBarMotor.moveVelocity(-200);
-  else fourBarMotor.moveVelocity(0);
+  if (fourBarNormal.isPressed()) {
+    fourBarMotor1.moveVoltage(12000);
+    fourBarMotor2.moveVoltage(12000);
+  }
+  else if (fourBarReverse.isPressed()) {
+    fourBarMotor1.moveVoltage(-12000);
+    fourBarMotor2.moveVoltage(-12000);
+  }
+    fourBarMotor1.moveVoltage(0);
+    fourBarMotor1.setBrakeMode(AbstractMotor::brakeMode::hold);
+
+    fourBarMotor2.moveVoltage(0);
+    fourBarMotor2.setBrakeMode(AbstractMotor::brakeMode::hold);
 }
 
 bool clawB = true;
@@ -36,7 +48,4 @@ void FourBar::claw()
   {
     clawB = !clawB; clawPiston.set_value(clawB);
   }
-  */
-
-  pros::delay(100);
 }

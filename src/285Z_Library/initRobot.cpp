@@ -14,7 +14,7 @@ int backLeftPort = -20; //reversed
 int frontRightPort = 17;
 int backRightPort = 19;
 
-int fourBarPortLeft = 13;
+int fourBarPortLeft = -13;
 int twoBarPort = 14;
 int fourBarPortRight = 12;
 int intakePort = 11;

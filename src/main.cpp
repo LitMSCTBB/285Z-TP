@@ -29,14 +29,13 @@ int i = 0;
 bool isPressed = 0;
 
 std::shared_ptr<okapi::OdomChassisController> chassisaut = okapi::ChassisControllerBuilder()
-  .withMotors(driveL, driveR) // left motor is 0, right motor is 2 (reversed)
+  .withMotors(driveL, driveR)
   .withGains(
       {0.001, 0, 0.0001},        // Distance controller gains
       {0.00075, 0.001, 0.00009}, // Turn controller gains //try 0.00075, 0.001, 0.00009
       {0.001, 0, 0.0001}         // Angle controller gains (helps drive straight)
       )
   .withDimensions(AbstractMotor::gearset::blue, scales)
-  .withMaxVelocity(600)
   .withOdometryTimeUtilFactory(TimeUtilFactory())
   .withClosedLoopControllerTimeUtil(80, 10, 250_ms)
   .withOdometry()   // use the same scales as the chassis (above)
@@ -49,7 +48,10 @@ std::shared_ptr<okapi::ChassisController> motion =
       .withMaxVelocity(600)
       .build();
 
-std::shared_ptr<okapi::AsyncMotionProfileController> profileController = AsyncMotionProfileControllerBuilder().withLimits({1.1, 2.0, 10.0}).withOutput(motion).buildMotionProfileController();
+std::shared_ptr<okapi::AsyncMotionProfileController> profileController = AsyncMotionProfileControllerBuilder()
+      .withLimits({1.1, 2.0, 10.0})
+      .withOutput(motion)
+      .buildMotionProfileController();
 
 /**
  * Runs while the robot is in the disabled state of Field Management System or
@@ -141,9 +143,12 @@ void opcontrol()
   {
 
     tb.liftToggle();
-    chassisaut->getModel()->tank(controller.getAnalog(ControllerAnalog::leftY), controller.getAnalog(ControllerAnalog::rightY));
-    //fb.liftToggle();
-    //fb.claw();
+    chassisaut->getModel()->tank(
+      controller.getAnalog(ControllerAnalog::leftY),
+      controller.getAnalog(ControllerAnalog::rightY)
+    );
+    fb.liftToggle();
+    fb.claw();
     in.run();
 
     pros::delay(20);
