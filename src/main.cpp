@@ -67,65 +67,17 @@ void competition_initialize()
 
   pros::lcd::initialize();
 
-  // imuSensor.reset();
-  // while (imuSensor.is_calibrating())
-  // {
-  //   pros::delay(15);
-  // }
+  imuSensor.reset();
+  while (imuSensor.is_calibrating())
+    pros::delay(15);
 
-  // pros::delay(20);
+  pros::delay(20);
 
-  // while (true)
-  // {
-  //   if (autoSelectorLeft.get_value() and !isPressed)
-  //   {
-  //     if (i > 0)
-  //     {
-  //       i = (i-1) % 6;
-  //       isPressed = true;
-  //     }
-  //   }
-  //   else if (autoSelectorRight.get_value() and !isPressed)
-  //   {
-  //     if (i < 6)
-  //     {
-  //       i = (i+1) % 6;
-  //       isPressed = true;
-  //     }
-  //   }
-  //   else if (!autoSelectorLeft.get_value() && !autoSelectorRight.get_value())
-  //   {
-  //     isPressed = false;
-  //   }
-
-  //   pros::lcd::set_text(1, autStringList[i]);
-  //   pros::delay(30);
-  // }
 }
 
 void autonomous()
 {
-  blueLeft(profileController);
-  // switch(i) {
-  //   case 0:
-  //     redLeft(profileController);
-  //     break;
-  //   case 1:
-  //     redRight(profileController);
-  //     break;
-  //   case 2:
-  //     blueLeft(profileController);
-  //     break;
-  //   case 3:
-  //     blueRight(profileController);
-  //     break;
-  //   case 4:
-  //     noAuton();
-  //     break;
-  //   case 5:
-  //     skillsAuto();
-  //     break;
-  // }
+  
 }
 
 void opcontrol()

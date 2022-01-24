@@ -5,14 +5,6 @@
 #include "../include/285Z_Subsystems/pid.hpp"
 #include "../include/285z/initSensors.hpp"
 
-// std::shared_ptr<okapi::ChassisController> motion =
-//     ChassisControllerBuilder()
-//         .withMotors({frontLeftPort, backLeftPort}, {frontRightPort, backRightPort})
-//         .withDimensions(AbstractMotor::gearset::green, scales)
-//         .withMaxVelocity(200)
-//         .build();
-// std::shared_ptr<okapi::AsyncMotionProfileController> profileController = AsyncMotionProfileControllerBuilder().withLimits({0.5, 2.0, 10.0}).withOutput(motion).buildMotionProfileController();
-
 void move(std::shared_ptr<okapi::AsyncMotionProfileController> profile, okapi::QLength distance, bool dir){
   profile->generatePath({
     {0_ft,0_ft,0_deg},
@@ -28,16 +20,10 @@ void move(std::shared_ptr<okapi::AsyncMotionProfileController> profile, okapi::Q
 //****************** SKILLS ***********************************//
 void skillsAuto()
 {
-  imuSensor.reset();
-  while (imuSensor.is_calibrating())
-  {
-    pros::delay(15);
-  }
-
   turn(45);
 }
 
-void noAuton() 
+void noAuton()
 {
   pros::delay(15000);
 }
