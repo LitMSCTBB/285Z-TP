@@ -7,7 +7,7 @@ std::shared_ptr<okapi::AsyncPositionController<double, double>> twoBarController
 std::shared_ptr<okapi::AsyncPositionController<double, double>> clawController = AsyncPosControllerBuilder().withMotor(clawPort).build();
 
 // 2b
-bool tbB = true; // tbH will only ever be 2 at the beginning of the match (max height because needs to satisfy size reqs) before the lift is triggered for the first time
+bool tbB = true;
 
 void TwoBar::liftToggle()
 {

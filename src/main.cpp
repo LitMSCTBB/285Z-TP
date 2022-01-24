@@ -49,7 +49,11 @@ std::shared_ptr<okapi::ChassisController> motion =
       .withMaxVelocity(600)
       .build();
 
-std::shared_ptr<okapi::AsyncMotionProfileController> profileController = AsyncMotionProfileControllerBuilder().withLimits({1.1, 2.0, 10.0}).withOutput(motion).buildMotionProfileController();
+std::shared_ptr<okapi::AsyncMotionProfileController> profileController =
+  AsyncMotionProfileControllerBuilder()
+    .withLimits({1.1, 2.0, 10.0})
+    .withOutput(motion)
+    .buildMotionProfileController();
 
 /**
  * Runs while the robot is in the disabled state of Field Management System or
@@ -128,11 +132,6 @@ void autonomous()
 
 void opcontrol()
 {
-
-  // // LIFT TASK
-  // pros::Task intakeThread(liftTask, (void *)"PROS", TASK_PRIORITY_DEFAULT,
-  //                         TASK_STACK_DEPTH_DEFAULT, "Lift Task");
-
   TwoBar tb;
   FourBar fb;
   Intake in;
