@@ -10,7 +10,7 @@ void Intake::run()
   if (intakeButton.isPressed())
   {
 
-    intakeMotor.moveVoltage(9500);
+    intakeMotor.moveVoltage(-12000);
   }
   else
   {
