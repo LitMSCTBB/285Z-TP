@@ -3,7 +3,7 @@
 #include "../include/285Z_Subsystems/pid.hpp"
 
 const double GLOBAL_kP = 0.8;
-const double GLOBAL_kI = 0.0;
+const double GLOBAL_kI = 0.6;
 const double GLOBAL_kD = 0.0;
 
 void calibrate(){

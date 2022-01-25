@@ -22,8 +22,8 @@ bool clawB = true;
 
 // 2b
 bool tbB = true;
-const int height0 = -3000;
-const int height1 = -1230; //increase magnitude to go higher
+const int height0 = -3010;
+const int height1 = -1615; //increase magnitude to go higher
 
 //4b
 
