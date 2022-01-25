@@ -18,7 +18,7 @@ void move(std::shared_ptr<okapi::AsyncMotionProfileController> profile, okapi::Q
 }
 
 //****************** SKILLS ***********************************//
-void skillsAuto()
+void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> profileController)
 {
   turn(45);
 }

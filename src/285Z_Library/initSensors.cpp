@@ -1,7 +1,6 @@
 #include "../include/285z/initRobot.hpp"
 
-pros::ADIDigitalIn autoSelectorLeft('E');
-pros::ADIDigitalIn autoSelectorRight('D');
+Potentiometer autonPot('B');
 pros::ADIDigitalOut clawPiston('A');
 
 const std::uint8_t imuPort = 15;

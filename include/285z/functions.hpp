@@ -15,11 +15,6 @@ void tankDrive();
 void toggleIntake();
 void intakeRev();
 
-//Tray
-void anglerManual();
-void anglerToggle();
-void stopPID();
-
 //Lift
 void liftControl();
 void liftUp();
@@ -33,7 +28,6 @@ void liftManualUp();
 void liftManualDown();
 void liftManualStop();
 
-void anglerToggle();
 
 void liftPositionToggleFunction();
 
@@ -47,7 +41,7 @@ void blueRight(std::shared_ptr<okapi::AsyncMotionProfileController> profileContr
 void redLeft(std::shared_ptr<okapi::AsyncMotionProfileController> profileController);
 void redRight(std::shared_ptr<okapi::AsyncMotionProfileController> profileController);
 void noAuton();
-void skillsAuto();
+void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> profileController);
 
 const bool fwd {false};
 const bool bwd {true};

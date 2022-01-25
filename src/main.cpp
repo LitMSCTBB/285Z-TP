@@ -1,5 +1,5 @@
 #include "285z/initRobot.hpp"
-#include "285z/functions.hpp"
+#include "../include/285z/functions.hpp"
 #include "285Z_Subsystems/lift.hpp"
 #include "285Z_Subsystems/pid.hpp"
 #include "285Z_Subsystems/intake.hpp"
@@ -45,7 +45,6 @@ std::shared_ptr<okapi::ChassisController> motion =
     ChassisControllerBuilder()
       .withMotors(driveL, driveR)
       .withDimensions(AbstractMotor::gearset::blue, scales)
-      .withMaxVelocity(600)
       .build();
 
 std::shared_ptr<okapi::AsyncMotionProfileController> profileController = AsyncMotionProfileControllerBuilder()
@@ -60,24 +59,35 @@ std::shared_ptr<okapi::AsyncMotionProfileController> profileController = AsyncMo
 -+
  */
 
-void disabled() {}
+double potVal;
+
+void disabled() {
+
+  clawPiston.set_value(true);
+
+}
 
 void competition_initialize()
 {
 
-  pros::lcd::initialize();
+  //pros::lcd::initialize();
+
+  clawPiston.set_value(false);
 
   imuSensor.reset();
   while (imuSensor.is_calibrating())
     pros::delay(15);
 
-  pros::delay(20);
-
 }
 
 void autonomous()
 {
-  
+  skillsAuto(profileController);
+  //noAuton();
+  //blueRight(profileController);
+  //blueLeft(profileController);
+  //redRight(profileController);
+  //redLeft(profileController);
 }
 
 void opcontrol()

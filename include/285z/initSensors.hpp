@@ -3,7 +3,5 @@
 #include "main.h"
 
 extern pros::Imu imuSensor;
-extern pros::ADIDigitalIn autoSelectorLeft;
-extern pros::ADIDigitalIn autoSelectorRight;
+extern Potentiometer autonPot;
 extern pros::ADIDigitalOut clawPiston;
-
