@@ -2,15 +2,15 @@
 #include "../../include/285z/initSensors.hpp"
 #include "../../include/285Z_Subsystems/lift.hpp"
 
-std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarControllerLeft =
-    AsyncPosControllerBuilder()
-      .withMotor(fourBarPortLeft)
-      .build();
-
-std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarControllerRight =
-    AsyncPosControllerBuilder()
-      .withMotor(fourBarPortRight)
-      .build();
+// std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarControllerLeft =
+//     AsyncPosControllerBuilder()
+//       .withMotor(fourBarPortLeft)
+//       .build();
+//
+// std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarControllerRight =
+//     AsyncPosControllerBuilder()
+//       .withMotor(fourBarPortRight)
+//       .build();
 
 std::shared_ptr<okapi::AsyncPositionController<double, double>> twoBarController =
     AsyncPosControllerBuilder()
@@ -23,14 +23,14 @@ bool clawB = true;
 // 2b
 bool tbB = true;
 const int height0 = -3000;
-const int height1 = -1330; //increase magnitude to go higher
+const int height1 = -1230; //increase magnitude to go higher
 
 //4b
 
 const int height0L = 0;
 const int height0R = 0;
-const int height1L = 1000;
-const int height1R = 1000;
+const int height1L = 100;
+const int height1R = 100;
 int currentHeight = fourBarMotor1.getPosition();
 
 

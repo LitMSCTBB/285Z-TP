@@ -32,7 +32,6 @@ MotorGroup driveL({frontLeftPort, backLeftPort});
 MotorGroup driveR({frontRightPort, backRightPort});
 
 okapi::ChassisScales scales{
-    //4.125 is the wheelsize and 9.75 is the wheelbase
     {4.125_in, 11.5_in}, //dimensions of the chassis
     imev5BlueTPR};
 

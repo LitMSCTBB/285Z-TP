@@ -16,18 +16,6 @@
 
 //**************** INITIALIZE ALL CHASSIS FOR AUTON ********************//
 
-std::string autStringList[] =
-    {
-        "Red Left",
-        "Red Right",
-        "Blue Left",
-        "Blue Right",
-        "No Auton",
-        "Skills Auto"};
-
-int i = 0;
-bool isPressed = 0;
-
 std::shared_ptr<okapi::OdomChassisController> chassisaut = okapi::ChassisControllerBuilder()
   .withMotors(driveL, driveR)
   .withGains(
@@ -38,19 +26,44 @@ std::shared_ptr<okapi::OdomChassisController> chassisaut = okapi::ChassisControl
   .withDimensions(AbstractMotor::gearset::blue, scales)
   .withOdometryTimeUtilFactory(TimeUtilFactory())
   .withClosedLoopControllerTimeUtil(80, 10, 250_ms)
+  .withMaxVelocity(600)
   .withOdometry()   // use the same scales as the chassis (above)
   .buildOdometry(); // build an odometry chassis
 
 std::shared_ptr<okapi::ChassisController> motion =
     ChassisControllerBuilder()
       .withMotors(driveL, driveR)
+      .withMaxVelocity(600)
       .withDimensions(AbstractMotor::gearset::blue, scales)
       .build();
 
-std::shared_ptr<okapi::AsyncMotionProfileController> profileController = AsyncMotionProfileControllerBuilder()
-      .withLimits({1.1, 2.0, 10.0})
+std::shared_ptr<okapi::AsyncMotionProfileController> fastAuto = AsyncMotionProfileControllerBuilder()
+      .withLimits({
+        2.8213, //max linear velocity of Chassis in m/s
+        2.6, //max linear acceleration in m/s^2
+        10.0 //max linear jerk in m/s^3
+      })
       .withOutput(motion)
       .buildMotionProfileController();
+
+std::shared_ptr<okapi::AsyncMotionProfileController> mediumAuto = AsyncMotionProfileControllerBuilder()
+      .withLimits({
+        1.7, //max linear velocity of Chassis in m/s
+        2.3, //max linear acceleration in m/s^2
+        10.0 //max linear jerk in m/s^3
+      })
+      .withOutput(motion)
+      .buildMotionProfileController();
+
+std::shared_ptr<okapi::AsyncMotionProfileController> slowAuto = AsyncMotionProfileControllerBuilder()
+      .withLimits({
+        0.7, //max linear velocity of Chassis in m/s
+        2.0, //max linear acceleration in m/s^2
+        10.0 //max linear jerk in m/s^3
+      })
+      .withOutput(motion)
+      .buildMotionProfileController();
+
 
 /**
  * Runs while the robot is in the disabled state of Field Management System or
@@ -58,8 +71,6 @@ std::shared_ptr<okapi::AsyncMotionProfileController> profileController = AsyncMo
  * the robot is enabled, this task will exit.
 -+
  */
-
-double potVal;
 
 void disabled() {
 
@@ -71,23 +82,21 @@ void competition_initialize()
 {
 
   //pros::lcd::initialize();
-
-  clawPiston.set_value(false);
-
   imuSensor.reset();
   while (imuSensor.is_calibrating())
     pros::delay(15);
+
+  clawPiston.set_value(false);
 
 }
 
 void autonomous()
 {
-  skillsAuto(profileController);
   //noAuton();
-  //blueRight(profileController);
-  //blueLeft(profileController);
-  //redRight(profileController);
-  //redLeft(profileController);
+  skillsAuto(slowAuto, mediumAuto, fastAuto);
+  //redLeftBlueLeft(slowAuto, mediumAuto, fastAuto);
+  //redRightBlueRight(slowAuto, mediumAuto, fastAuto);
+  // winPoint(slowAuto, mediumAuto, fastAuto);
 }
 
 void opcontrol()
@@ -98,17 +107,17 @@ void opcontrol()
 
   while (1)
   {
-
-    tb.liftToggle();
     chassisaut->getModel()->tank(
       controller.getAnalog(ControllerAnalog::leftY),
       controller.getAnalog(ControllerAnalog::rightY)
     );
-    fb.liftToggle();
-    fb.claw();
-    in.run();
 
-    pros::delay(20);
+  tb.liftToggle();
+  fb.liftToggle();
+  fb.claw();
+  in.run();
+
+  pros::delay(20);
 
   }
 }

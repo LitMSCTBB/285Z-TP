@@ -2,7 +2,7 @@
 #include "../include/285z/initSensors.hpp"
 #include "../include/285Z_Subsystems/pid.hpp"
 
-const double GLOBAL_kP = 0.2;
+const double GLOBAL_kP = 0.8;
 const double GLOBAL_kI = 0.0;
 const double GLOBAL_kD = 0.0;
 
@@ -14,6 +14,7 @@ double deg = 0;
 bool absolute = true;
 
 void turn(double degrees){
+
   driveL.setBrakeMode(AbstractMotor::brakeMode::hold);
   driveR.setBrakeMode(AbstractMotor::brakeMode::hold);
   double thetaI = imuSensor.get_heading();
@@ -36,6 +37,7 @@ void turn(double degrees){
     } else {
       sensorValue = thetaI;
     }
+
   }
 
   double error = turnTarget - sensorValue;

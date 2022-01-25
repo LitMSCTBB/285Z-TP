@@ -5,10 +5,13 @@
 #include "../include/285Z_Subsystems/pid.hpp"
 
 
-//*****************************RED AUTONOMOUS PROGRAMS**********************//
+//***************************** RED/BLUE AUTONOMOUS PROGRAMS **********************//
 
-void redLeft(std::shared_ptr<okapi::AsyncMotionProfileController> profileController)
+void redLeftBlueLeft(std::shared_ptr<okapi::AsyncMotionProfileController> slow,
+  std::shared_ptr<okapi::AsyncMotionProfileController> med,
+  std::shared_ptr<okapi::AsyncMotionProfileController> fast)
 {
+  /*
   chassisaut->turnAngle(-20_deg);
   twoBarController->setTarget(-3100);
   pros::delay(1500);
@@ -19,9 +22,22 @@ void redLeft(std::shared_ptr<okapi::AsyncMotionProfileController> profileControl
   move(profileController, 0.35_ft, fwd);
   pros::delay(1500);
   intakeMotor.moveVoltage(9500);
+  */
+  intakeMotor.moveVelocity(-600);
+  move(fast, 0.3_ft, fwd);
+  move(med, 0.3_ft, fwd);
+  move(slow, 0.3_ft, fwd);
+  intakeMotor.moveVelocity(0); 
+  turn(90);
+  turn(180);
+  turn(0);
+
 }
-void redRight(std::shared_ptr<okapi::AsyncMotionProfileController> profileController)
+void redRightBlueRight(std::shared_ptr<okapi::AsyncMotionProfileController> slow,
+  std::shared_ptr<okapi::AsyncMotionProfileController> med,
+  std::shared_ptr<okapi::AsyncMotionProfileController> fast)
 {
+  /*
   move(profileController, 2_ft, fwd);
   pros::delay(200);
   // move(profileController, 0.065_ft, fwd);
@@ -34,4 +50,14 @@ void redRight(std::shared_ptr<okapi::AsyncMotionProfileController> profileContro
   pros::delay(200);
   move(profileController, 0.33_ft, fwd);
   intakeMotor.moveVoltage(9500);
+  */
+}
+
+void winPoint(std::shared_ptr<okapi::AsyncMotionProfileController> slow,
+  std::shared_ptr<okapi::AsyncMotionProfileController> med,
+  std::shared_ptr<okapi::AsyncMotionProfileController> fast)
+{
+
+
+
 }
