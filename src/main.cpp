@@ -86,7 +86,7 @@ void competition_initialize()
   while (imuSensor.is_calibrating())
     pros::delay(15);
 
-  clawPiston.set_value(false);
+  //clawPiston.set_value(false);
 
 }
 
@@ -95,7 +95,7 @@ void autonomous()
   //noAuton();
   skillsAuto(slowAuto, mediumAuto, fastAuto);
   //redLeftBlueLeft(slowAuto, mediumAuto, fastAuto);
-  //redRightBlueRight(slowAuto, mediumAuto, fastAuto);
+  //redRightBlueRight(slowAuto, mediumAuto, fastAuto);x
   // winPoint(slowAuto, mediumAuto, fastAuto);
 }
 
