@@ -74,7 +74,7 @@ std::shared_ptr<okapi::AsyncMotionProfileController> slowAuto = AsyncMotionProfi
 
 void disabled() {
 
-  clawPiston.set_value(true);
+  //clawPiston.set_value(true);
 
 }
 
@@ -120,4 +120,5 @@ void opcontrol()
   pros::delay(20);
 
   }
+
 }

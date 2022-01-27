@@ -16,6 +16,12 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> slow,
   std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
 {
-  turn(45);
-  liftDown(); 
+  intakeMotor.moveVelocity(-600);
+  move(fast, 0.3_ft, fwd);
+  move(med, 0.3_ft, fwd);
+  move(slow, 0.3_ft, fwd);
+  intakeMotor.moveVelocity(0);
+  turn(90);
+  turn(180);
+  turn(0);
 }

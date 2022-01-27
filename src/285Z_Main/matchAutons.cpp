@@ -23,14 +23,6 @@ void redLeftBlueLeft(std::shared_ptr<okapi::AsyncMotionProfileController> slow,
   pros::delay(1500);
   intakeMotor.moveVoltage(9500);
   */
-  intakeMotor.moveVelocity(-600);
-  move(fast, 0.3_ft, fwd);
-  move(med, 0.3_ft, fwd);
-  move(slow, 0.3_ft, fwd);
-  intakeMotor.moveVelocity(0); 
-  turn(90);
-  turn(180);
-  turn(0);
 
 }
 void redRightBlueRight(std::shared_ptr<okapi::AsyncMotionProfileController> slow,

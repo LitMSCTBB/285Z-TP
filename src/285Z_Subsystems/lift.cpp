@@ -2,12 +2,12 @@
 #include "../../include/285z/initSensors.hpp"
 #include "../../include/285Z_Subsystems/lift.hpp"
 
-// std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarControllerLeft =
+// std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarControllerL =
 //     AsyncPosControllerBuilder()
 //       .withMotor(fourBarPortLeft)
 //       .build();
-//
-// std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarControllerRight =
+
+// std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarControllerR =
 //     AsyncPosControllerBuilder()
 //       .withMotor(fourBarPortRight)
 //       .build();
@@ -26,7 +26,6 @@ const int height0 = -3010;
 const int height1 = -1615; //increase magnitude to go higher
 
 //4b
-
 const double height0F = 1;
 const double height1F = 1540.0;
 double currentHeight = fourBarMotor1.getPosition();
@@ -50,14 +49,14 @@ void FourBar::liftToggle()
   fourBarMotor2.setBrakeMode(AbstractMotor::brakeMode::hold); //right motor
 
   if (fourBarNormal.isPressed() && currentHeight <= height1F) {
-    fourBarMotor1.moveVelocity(100);
-    fourBarMotor2.moveVelocity(100);
+    fourBarMotor1.moveVelocity(150);
+    fourBarMotor2.moveVelocity(150);
     currentHeight = fourBarMotor1.getPosition();
   }
   else if (fourBarReverse.isPressed() && currentHeight >= height0F)
   {
-    fourBarMotor1.moveVelocity(-100);
-    fourBarMotor2.moveVelocity(-100);
+    fourBarMotor1.moveVelocity(-150);
+    fourBarMotor2.moveVelocity(-150);
     currentHeight = fourBarMotor1.getPosition();
   }
   else
