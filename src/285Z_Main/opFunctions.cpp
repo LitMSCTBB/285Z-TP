@@ -18,9 +18,9 @@ void move(std::shared_ptr<okapi::AsyncMotionProfileController> profile,
 }
 
 void liftUp() {
-  twoBarController->setTarget(-1230);
+  twoBarController->setTarget(-1615);
 }
 
 void liftDown() {
-  twoBarController->setTarget(-3000);
+  twoBarController->setTarget(-3010);
 }

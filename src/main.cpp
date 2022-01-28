@@ -40,8 +40,8 @@ std::shared_ptr<okapi::ChassisController> motion =
 std::shared_ptr<okapi::AsyncMotionProfileController> fastAuto = AsyncMotionProfileControllerBuilder()
       .withLimits({
         2.8213, //max linear velocity of Chassis in m/s
-        2.6, //max linear acceleration in m/s^2
-        10.0 //max linear jerk in m/s^3
+        5, //max linear acceleration in m/s^2
+        27.0 //max linear jerk in m/s^3
       })
       .withOutput(motion)
       .buildMotionProfileController();
@@ -49,8 +49,8 @@ std::shared_ptr<okapi::AsyncMotionProfileController> fastAuto = AsyncMotionProfi
 std::shared_ptr<okapi::AsyncMotionProfileController> mediumAuto = AsyncMotionProfileControllerBuilder()
       .withLimits({
         1.7, //max linear velocity of Chassis in m/s
-        2.3, //max linear acceleration in m/s^2
-        10.0 //max linear jerk in m/s^3
+        3.2, //max linear acceleration in m/s^2
+        18.0 //max linear jerk in m/s^3
       })
       .withOutput(motion)
       .buildMotionProfileController();
@@ -72,11 +72,7 @@ std::shared_ptr<okapi::AsyncMotionProfileController> slowAuto = AsyncMotionProfi
 -+
  */
 
-void disabled() {
-
-  //clawPiston.set_value(true);
-
-}
+void disabled() {}
 
 void competition_initialize()
 {
@@ -85,8 +81,6 @@ void competition_initialize()
   imuSensor.reset();
   while (imuSensor.is_calibrating())
     pros::delay(15);
-
-  //clawPiston.set_value(false);
 
 }
 
