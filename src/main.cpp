@@ -40,8 +40,8 @@ std::shared_ptr<okapi::ChassisController> motion =
 std::shared_ptr<okapi::AsyncMotionProfileController> fastAuto = AsyncMotionProfileControllerBuilder()
       .withLimits({
         2.8213, //max linear velocity of Chassis in m/s
-        5, //max linear acceleration in m/s^2
-        27.0 //max linear jerk in m/s^3
+        9.5, //max linear acceleration in m/s^2
+        35.0 //max linear jerk in m/s^3
       })
       .withOutput(motion)
       .buildMotionProfileController();
@@ -49,8 +49,8 @@ std::shared_ptr<okapi::AsyncMotionProfileController> fastAuto = AsyncMotionProfi
 std::shared_ptr<okapi::AsyncMotionProfileController> mediumAuto = AsyncMotionProfileControllerBuilder()
       .withLimits({
         1.7, //max linear velocity of Chassis in m/s
-        3.2, //max linear acceleration in m/s^2
-        18.0 //max linear jerk in m/s^3
+        5, //max linear acceleration in m/s^2
+        20 //max linear jerk in m/s^3
       })
       .withOutput(motion)
       .buildMotionProfileController();

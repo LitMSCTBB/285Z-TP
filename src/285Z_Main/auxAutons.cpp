@@ -19,22 +19,15 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> slow,
   std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
 {
-  //neutral rush
-  move(fast, 10.5_ft, fwd);
+
+  turn(90);
+  move(fast, 4_ft, fwd);
   clawPiston.set_value(true);
-  move(fast, 5.5_ft, bwd);
+  move(fast, 4_ft, bwd);
   clawPiston.set_value(false);
 
-  //facing alliance
-  turn(270);
-  liftDown();
-  pros::delay(800);
-  move(med, 3_ft, bwd);
-  liftUp();
-
-  //scoring on alliance
-  intakeMotor.moveVelocity(600);
-  pros::delay(3000);
-  intakeMotor.moveVelocity(0);
+  //getting 1 neutral
+  //move(fast, 18_ft, fwd);
+  // move(med, 3_ft, bwd);
 
 }

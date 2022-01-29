@@ -1,6 +1,7 @@
 #include "../include/285z/functions.hpp"
 #include "../include/285z/initRobot.hpp"
 #include "../include/285Z_Subsystems/lift.hpp"
+#include "../include/285z/initSensors.hpp"
 
 void move(std::shared_ptr<okapi::AsyncMotionProfileController> profile,
   okapi::QLength distance,

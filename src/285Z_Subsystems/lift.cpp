@@ -18,7 +18,7 @@ std::shared_ptr<okapi::AsyncPositionController<double, double>> twoBarController
       .build();
 
 //claw
-bool clawB = true;
+bool clawB = false;
 
 // 2b
 bool tbB = true;
