@@ -28,7 +28,7 @@ const int height1 = -1615; //increase magnitude to go higher
 //4b
 
 const int height0F = 0;
-const int height1F = -820;
+const int height1F = -780;
 int currentHeight = fourBarMotor1.getPosition();
 
 
@@ -49,11 +49,11 @@ void FourBar::liftToggle()
   fourBarMotor1.setBrakeMode(AbstractMotor::brakeMode::hold); //left motor
   fourBarMotor2.setBrakeMode(AbstractMotor::brakeMode::hold); //right motor
 
-  if (fourBarNormal.isPressed() && currentHeight >= height1F) {
+  if (fourBarNormal.isPressed()) {
     fourBarMotor1.moveVelocity(100);
     fourBarMotor2.moveVelocity(100);
   }
-  else if (fourBarReverse.isPressed() && currentHeight <= height0F)
+  else if (fourBarReverse.isPressed())
   {
     fourBarMotor1.moveVelocity(-100);
     fourBarMotor2.moveVelocity(-100);
