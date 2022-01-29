@@ -73,9 +73,4 @@ void newRedLeftBlueLeft(std::shared_ptr<okapi::AsyncMotionProfileController> slo
   clawPiston.set_value(true);
   turn(-12);
   move(fast, 13.5_ft, bwd);
-  
-  intakeMotor.moveVelocity(0);
-  turn(90);
-  turn(180);
-  turn(0);
 }
