@@ -48,7 +48,7 @@ void FourBar::liftToggle()
   fourBarMotor1.setBrakeMode(AbstractMotor::brakeMode::hold); //left motor
   fourBarMotor2.setBrakeMode(AbstractMotor::brakeMode::hold); //right motor
 
-  if (fourBarNormal.isPressed() && currentHeight <= height1F) {
+  if (fourBarNormal.isPressed()) {
     fourBarMotor1.moveVelocity(100);
     fourBarMotor2.moveVelocity(100);
     currentHeight = fourBarMotor1.getPosition();
