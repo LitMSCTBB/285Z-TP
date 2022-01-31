@@ -4,7 +4,7 @@
 
 const double GLOBAL_kP = 4.85;
 const double GLOBAL_kI = 0.0001;
-const double GLOBAL_kD = 0.22;
+const double GLOBAL_kD = 0.1;
 
 void calibrate(){
   imuSensor.reset();

@@ -13,10 +13,9 @@ void redLeftBlueLeft(std::shared_ptr<okapi::AsyncMotionProfileController> slow,
 {
 
   //neutral rush
-  move(fast, 11.5_ft, fwd);
+  move(fast, 10_ft, fwd);
   clawPiston.set_value(true);
-  move(fast, 7.5_ft, bwd);
-  clawPiston.set_value(false);
+  move(fast, 8_ft, bwd);
 
 }
 void redRightBlueRight(std::shared_ptr<okapi::AsyncMotionProfileController> slow,
@@ -24,20 +23,23 @@ void redRightBlueRight(std::shared_ptr<okapi::AsyncMotionProfileController> slow
   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
 {
     //neutral rush
-    move(fast, 10.5_ft, fwd);
+    move(fast, 9.55_ft, fwd);
     clawPiston.set_value(true);
-    move(fast, 5.5_ft, bwd);
-    clawPiston.set_value(false);
+    move(fast, 8.5_ft, bwd);
+
 
     //facing alliance
     turn(270);
+    move(fast, 1.67_ft, fwd);
+    clawPiston.set_value(false);
     liftDown();
     pros::delay(800);
-    move(med, 4_ft, bwd);
+    move(med, 3.65_ft, bwd);
     liftUp();
+    pros::delay(1200);
 
     //scoring on alliance
-    intakeMotor.moveVelocity(600);
+    intakeMotor.moveVelocity(-600);
     pros::delay(2500);
     intakeMotor.moveVelocity(0);
 }

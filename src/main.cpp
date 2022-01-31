@@ -40,8 +40,8 @@ std::shared_ptr<okapi::ChassisController> motion =
 std::shared_ptr<okapi::AsyncMotionProfileController> fastAuto = AsyncMotionProfileControllerBuilder()
       .withLimits({
         2.8213, //max linear velocity of Chassis in m/s
-        9.5, //max linear acceleration in m/s^2
-        35.0 //max linear jerk in m/s^3
+        10.5, //max linear acceleration in m/s^2
+        40.0 //max linear jerk in m/s^3
       })
       .withOutput(motion)
       .buildMotionProfileController();
@@ -49,8 +49,8 @@ std::shared_ptr<okapi::AsyncMotionProfileController> fastAuto = AsyncMotionProfi
 std::shared_ptr<okapi::AsyncMotionProfileController> mediumAuto = AsyncMotionProfileControllerBuilder()
       .withLimits({
         1.7, //max linear velocity of Chassis in m/s
-        5, //max linear acceleration in m/s^2
-        20 //max linear jerk in m/s^3
+        6, //max linear acceleration in m/s^2
+        24 //max linear jerk in m/s^3
       })
       .withOutput(motion)
       .buildMotionProfileController();
@@ -87,9 +87,9 @@ void competition_initialize()
 void autonomous()
 {
   //noAuton();
-  skillsAuto(slowAuto, mediumAuto, fastAuto);
+  //skillsAuto(slowAuto, mediumAuto, fastAuto);
   //redLeftBlueLeft(slowAuto, mediumAuto, fastAuto);
-  //redRightBlueRight(slowAuto, mediumAuto, fastAuto);x
+  redRightBlueRight(slowAuto, mediumAuto, fastAuto);
   // winPoint(slowAuto, mediumAuto, fastAuto);
 }
 
