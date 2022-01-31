@@ -7,9 +7,6 @@
 
 //****************** SKILLS ***********************************//
 
-  //move(fast, 12_ft, fwd); //12 ft = 6 ft real
-
-
 void noAuton()
 {
   pros::delay(15000);
@@ -20,14 +17,24 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> slow,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
 {
 
-  turn(90);
-  move(fast, 4_ft, fwd);
+  //neutral rush
+  move(fast, 9.55_ft, fwd);
   clawPiston.set_value(true);
-  move(fast, 4_ft, bwd);
-  clawPiston.set_value(false);
+  move(fast, 8.5_ft, bwd);
 
-  //getting 1 neutral
-  //move(fast, 18_ft, fwd);
-  // move(med, 3_ft, bwd);
+  //facing alliance
+  turn(270);
+  move(fast, 1.67_ft, fwd);
+  clawPiston.set_value(false);
+  liftDown();
+  pros::delay(800);
+  move(med, 3.65_ft, bwd);
+  liftUp();
+  pros::delay(1200);
+
+  //scoring on alliance
+  intakeMotor.moveVelocity(-600);
+  pros::delay(2500);
+  intakeMotor.moveVelocity(0);
 
 }

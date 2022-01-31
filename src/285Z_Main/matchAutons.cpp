@@ -14,9 +14,9 @@ void redLeftBlueLeft(std::shared_ptr<okapi::AsyncMotionProfileController> slow,
 {
 
   //neutral rush
-  move(fast, 10_ft, fwd);
+  move(fast, 9.55_ft, fwd);
   clawPiston.set_value(true);
-  move(fast, 8_ft, bwd);
+  move(fast, 8.5_ft, bwd);
 
 }
 void redRightBlueRight(std::shared_ptr<okapi::AsyncMotionProfileController> slow,
@@ -27,7 +27,6 @@ void redRightBlueRight(std::shared_ptr<okapi::AsyncMotionProfileController> slow
     move(fast, 9.55_ft, fwd);
     clawPiston.set_value(true);
     move(fast, 8.5_ft, bwd);
-
 
     //facing alliance
     turn(270);
@@ -52,27 +51,4 @@ void winPoint(std::shared_ptr<okapi::AsyncMotionProfileController> slow,
 
   pros::delay(15000);
 
-}
-
-void newRedLeftBlueLeft(std::shared_ptr<okapi::AsyncMotionProfileController> slow,
-                     std::shared_ptr<okapi::AsyncMotionProfileController> med,
-                     std::shared_ptr<okapi::AsyncMotionProfileController> fast)
-{
-  /*
-  chassisaut->turnAngle(-20_deg);
-  twoBarController->setTarget(-3100);
-  pros::delay(1500);
-  move(profileController, 0.4_ft, bwd);
-  pros::delay(1500);
-  twoBarController->setTarget(-1495);
-  pros::delay(1500);
-  move(profileController, 0.35_ft, fwd);
-  pros::delay(1500);
-  intakeMotor.moveVoltage(9500);
-  */
-  move(fast, 13.5_ft, fwd);
-  move(med, 2.4_ft, fwd);
-  clawPiston.set_value(true);
-  turn(-12);
-  move(fast, 13.5_ft, bwd);
 }

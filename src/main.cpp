@@ -87,9 +87,9 @@ void competition_initialize()
 void autonomous()
 {
   //noAuton();
-  //skillsAuto(slowAuto, mediumAuto, fastAuto);
+  skillsAuto(slowAuto, mediumAuto, fastAuto);
   //redLeftBlueLeft(slowAuto, mediumAuto, fastAuto);
-  redRightBlueRight(slowAuto, mediumAuto, fastAuto);
+  //redRightBlueRight(slowAuto, mediumAuto, fastAuto);
   // winPoint(slowAuto, mediumAuto, fastAuto);
 }
 
