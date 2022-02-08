@@ -3,6 +3,7 @@
 okapi::Controller controller;
 
 okapi::ControllerButton intakeButton = okapi::ControllerDigital::R2;
+okapi::ControllerButton intakeReverse = okapi::ControllerDigital::B;
 okapi::ControllerButton clawButton = okapi::ControllerDigital::Y;
 okapi::ControllerButton fourBarReverse = okapi::ControllerDigital::L1;
 okapi::ControllerButton fourBarNormal = okapi::ControllerDigital::R1;

@@ -10,6 +10,7 @@ void flat();
 
 //Controller Button
 extern ControllerButton intakeButton;
+extern ControllerButton intakeReverse;
 extern ControllerButton clawButton;
 extern ControllerButton fourBarNormal;
 extern ControllerButton fourBarReverse;
