@@ -33,7 +33,7 @@ MotorGroup driveL({frontLeftPort, backLeftPort});
 MotorGroup driveR({frontRightPort, backRightPort});
 
 okapi::ChassisScales scales{
-    {4.125_in, 11.5_in}, //dimensions of the chassis
+    {4.125_in,  14_in}, //dimensions of the chassis
     imev5BlueTPR};
 
 //**************** INITIALIZE CHASSIS FOR TELEOP ***********************//
