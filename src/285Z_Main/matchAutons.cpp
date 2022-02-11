@@ -69,3 +69,30 @@ void winPoint(std::shared_ptr<okapi::AsyncMotionProfileController> slow,
   move(fast, 0.1_ft, fwd);
 
 }
+
+void neutralSide(std::shared_ptr<okapi::AsyncMotionProfileController> slow,
+  std::shared_ptr<okapi::AsyncMotionProfileController> med,
+  std::shared_ptr<okapi::AsyncMotionProfileController> fast)
+{
+  move(fast, 9.55_ft, fwd);
+  clawPiston.set_value(true);
+  move(fast, 10_ft, bwd);
+}
+
+void neutralCenter(std::shared_ptr<okapi::AsyncMotionProfileController> slow,
+  std::shared_ptr<okapi::AsyncMotionProfileController> med,
+  std::shared_ptr<okapi::AsyncMotionProfileController> fast)
+{
+  move(fast, 10.5_ft, fwd);
+  clawPiston.set_value(true);
+  move(fast, 10_ft, bwd);
+}
+
+void neutralSideCenter(std::shared_ptr<okapi::AsyncMotionProfileController> slow,
+  std::shared_ptr<okapi::AsyncMotionProfileController> med,
+  std::shared_ptr<okapi::AsyncMotionProfileController> fast)
+{
+  move(fast, 9.55_ft, fwd);
+  clawPiston.set_value(true);
+  
+}

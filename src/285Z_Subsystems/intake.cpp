@@ -13,14 +13,14 @@ void Intake::run()
   intakeMotor.moveVelocity(intakeB ? -600 : 0);
 }
 
-void Intake::reverse() {
-  intakeMotor.setBrakeMode(AbstractMotor::brakeMode::coast);
-
-  if (intakeReverse.changedToPressed()) {
-    intakeMotor.moveVelocity(0); intakeB = false;
-    intakeMotor.moveVelocity(600);
-  }
-  else {
-    intakeMotor.moveVelocity(0);
-  }
-}
+// void Intake::reverse() {
+//   intakeMotor.setBrakeMode(AbstractMotor::brakeMode::coast);
+//
+//   if (intakeReverse.changedToPressed()) {
+//     intakeMotor.moveVelocity(0); intakeB = false;
+//     intakeMotor.moveVelocity(400);
+//   }
+//   else {
+//     intakeMotor.moveVelocity(0);
+//   }
+// }

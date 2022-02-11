@@ -14,6 +14,22 @@
  * to keep execution time for this mode under a few seconds.
  */
 
+int autoIndex = 0;
+bool isPressed = 0;
+
+std::string autList [] =
+{
+  "No Auton",
+  "Winpoint Auton",
+  "Left Side Winpoint",
+  "Right Side Winpoint",
+  "Neutral Left / Right",
+  "Neutral Center",
+  "Neutral Side + Center (Right)",
+  "Skills Auton"
+};
+
+
 //**************** INITIALIZE ALL CHASSIS FOR AUTON ********************//
 
 std::shared_ptr<okapi::OdomChassisController> chassisaut = okapi::ChassisControllerBuilder()
@@ -72,25 +88,48 @@ std::shared_ptr<okapi::AsyncMotionProfileController> slowAuto = AsyncMotionProfi
 -+
  */
 
+
 void disabled() {}
+
 
 void competition_initialize()
 {
 
-  //pros::lcd::initialize();
+  pros::lcd::initialize();
+
   imuSensor.reset();
   while (imuSensor.is_calibrating())
     pros::delay(15);
+
+    while(true) {
+
+      bool autval = autonSelector.get_value();
+
+      if (autval == 1) {
+        pros::delay(500);
+        autoIndex=(autoIndex + 1) % 8;
+      }
+
+      pros::lcd::set_text(1, autList[autoIndex]);
+      pros::delay(20);
+    }
+
 
 }
 
 void autonomous()
 {
-  //noAuton();
-  skillsAuto(slowAuto, mediumAuto, fastAuto);
-  //redLeftBlueLeft(slowAuto, mediumAuto, fastAuto);
-  //redRightBlueRight(slowAuto, mediumAuto, fastAuto);
-  // winPoint(slowAuto, mediumAuto, fastAuto);
+  switch(autoIndex) {
+    case (0): noAuton(); break;
+    case (1): skillsAuto(slowAuto, mediumAuto, fastAuto); break;
+    case (2): redLeftBlueLeft(slowAuto, mediumAuto, fastAuto); break;
+    case (3): redRightBlueRight(slowAuto, mediumAuto, fastAuto); break;
+    case (4): winPoint(slowAuto, mediumAuto, fastAuto); break;
+    case (5): neutralSide(slowAuto, mediumAuto, fastAuto); break;
+    case (6): neutralCenter(slowAuto, mediumAuto, fastAuto); break;
+    case (7): neutralSideCenter(slowAuto, mediumAuto, fastAuto); break;
+    default: noAuton();
+  }
 }
 
 void opcontrol()
@@ -106,12 +145,13 @@ void opcontrol()
       controller.getAnalog(ControllerAnalog::rightY)
     );
 
-  tb.liftToggle();
-  fb.liftToggle();
-  fb.claw();
-  in.run();
+    tb.liftToggle();
+    fb.liftToggle();
+    fb.claw();
+    in.run();
+    // in.reverse();
 
-  pros::delay(20);
+    pros::delay(20);
 
   }
 
