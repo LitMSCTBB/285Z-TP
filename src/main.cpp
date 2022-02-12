@@ -106,7 +106,7 @@ void competition_initialize()
       bool autval = autonSelector.get_value();
 
       if (autval == 1) {
-        pros::delay(500);
+        pros::delay(350);
         autoIndex=(autoIndex + 1) % 8;
       }
 

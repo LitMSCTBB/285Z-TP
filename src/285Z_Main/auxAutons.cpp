@@ -9,7 +9,9 @@
 
 void noAuton()
 {
-  pros::delay(15000);
+
+  turn(90);
+  // pros::delay(15000);
 }
 
 void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> slow,

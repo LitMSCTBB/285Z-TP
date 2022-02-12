@@ -2,8 +2,8 @@
 #include "../include/285z/initSensors.hpp"
 #include "../include/285Z_Subsystems/pid.hpp"
 
-const double GLOBAL_kP = 4.85;
-const double GLOBAL_kI = 0.0001;
+const double GLOBAL_kP = 4.65;
+const double GLOBAL_kI = 0.0;
 const double GLOBAL_kD = 0.1;
 
 void calibrate(){
