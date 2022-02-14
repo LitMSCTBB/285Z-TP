@@ -95,11 +95,30 @@ void disabled() {}
 void competition_initialize()
 {
 
-  pros::lcd::initialize();
+    pros::lcd::initialize();
 
-  imuSensor.reset();
-  while (imuSensor.is_calibrating())
-    pros::delay(15);
+    imuSensor.reset();
+    while (imuSensor.is_calibrating())
+      pros::delay(15);
+
+    pros::lcd::set_text(1, "IMU Calibration Finished");
+
+    fastAuto->generatePath({
+        {0_ft,0_ft,0_deg},
+        {10_ft, 0_ft,0_deg}},
+        "sideNeutral"
+    );
+
+    pros::lcd::set_text(1, "Side Path Finished");
+
+    fastAuto->generatePath({
+        {0_ft,0_ft,0_deg},
+        {11_ft, 0_ft,0_deg}},
+        "centerNeutral"
+    );
+
+
+    pros::lcd::set_text(1, "Center Path Finished");
 
     while(true) {
 
@@ -110,23 +129,25 @@ void competition_initialize()
         autoIndex=(autoIndex + 1) % 8;
       }
 
-      pros::lcd::set_text(1, autList[autoIndex]);
+      pros::lcd::set_text(6, autList[autoIndex]);
       pros::delay(20);
     }
-
 
 }
 
 void autonomous()
 {
+
+  pros::lcd::shutdown();
+
   switch(autoIndex) {
     case (0): noAuton(); break;
-    case (1): skillsAuto(slowAuto, mediumAuto, fastAuto); break;
-    case (2): redLeftBlueLeft(slowAuto, mediumAuto, fastAuto); break;
-    case (3): redRightBlueRight(slowAuto, mediumAuto, fastAuto); break;
-    case (4): winPoint(slowAuto, mediumAuto, fastAuto); break;
-    case (5): neutralSide(slowAuto, mediumAuto, fastAuto); break;
-    case (6): neutralCenter(slowAuto, mediumAuto, fastAuto); break;
+    case (1): fastProfile->removePath("centerNeutral"); fastProfile->removePath("sideNeutral"); skillsAuto(slowAuto, mediumAuto, fastAuto); break;
+    case (2): fastProfile->removePath("centerNeutral"); redLeftBlueLeft(slowAuto, mediumAuto, fastAuto); break;
+    case (3): fastProfile->removePath("centerNeutral"); redRightBlueRight(slowAuto, mediumAuto, fastAuto); break;
+    case (4): fastProfile->removePath("centerNeutral"); fastProfile->removePath("sideNeutral"); winPoint(slowAuto, mediumAuto, fastAuto); break;
+    case (5): fastProfile->removePath("centerNeutral"); neutralSide(slowAuto, mediumAuto, fastAuto); break;
+    case (6): fastProfile->removePath("sideNeutral"); neutralCenter(slowAuto, mediumAuto, fastAuto); break;
     case (7): neutralSideCenter(slowAuto, mediumAuto, fastAuto); break;
     default: noAuton();
   }
