@@ -5,6 +5,7 @@
 #include "../include/285Z_Aux/gui.hpp"
 #include "../include/285Z_Subsystems/pid.hpp"
 #include "../include/285z/initSensors.hpp"
+using namespace std;
 
 //***************************** RED/BLUE AUTONOMOUS PROGRAMS **********************//
 
@@ -13,15 +14,32 @@ void redLeftBlueLeft(std::shared_ptr<okapi::AsyncMotionProfileController> slow,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
 {
 
-  //neutral rush
-  move(fast, 9.55_ft, fwd);
-  clawPiston.set_value(true);
-  move(fast, 8.5_ft, bwd);
+  // //neutral rush
+  // moveProfile(fast, "0", dirs[0]);
+  // clawPiston.set_value(true);
+  // moveProfile(fast, "1", dirs[1]);
 
-  turn(270);
+  // turn(330);
+  // liftDown();
+  // pros::delay(500);
+  // moveProfile(slow, "2", dirs[2]);
+  // liftUp();
+  // intakeMotor.moveVelocity(-600);
+  // pros::delay(2500);
+  // intakeMotor.moveVelocity(0);
+
+  // neutral rush
+  move(fast, 10_ft, fwd);
+  clawPiston.set_value(true);
+  move(fast, 5_ft, bwd);
+
+  turn(335);
   liftDown();
-  move(slow, 1_ft, bwd);
+  pros::delay(500);
+  move(med, 3_ft, bwd);
   liftUp();
+  pros::delay(1200);
+
   intakeMotor.moveVelocity(-600);
   pros::delay(2500);
   intakeMotor.moveVelocity(0);
@@ -30,12 +48,12 @@ void redRightBlueRight(std::shared_ptr<okapi::AsyncMotionProfileController> slow
   std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
 {
-  //neutral rush
-  move(fast, 9.55_ft, fwd);
+  // neutral rush
+  move(fast, 9.4_ft, fwd);
   clawPiston.set_value(true);
-  move(fast, 8.5_ft, bwd);
+  move(fast, 7.35_ft, bwd);
 
-  //facing alliance
+  // facing alliance
   turn(270);
   move(fast, 1.67_ft, fwd);
   clawPiston.set_value(false);
@@ -45,10 +63,12 @@ void redRightBlueRight(std::shared_ptr<okapi::AsyncMotionProfileController> slow
   liftUp();
   pros::delay(1200);
 
-  //scoring on alliance
-  intakeMotor.moveVelocity(-600);
+  // scoring on alliance
+  intakeMotor.moveVelocity(-200);
   pros::delay(2500);
   intakeMotor.moveVelocity(0);
+
+
 }
 
 void winPoint(std::shared_ptr<okapi::AsyncMotionProfileController> slow,

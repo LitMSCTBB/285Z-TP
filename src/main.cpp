@@ -6,6 +6,7 @@
 #include "../include/285z/initSensors.hpp"
 #include "../include/285Z_Aux/gui.hpp"
 #include "../include/pros/llemu.hpp"
+using namespace std;
 
 //
 /** Runs initialization code. This occurs as soon as the program is started.
@@ -119,8 +120,11 @@ void competition_initialize()
 
 void autonomous()
 {
+  // vector<bool> dirs = genPaths(slowAuto, mediumAuto, fastAuto, autoIndex);
   switch(autoIndex) {
-    case (0): noAuton(); break;
+    case (0):
+      noAuton(slowAuto, mediumAuto, fastAuto);
+      break;
     case (1): skillsAuto(slowAuto, mediumAuto, fastAuto); break;
     case (2): redLeftBlueLeft(slowAuto, mediumAuto, fastAuto); break;
     case (3): redRightBlueRight(slowAuto, mediumAuto, fastAuto); break;
@@ -128,7 +132,8 @@ void autonomous()
     case (5): neutralSide(slowAuto, mediumAuto, fastAuto); break;
     case (6): neutralCenter(slowAuto, mediumAuto, fastAuto); break;
     case (7): neutralSideCenter(slowAuto, mediumAuto, fastAuto); break;
-    default: noAuton();
+    default:
+      noAuton(slowAuto, mediumAuto, fastAuto);
   }
 }
 
