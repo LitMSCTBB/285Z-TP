@@ -4,15 +4,7 @@
 #include "285Z_Subsystems/pid.hpp"
 #include "285Z_Subsystems/intake.hpp"
 #include "../include/285z/initSensors.hpp"
-#include "../include/285Z_Aux/gui.hpp"
 #include "../include/pros/llemu.hpp"
-
-//
-/** Runs initialization code. This occurs as soon as the program is started.
- *
- * All other competition modes are blocked by initialize; it is recommended
- * to keep execution time for this mode under a few seconds.
- */
 
 int autoIndex = 0;
 bool isPressed = 0;
@@ -91,6 +83,12 @@ std::shared_ptr<okapi::AsyncMotionProfileController> slowAuto = AsyncMotionProfi
 
 void disabled() {}
 
+//
+/** Runs initialization code. This occurs as soon as the program is started.
+ *
+ * All other competition modes are blocked by initialize; it is recommended
+ * to keep execution time for this mode under a few seconds.
+ */
 
 void competition_initialize()
 {
@@ -106,15 +104,15 @@ void competition_initialize()
     fastAuto->generatePath({
         {0_ft,0_ft,0_deg},
         {10_ft, 0_ft,0_deg}},
-        "sideNeutral"
+        "sideLeft"
     );
 
     pros::lcd::set_text(1, "Side Path Finished");
 
     fastAuto->generatePath({
         {0_ft,0_ft,0_deg},
-        {11_ft, 0_ft,0_deg}},
-        "centerNeutral"
+        {9.4_ft, 0_ft,0_deg}},
+        "sideRight"
     );
 
 
@@ -141,15 +139,41 @@ void autonomous()
   pros::lcd::shutdown();
 
   switch(autoIndex) {
-    case (0): noAuton(); break;
-    case (1): fastProfile->removePath("centerNeutral"); fastProfile->removePath("sideNeutral"); skillsAuto(slowAuto, mediumAuto, fastAuto); break;
-    case (2): fastProfile->removePath("centerNeutral"); redLeftBlueLeft(slowAuto, mediumAuto, fastAuto); break;
-    case (3): fastProfile->removePath("centerNeutral"); redRightBlueRight(slowAuto, mediumAuto, fastAuto); break;
-    case (4): fastProfile->removePath("centerNeutral"); fastProfile->removePath("sideNeutral"); winPoint(slowAuto, mediumAuto, fastAuto); break;
-    case (5): fastProfile->removePath("centerNeutral"); neutralSide(slowAuto, mediumAuto, fastAuto); break;
-    case (6): fastProfile->removePath("sideNeutral"); neutralCenter(slowAuto, mediumAuto, fastAuto); break;
-    case (7): neutralSideCenter(slowAuto, mediumAuto, fastAuto); break;
-    default: noAuton();
+    case (0):
+      noAuton();
+      break;
+    case (1):
+      fastAuto->removePath("sideLeft");
+      fastAuto->removePath("sideRight");
+      skillsAuto(slowAuto, mediumAuto, fastAuto);
+      break;
+    case (2):
+      fastAuto->removePath("sideRight");
+      redLeftBlueLeft(slowAuto, mediumAuto, fastAuto);
+      break;
+    case (3):
+      fastAuto->removePath("sideLeft");
+      redRightBlueRight(slowAuto, mediumAuto, fastAuto);
+      break;
+    case (4):
+      fastAuto->removePath("sideLeft");
+      fastAuto->removePath("sideRight");
+      winPoint(slowAuto, mediumAuto, fastAuto);
+      break;
+    case (5):
+      fastAuto->removePath("sideRight");
+      neutralSide(slowAuto, mediumAuto, fastAuto);
+      break;
+    case (6):
+      fastAuto->removePath("sideLeft");
+      fastAuto->removePath("sideRight");
+      neutralCenter(slowAuto, mediumAuto, fastAuto);
+      break;
+    case (7):
+      neutralSideCenter(slowAuto, mediumAuto, fastAuto);
+      break;
+    default:
+      noAuton();
   }
 }
 
