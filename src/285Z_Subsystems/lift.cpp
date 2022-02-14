@@ -1,6 +1,7 @@
 #include "../../include/285z/initRobot.hpp"
 #include "../../include/285z/initSensors.hpp"
 #include "../../include/285Z_Subsystems/lift.hpp"
+#include "../../include/285z/functions.hpp"
 
 // std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarControllerL =
 //     AsyncPosControllerBuilder()
@@ -23,7 +24,7 @@ bool clawB = false;
 // 2b
 bool tbB = true;
 const int height0 = -3010;
-const int height1 = -1590; //decrease magnitude to go higher
+const int height1 = -1600; //decrease magnitude to go higher
 
 //4b
 const double height0F = 1.0;
@@ -37,10 +38,19 @@ void TwoBar::liftToggle()
   if (twoBarButton.changedToPressed())
   {
     tbB = !tbB;
-    twoBarController->setTarget(tbB ? height1 : height0);
+    if (tbB) liftUp(); else liftDown();
   }
 }
 
+void liftUp()
+{
+  twoBarController->setTarget(height1);
+}
+
+void liftDown()
+{
+  twoBarController->setTarget(height0);
+}
 
 void FourBar::liftToggle()
 {

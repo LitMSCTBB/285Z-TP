@@ -4,14 +4,15 @@
 #include "../include/285Z_Aux/gui.hpp"
 #include "../include/285Z_Subsystems/pid.hpp"
 #include "../include/285z/initSensors.hpp"
+using namespace std;
 
 //****************** SKILLS ***********************************//
 
-void noAuton()
+void noAuton(std::shared_ptr<okapi::AsyncMotionProfileController> slow,
+             std::shared_ptr<okapi::AsyncMotionProfileController> med,
+             std::shared_ptr<okapi::AsyncMotionProfileController> fast)
 {
-
-  turn(90);
-  // pros::delay(15000);
+  pros::delay(15000);
 }
 
 void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> slow,
