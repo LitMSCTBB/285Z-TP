@@ -42,7 +42,7 @@ std::shared_ptr<okapi::ChassisController> motion =
     ChassisControllerBuilder()
       .withMotors(driveL, driveR)
       .withMaxVelocity(600)
-      .withDimensions(AbstractMotor::gearset::blue, scales)
+      .withDimensions({AbstractMotor::gearset::blue, (36.0 / 84.0)}, scales)
       .build();
 
 std::shared_ptr<okapi::AsyncMotionProfileController> fastAuto = AsyncMotionProfileControllerBuilder()

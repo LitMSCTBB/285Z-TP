@@ -33,13 +33,5 @@ MotorGroup driveL({frontLeftPort, backLeftPort});
 MotorGroup driveR({frontRightPort, backRightPort});
 
 okapi::ChassisScales scales{
-    {4.125_in,  14_in}, //dimensions of the chassis
+    {4.125_in,  14.5_in}, //dimensions of the chassis
     imev5BlueTPR};
-
-//**************** INITIALIZE CHASSIS FOR TELEOP ***********************//
-
-// auto chassis = okapi::ChassisControllerBuilder()
-//     .withMotors({frontLeftPort,backLeftPort}, {frontRightPort,backRightPort}) // left motor is 1, right motor is 2 (reversed)
-//     .withDimensions(AbstractMotor::gearset::green, {{4.125_in, 9.75_in}, imev5GreenTPR})
-//     .withMaxVelocity(200)
-//     .build(); // build an odometry chassis

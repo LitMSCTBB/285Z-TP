@@ -68,7 +68,7 @@ void winPoint(std::shared_ptr<okapi::AsyncMotionProfileController> slow,
 {
   //liftDown();
   move(fast, 0.1_ft, bwd);
-  //liftUp();
+  fourbarDown();
   intakeMotor.moveVelocity(-600);
   pros::delay(2500);
   intakeMotor.moveVelocity(0);

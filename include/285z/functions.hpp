@@ -9,8 +9,7 @@ extern std::shared_ptr<okapi::OdomChassisController> chassisaut;
 void twobarUp();
 void twobarDown();
 void fourbarUp();
-void fourbarDown(); 
-
+void fourbarDown();
 
 //   **AUTON FUNCTIONS**    //
 void noAuton();

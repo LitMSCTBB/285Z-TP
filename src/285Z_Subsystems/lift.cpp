@@ -67,10 +67,10 @@ void fourbarUp()
   fourBarControllerR->setTarget(liftVal);
 }
 
-void fourBarDown()
+void fourbarDown()
 {
-  fourBarControllerL->setTarget(0);
-  fourBarControllerR->setTarget(0);
+  fourBarControllerL->setTarget(0.0);
+  fourBarControllerR->setTarget(0.0);
 }
 
 
