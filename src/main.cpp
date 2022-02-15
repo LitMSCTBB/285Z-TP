@@ -12,13 +12,13 @@ bool isPressed = 0;
 std::string autList [] =
 {
   "No Auton",
-  "Winpoint Auton",
+  "Skills Auton",
   "Left Side Winpoint",
   "Right Side Winpoint",
-  "Neutral Left / Right",
+  "Full Winpoint",
+  "Neutral Side",
   "Neutral Center",
-  "Neutral Side + Center (Right)",
-  "Skills Auton"
+  "Neutral Side & Center (Right)"
 };
 
 
@@ -99,7 +99,7 @@ void competition_initialize()
     while (imuSensor.is_calibrating())
       pros::delay(15);
 
-    pros::lcd::set_text(1, "IMU Calibration Finished");
+    pros::lcd::set_text(6, "IMU Calibration Finished");
 
     fastAuto->generatePath({
         {0_ft,0_ft,0_deg},
@@ -107,7 +107,7 @@ void competition_initialize()
         "sideLeft"
     );
 
-    pros::lcd::set_text(1, "Side Path Finished");
+    pros::lcd::set_text(6, "Side Left Path Finished");
 
     fastAuto->generatePath({
         {0_ft,0_ft,0_deg},
@@ -116,9 +116,10 @@ void competition_initialize()
     );
 
 
-    pros::lcd::set_text(1, "Center Path Finished");
+    pros::lcd::set_text(6, "Side Right Path Finished");
+    pros::lcd::set_text(6, "**ALL INITIALIZATION COMPLETE**");
 
-    while(true) {
+        while(true) {
 
       bool autval = autonSelector.get_value();
 
@@ -127,7 +128,7 @@ void competition_initialize()
         autoIndex=(autoIndex + 1) % 8;
       }
 
-      pros::lcd::set_text(6, autList[autoIndex]);
+      pros::lcd::set_text(7, autList[autoIndex]);
       pros::delay(20);
     }
 

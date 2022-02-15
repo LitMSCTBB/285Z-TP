@@ -16,6 +16,8 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> slow,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
 {
 
-
+  turn(90);
+  fourbarUp();
+  fourbarDown();
 
 }
