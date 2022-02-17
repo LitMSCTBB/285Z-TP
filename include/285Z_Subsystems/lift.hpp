@@ -2,9 +2,9 @@
 #include "main.h"
 #include "../include/285z/initRobot.hpp"
 
-extern std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarController;
+extern std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarControllerL;
+extern std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarControllerR;
 extern std::shared_ptr<okapi::AsyncPositionController<double, double>> twoBarController;
-extern std::shared_ptr<okapi::AsyncPositionController<double, double>> clawController;
 
 class TwoBar
 {

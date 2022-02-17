@@ -11,13 +11,10 @@ void noAuton()
   pros::delay(15000);
 }
 
-void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> slow,
-  std::shared_ptr<okapi::AsyncMotionProfileController> med,
+void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
 {
 
-  turn(90);
-  fourbarUp();
-  fourbarDown();
+
 
 }

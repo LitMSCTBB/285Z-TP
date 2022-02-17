@@ -36,7 +36,5 @@ extern Motor intakeMotor;
 extern MotorGroup driveL;
 extern MotorGroup driveR;
 
-extern ChassisScales scales;
-
 //Chassis controllers
 extern std::shared_ptr<okapi::OdomChassisController> chassisaut;

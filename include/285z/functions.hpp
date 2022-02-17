@@ -10,6 +10,7 @@ void twobarUp();
 void twobarDown();
 void fourbarUp();
 void fourbarDown();
+void fourbarLift(const double target);
 
 //   **AUTON FUNCTIONS**    //
 void noAuton();

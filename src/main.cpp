@@ -21,55 +21,39 @@ std::string autList [] =
   "Neutral Side & Center (Right)"
 };
 
+TwoBar tb;
+FourBar fb;
+Intake in;
 
 //**************** INITIALIZE ALL CHASSIS FOR AUTON ********************//
 
-std::shared_ptr<okapi::OdomChassisController> chassisaut = okapi::ChassisControllerBuilder()
-  .withMotors(driveL, driveR)
-  .withGains(
-      {0.001, 0, 0.0001},        // Distance controller gains
-      {0.00075, 0.001, 0.00009}, // Turn controller gains //try 0.00075, 0.001, 0.00009
-      {0.001, 0, 0.0001}         // Angle controller gains (helps drive straight)
-      )
-  .withDimensions(AbstractMotor::gearset::blue, scales)
-  .withOdometryTimeUtilFactory(TimeUtilFactory())
-  .withClosedLoopControllerTimeUtil(80, 10, 250_ms)
-  .withMaxVelocity(600)
-  .withOdometry()   // use the same scales as the chassis (above)
-  .buildOdometry(); // build an odometry chassis
 
-std::shared_ptr<okapi::ChassisController> motion =
-    ChassisControllerBuilder()
+auto chassis = okapi::ChassisControllerBuilder()
       .withMotors(driveL, driveR)
+      .withDimensions({AbstractMotor::gearset::blue, (84.0 / 36.0)}, {{4.125_in, 14.5_in}, imev5BlueTPR})
       .withMaxVelocity(600)
-      .withDimensions({AbstractMotor::gearset::blue, (36.0 / 84.0)}, scales)
       .build();
+
+std::shared_ptr<okapi::ChassisModel> model = std::dynamic_pointer_cast<okapi::ChassisModel>(chassis->getModel());
+
+
 
 std::shared_ptr<okapi::AsyncMotionProfileController> fastAuto = AsyncMotionProfileControllerBuilder()
       .withLimits({
-        2.8213, //max linear velocity of Chassis in m/s
-        10.5, //max linear acceleration in m/s^2
-        40.0 //max linear jerk in m/s^3
+        2.7, //max linear velocity of Chassis in m/s
+        9, //max linear acceleration in m/s^2
+        18.0 //max linear jerk in m/s^3
       })
-      .withOutput(motion)
+      .withOutput(chassis)
       .buildMotionProfileController();
 
-std::shared_ptr<okapi::AsyncMotionProfileController> mediumAuto = AsyncMotionProfileControllerBuilder()
+std::shared_ptr<okapi::AsyncMotionProfileController> normalAuto = AsyncMotionProfileControllerBuilder()
       .withLimits({
         1.7, //max linear velocity of Chassis in m/s
-        6, //max linear acceleration in m/s^2
-        24 //max linear jerk in m/s^3
+        4, //max linear acceleration in m/s^2
+        6 //max linear jerk in m/s^3
       })
-      .withOutput(motion)
-      .buildMotionProfileController();
-
-std::shared_ptr<okapi::AsyncMotionProfileController> slowAuto = AsyncMotionProfileControllerBuilder()
-      .withLimits({
-        0.7, //max linear velocity of Chassis in m/s
-        2.0, //max linear acceleration in m/s^2
-        10.0 //max linear jerk in m/s^3
-      })
-      .withOutput(motion)
+      .withOutput(chassis)
       .buildMotionProfileController();
 
 
@@ -99,32 +83,32 @@ void competition_initialize()
     while (imuSensor.is_calibrating())
       pros::delay(15);
 
-    pros::lcd::set_text(6, "IMU Calibration Finished");
-
     fastAuto->generatePath({
         {0_ft,0_ft,0_deg},
-        {10_ft, 0_ft,0_deg}},
+        {3.65_ft, 0_ft,0_deg}},
         "sideLeft"
     );
 
-    pros::lcd::set_text(6, "Side Left Path Finished");
-
     fastAuto->generatePath({
         {0_ft,0_ft,0_deg},
-        {9.4_ft, 0_ft,0_deg}},
+        {3.6_ft, 0_ft,0_deg}},
         "sideRight"
     );
 
+    fastAuto->generatePath({
+        {0_ft,0_ft,0_deg},
+        {3.93_ft, 0_ft,0_deg}},
+        "centerNeutral"
+    );
 
-    pros::lcd::set_text(6, "Side Right Path Finished");
-    pros::lcd::set_text(6, "**ALL INITIALIZATION COMPLETE**");
+    pros::lcd::set_text(6, "// All Initializations Complete //");
 
-        while(true) {
+    while(true) {
 
       bool autval = autonSelector.get_value();
 
       if (autval == 1) {
-        pros::delay(350);
+        pros::delay(250);
         autoIndex=(autoIndex + 1) % 8;
       }
 
@@ -137,65 +121,32 @@ void competition_initialize()
 void autonomous()
 {
 
-  pros::lcd::shutdown();
-
   switch(autoIndex) {
-    case (0):
-      noAuton();
-      break;
-    case (1):
-      fastAuto->removePath("sideLeft");
-      fastAuto->removePath("sideRight");
-      skillsAuto(slowAuto, mediumAuto, fastAuto);
-      break;
-    case (2):
-      fastAuto->removePath("sideRight");
-      redLeftBlueLeft(slowAuto, mediumAuto, fastAuto);
-      break;
-    case (3):
-      fastAuto->removePath("sideLeft");
-      redRightBlueRight(slowAuto, mediumAuto, fastAuto);
-      break;
-    case (4):
-      fastAuto->removePath("sideLeft");
-      fastAuto->removePath("sideRight");
-      winPoint(slowAuto, mediumAuto, fastAuto);
-      break;
-    case (5):
-      fastAuto->removePath("sideRight");
-      neutralSide(slowAuto, mediumAuto, fastAuto);
-      break;
-    case (6):
-      fastAuto->removePath("sideLeft");
-      fastAuto->removePath("sideRight");
-      neutralCenter(slowAuto, mediumAuto, fastAuto);
-      break;
-    case (7):
-      neutralSideCenter(slowAuto, mediumAuto, fastAuto);
-      break;
-    default:
-      noAuton();
+    case (0): noAuton(); break;
+    case (1): skillsAuto(normalAuto, fastAuto); break;
+    case (2): redLeftBlueLeft(normalAuto, fastAuto); break;
+    case (3): redRightBlueRight(normalAuto, fastAuto); break;
+    case (4): winPoint(normalAuto, fastAuto); break;
+    case (5): neutralSide(normalAuto, fastAuto); break;
+    case (6): neutralCenter(normalAuto, fastAuto); break;
+    case (7): neutralSideCenter(normalAuto, fastAuto); break;
+    default: noAuton();
   }
 }
 
 void opcontrol()
 {
-  TwoBar tb;
-  FourBar fb;
-  Intake in;
 
-  while (1)
-  {
-    chassisaut->getModel()->tank(
-      controller.getAnalog(ControllerAnalog::leftY),
-      controller.getAnalog(ControllerAnalog::rightY)
-    );
+  while (1) {
+
+    model->tank(controller.getAnalog(okapi::ControllerAnalog::leftY),
+              controller.getAnalog(okapi::ControllerAnalog::rightY));
 
     tb.liftToggle();
     fb.liftToggle();
     fb.claw();
     in.run();
-    // in.reverse();
+    in.reverse();
 
     pros::delay(20);
 

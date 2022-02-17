@@ -3,11 +3,12 @@
 okapi::Controller controller;
 
 okapi::ControllerButton intakeButton = okapi::ControllerDigital::R2;
-okapi::ControllerButton intakeReverse = okapi::ControllerDigital::B;
+okapi::ControllerButton intakeReverse = okapi::ControllerDigital::right;
 okapi::ControllerButton clawButton = okapi::ControllerDigital::Y;
 okapi::ControllerButton fourBarReverse = okapi::ControllerDigital::L1;
 okapi::ControllerButton fourBarNormal = okapi::ControllerDigital::R1;
 okapi::ControllerButton twoBarButton = okapi::ControllerDigital::L2;
+
 
 //drive motor points
 int frontLeftPort = -18; //reversed
@@ -31,7 +32,3 @@ Motor intakeMotor(intakePort);
 
 MotorGroup driveL({frontLeftPort, backLeftPort});
 MotorGroup driveR({frontRightPort, backRightPort});
-
-okapi::ChassisScales scales{
-    {4.125_in,  14.5_in}, //dimensions of the chassis
-    imev5BlueTPR};
