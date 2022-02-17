@@ -11,6 +11,7 @@ extern ControllerButton clawButton;
 extern ControllerButton fourBarNormal;
 extern ControllerButton fourBarReverse;
 extern ControllerButton twoBarButton;
+extern ControllerButton resettwobarButton;
 
 //drive motor points
 extern int frontLeftPort;

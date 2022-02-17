@@ -47,6 +47,8 @@ void TwoBar::liftToggle()
     tbB = !tbB;
     if (tbB) twobarUp();
     else twobarDown();
+  } else if (resettwobarButton.changedToPressed()) {
+    twoBarController->setTarget(-1800);
   }
 
 }
@@ -86,8 +88,8 @@ void FourBar::liftToggle()
  fourBarMotor2.setBrakeMode(AbstractMotor::brakeMode::hold);  //right motor
 
   if (fourBarNormal.isPressed() && currentHeight <= height1F) {
-    fourBarMotor1.moveVelocity(200);
-    fourBarMotor2.moveVelocity(200);
+    fourBarMotor1.moveVelocity(180);
+    fourBarMotor2.moveVelocity(180);
   }
   else if (fourBarReverse.isPressed() && currentHeight >= height0F)
   {
