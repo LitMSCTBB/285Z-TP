@@ -74,16 +74,11 @@ void winPoint(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   //liftDown();
   move(fast, 0.1_ft, bwd);
   fourbarDown();
-  intakeMotor.moveVelocity(-600);
-  pros::delay(2500);
-  intakeMotor.moveVelocity(0);
-  twobarDown();
-  move(fast, 0.1_ft, fwd);
 
   turn(315);
-  move(fast, 5.5_ft, bwd);
+  move(fast, 3_ft, bwd);
   turn(45);
-  move(fast, 12_ft, bwd);
+  move(fast, 8_ft, bwd);
   twobarUp();
   intakeMotor.moveVelocity(-600);
   pros::delay(2500);
@@ -115,9 +110,9 @@ void neutralSide(std::shared_ptr<okapi::AsyncMotionProfileController> med,
 void neutralCenter(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
 {
-  move(fast, 12_ft, fwd);
+  move(fast, 4_ft, fwd);
   clawPiston.set_value(true);
-  move(fast, 13_ft, bwd);
+  move(fast, 3.8_ft, bwd);
   clawPiston.set_value(false);
 }
 
