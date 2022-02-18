@@ -14,6 +14,7 @@ public:
   void deploy();
   void move(int);
   void moveTo(int);
+  void reset();
 };
 
 class FourBar

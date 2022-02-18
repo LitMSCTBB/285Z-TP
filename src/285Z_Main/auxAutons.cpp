@@ -8,7 +8,9 @@
 
 void noAuton()
 {
+
   pros::delay(15000);
+
 }
 
 void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,

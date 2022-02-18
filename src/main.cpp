@@ -77,6 +77,8 @@ void disabled() {}
 void competition_initialize()
 {
 
+    clawPiston.set_value(true);
+
     pros::lcd::initialize();
 
     imuSensor.reset();
@@ -85,19 +87,19 @@ void competition_initialize()
 
     fastAuto->generatePath({
         {0_ft,0_ft,0_deg},
-        {3.65_ft, 0_ft,0_deg}},
+        {4.55_ft, 0_ft,0_deg}},
         "sideLeft"
     );
 
     fastAuto->generatePath({
         {0_ft,0_ft,0_deg},
-        {3.6_ft, 0_ft,0_deg}},
+        {4.3_ft, 0_ft,0_deg}},
         "sideRight"
     );
 
     fastAuto->generatePath({
         {0_ft,0_ft,0_deg},
-        {3.93_ft, 0_ft,0_deg}},
+        {4.3_ft, 0_ft,0_deg}},
         "centerNeutral"
     );
 
@@ -142,7 +144,7 @@ void opcontrol()
     model->tank(controller.getAnalog(okapi::ControllerAnalog::leftY),
               controller.getAnalog(okapi::ControllerAnalog::rightY));
 
-    tb.liftToggle();
+    tb.liftToggle(); tb.reset();
     fb.liftToggle();
     fb.claw();
     in.run();

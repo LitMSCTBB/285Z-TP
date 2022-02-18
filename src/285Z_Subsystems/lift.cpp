@@ -28,7 +28,7 @@ bool clawB = false;
 // 2b
 bool tbB = true;
 const int height0 = -3010;
-const int height1 = -1595; //decrease magnitude to go higher
+const int height1 = -1585; //decrease magnitude to go higher
 
 //4b
 const double height0F = 0.0;
@@ -47,10 +47,13 @@ void TwoBar::liftToggle()
     tbB = !tbB;
     if (tbB) twobarUp();
     else twobarDown();
-  } else if (resettwobarButton.changedToPressed()) {
-    twoBarController->setTarget(-1800);
   }
 
+}
+
+void TwoBar::reset()
+{
+  if (resettwobarButton.changedToPressed()) twoBarController->setTarget(0);
 }
 
 

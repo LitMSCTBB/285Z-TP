@@ -8,7 +8,7 @@ okapi::ControllerButton clawButton = okapi::ControllerDigital::Y;
 okapi::ControllerButton fourBarReverse = okapi::ControllerDigital::L1;
 okapi::ControllerButton fourBarNormal = okapi::ControllerDigital::R1;
 okapi::ControllerButton twoBarButton = okapi::ControllerDigital::L2;
-okapi::ControllerButton resettwobarButton = okapi::ControllerDigital::down;
+okapi::ControllerButton resettwobarButton = okapi::ControllerDigital::up;
 
 
 //drive motor points
