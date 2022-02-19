@@ -6,13 +6,13 @@
 std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarControllerL =
     AsyncPosControllerBuilder()
       .withMotor(fourBarPortLeft)
-      .withMaxVelocity(120)
+      .withMaxVelocity(140)
       .build();
 
 std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarControllerR =
     AsyncPosControllerBuilder()
       .withMotor(fourBarPortRight)
-      .withMaxVelocity(120)
+      .withMaxVelocity(140)
       .build();
 
 std::shared_ptr<okapi::AsyncPositionController<double, double>> twoBarController =
@@ -32,11 +32,8 @@ const int height1 = -1585; //decrease magnitude to go higher
 
 //4b
 const double height0F = 0.0;
-const double height1F = 1580.0;
+const double height1F = 1610.0;
 double currentHeight = fourBarMotor1.getPosition();
-
-const double liftVal = 500.0;
-
 
 
 void TwoBar::liftToggle()

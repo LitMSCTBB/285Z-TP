@@ -16,7 +16,7 @@ std::string autList [] =
   "Left Side Winpoint",
   "Right Side Winpoint",
   "Full Winpoint",
-  "Neutral Side",
+  "Neutral Side (Right)",
   "Neutral Center",
   "Neutral Side & Center (Right)"
 };
@@ -87,7 +87,7 @@ void competition_initialize()
 
     fastAuto->generatePath({
         {0_ft,0_ft,0_deg},
-        {4.55_ft, 0_ft,0_deg}},
+        {4.75_ft, 0_ft,0_deg}},
         "sideLeft"
     );
 
@@ -99,7 +99,7 @@ void competition_initialize()
 
     fastAuto->generatePath({
         {0_ft,0_ft,0_deg},
-        {4.3_ft, 0_ft,0_deg}},
+        {7.5_ft, 0_ft,0_deg}},
         "centerNeutral"
     );
 
@@ -110,7 +110,7 @@ void competition_initialize()
       bool autval = autonSelector.get_value();
 
       if (autval == 1) {
-        pros::delay(250);
+        pros::delay(150);
         autoIndex=(autoIndex + 1) % 8;
       }
 
