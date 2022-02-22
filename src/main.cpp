@@ -17,8 +17,11 @@ std::string autList [] =
   "Right Side Winpoint",
   "Full Winpoint",
   "Neutral Side (Right)",
-  "Neutral Center",
-  "Neutral Side & Center (Right)"
+  "Neutral Side (Left)", //new
+  "Neutral Center (Right)",
+  "Neutral Center (Left)", //new
+  "Neutral Side & Center (Right)",
+  "Neutral Side & Center (Left)" //new
 };
 
 TwoBar tb;
@@ -36,8 +39,6 @@ auto chassis = okapi::ChassisControllerBuilder()
 
 std::shared_ptr<okapi::ChassisModel> model = std::dynamic_pointer_cast<okapi::ChassisModel>(chassis->getModel());
 
-
-
 std::shared_ptr<okapi::AsyncMotionProfileController> fastAuto = AsyncMotionProfileControllerBuilder()
       .withLimits({
         2.7, //max linear velocity of Chassis in m/s
@@ -49,9 +50,9 @@ std::shared_ptr<okapi::AsyncMotionProfileController> fastAuto = AsyncMotionProfi
 
 std::shared_ptr<okapi::AsyncMotionProfileController> normalAuto = AsyncMotionProfileControllerBuilder()
       .withLimits({
-        1.7, //max linear velocity of Chassis in m/s
-        4, //max linear acceleration in m/s^2
-        6 //max linear jerk in m/s^3
+        2.0, //max linear velocity of Chassis in m/s
+        5, //max linear acceleration in m/s^2
+        10 //max linear jerk in m/s^3
       })
       .withOutput(chassis)
       .buildMotionProfileController();
@@ -77,44 +78,48 @@ void disabled() {}
 void competition_initialize()
 {
 
-    clawPiston.set_value(true);
+  imuSensor.reset();
+  while (imuSensor.is_calibrating())
+    pros::delay(15);
 
-    pros::lcd::initialize();
+  clawPiston.set_value(true);
 
-    imuSensor.reset();
-    while (imuSensor.is_calibrating())
-      pros::delay(15);
+  pros::lcd::initialize();
 
-    fastAuto->generatePath({
-        {0_ft,0_ft,0_deg},
-        {4.75_ft, 0_ft,0_deg}},
-        "sideLeft"
-    );
+  fastAuto->generatePath({
+      {0_ft,0_ft,0_deg},
+      {4.75_ft, 0_ft,0_deg}},
+      "sideLeft"
+  );
 
-    fastAuto->generatePath({
-        {0_ft,0_ft,0_deg},
-        {4.3_ft, 0_ft,0_deg}},
-        "sideRight"
-    );
+  fastAuto->generatePath({
+      {0_ft,0_ft,0_deg},
+      {4.3_ft, 0_ft,0_deg}},
+      "sideRight"
+  );
 
-    fastAuto->generatePath({
-        {0_ft,0_ft,0_deg},
-        {7.5_ft, 0_ft,0_deg}},
-        "centerNeutral"
-    );
+  fastAuto->generatePath({
+      {0_ft,0_ft,0_deg},
+      {7.5_ft, 0_ft,0_deg}},
+      "centerNeutral"
+  );
 
-    pros::lcd::set_text(6, "// All Initializations Complete //");
+  pros::lcd::set_text(6, "// All Initializations Complete //");
 
-    while(true) {
+  int len = sizeof(autList)/sizeof(autList[0]);
+
+  while(true) {
 
       bool autval = autonSelector.get_value();
+      double fourBarVal = autonPot.get(); //FOR TESTING POT VALUES
 
       if (autval == 1) {
-        pros::delay(150);
-        autoIndex=(autoIndex + 1) % 8;
+        pros::delay(200);
+        autoIndex=(autoIndex + 1) % len;
       }
 
       pros::lcd::set_text(7, autList[autoIndex]);
+      pros::lcd::set_text(1, std::to_string(fourBarVal)); //FOR TESTING POT VALUES
       pros::delay(20);
     }
 
@@ -133,6 +138,7 @@ void autonomous()
     case (6): neutralCenter(normalAuto, fastAuto); break;
     case (7): neutralSideCenter(normalAuto, fastAuto); break;
     default: noAuton();
+
   }
 }
 
