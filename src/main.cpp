@@ -111,7 +111,7 @@ void competition_initialize()
   while(true) {
 
       bool autval = autonSelector.get_value();
-      double fourBarVal = autonPot.get(); //FOR TESTING POT VALUES
+      // double fourBarVal = autonPot.get(); //FOR TESTING POT VALUES
 
       if (autval == 1) {
         pros::delay(200);
@@ -119,7 +119,7 @@ void competition_initialize()
       }
 
       pros::lcd::set_text(7, autList[autoIndex]);
-      pros::lcd::set_text(1, std::to_string(fourBarVal)); //FOR TESTING POT VALUES
+      // pros::lcd::set_text(1, std::to_string(fourBarVal)); //FOR TESTING POT VALUES
       pros::delay(20);
     }
 

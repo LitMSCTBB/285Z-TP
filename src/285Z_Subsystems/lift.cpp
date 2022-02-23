@@ -3,16 +3,21 @@
 #include "../../include/285Z_Subsystems/lift.hpp"
 #include "../../include/285z/functions.hpp"
 
-//AUTONOMOUS CONTROLLERS
+std::shared_ptr<okapi::Potentiometer> potL_ptr = std::make_shared<okapi::Potentiometer>(autonPotL);
+std::shared_ptr<okapi::Potentiometer> potR_ptr = std::make_shared<okapi::Potentiometer>(autonPotR);
+
+// AUTONOMOUS CONTROLLERS
 std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarControllerL =
     AsyncPosControllerBuilder()
-      .withMotor(fourBarPortLeft)
-      .withMaxVelocity(100)
-      .build();
+        .withMotor(fourBarPortLeft)
+        .withSensor(potL_ptr)
+        .withMaxVelocity(100)
+        .build();
 
 std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarControllerR =
     AsyncPosControllerBuilder()
       .withMotor(fourBarPortRight)
+      .withSensor(potR_ptr)
       .withMaxVelocity(100)
       .build();
 
@@ -36,7 +41,6 @@ const double height0F = 0.0;
 const double height1F = 1630.0;
 double currentHeight1 = 0.0; // left lift motor
 double currentHeight2 = 0.0; // right lift motor
-double potVal = autonPot.get(); // potentiometer
 
 
 void TwoBar::liftToggle()
