@@ -148,7 +148,7 @@ void opcontrol()
   while (1) {
 
     model->tank(controller.getAnalog(okapi::ControllerAnalog::leftY),
-              controller.getAnalog(okapi::ControllerAnalog::rightY));
+              controller.getAnalog(okapi::ControllerAnalog::rightY));        
 
     tb.liftToggle(); tb.reset();
     fb.liftToggle();

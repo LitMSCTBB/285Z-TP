@@ -91,8 +91,12 @@ void fourbarLift(const double target) {
 void FourBar::liftToggle()
 {
 
- fourBarMotor1.setBrakeMode(AbstractMotor::brakeMode::hold);  //left motor
- fourBarMotor2.setBrakeMode(AbstractMotor::brakeMode::hold);  //right motor
+  fourBarMotor1.setBrakeMode(AbstractMotor::brakeMode::hold);  //left motor
+  fourBarMotor2.setBrakeMode(AbstractMotor::brakeMode::hold);  //right motor
+
+   // 0 : L 150 up : L 1120
+  double valL = autonPotL.get();
+  // double valLR = autonPotR.get();
 
   if (fourBarNormal.isPressed()) //add pot limits
   {
