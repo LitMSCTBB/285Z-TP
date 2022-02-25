@@ -28,14 +28,11 @@ extern Motor frontLeftMotor;
 extern Motor backLeftMotor;
 extern Motor frontRightMotor;
 extern Motor backRightMotor;
-extern Motor fourBarMotor1;
-extern Motor fourBarMotor2;
+extern pros::Motor fourBarMotor1;
+extern pros::Motor fourBarMotor2;
 extern Motor twoBarMotor;
 extern Motor intakeMotor;
 
 //Drive motor groups
 extern MotorGroup driveL;
 extern MotorGroup driveR;
-
-//Chassis controllers
-extern std::shared_ptr<okapi::OdomChassisController> chassisaut;

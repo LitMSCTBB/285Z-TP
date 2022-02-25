@@ -26,8 +26,8 @@ Motor frontLeftMotor(frontLeftPort);
 Motor backLeftMotor(backLeftPort);
 Motor frontRightMotor(frontRightPort);
 Motor backRightMotor(backRightPort);
-Motor fourBarMotor1(fourBarPortLeft);
-Motor fourBarMotor2(fourBarPortRight);
+pros::Motor fourBarMotor1(fourBarPortLeft, pros::E_MOTOR_GEARSET_36);
+pros::Motor fourBarMotor2(fourBarPortRight, pros::E_MOTOR_GEARSET_36);
 Motor twoBarMotor(twoBarPort);
 Motor intakeMotor(intakePort);
 
