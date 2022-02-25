@@ -28,8 +28,8 @@ extern Motor frontLeftMotor;
 extern Motor backLeftMotor;
 extern Motor frontRightMotor;
 extern Motor backRightMotor;
-extern pros::Motor fourBarMotor1;
-extern pros::Motor fourBarMotor2;
+extern Motor fourBarMotor1;
+extern Motor fourBarMotor2;
 extern Motor twoBarMotor;
 extern Motor intakeMotor;
 

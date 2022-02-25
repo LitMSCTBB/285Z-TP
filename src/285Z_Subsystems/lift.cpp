@@ -95,23 +95,23 @@ void FourBar::liftToggle()
   fourBarMotor2.setBrakeMode(AbstractMotor::brakeMode::hold);  //right motor
 
    // 0 : L 150 up : L 1120
-  double valL = autonPotL.get();
+  //double valL = autonPotL.get();
   // double valLR = autonPotR.get();
 
   if (fourBarNormal.isPressed()) //add pot limits
   {
-    fourBarMotor1.moveVelocity(100);
-    fourBarMotor2.moveVelocity(100);
+    fourBarMotor1.moveVoltage(12000);
+    fourBarMotor2.moveVoltage(12000);
   }
   else if (fourBarReverse.isPressed()) //add pot limits
   {
-    fourBarMotor1.moveVelocity(-100);
-    fourBarMotor2.moveVelocity(-100);
+    fourBarMotor1.moveVoltage(-12000);
+    fourBarMotor2.moveVoltage(-12000);
   }
   else
   {
-    fourBarMotor1.moveVelocity(0);
-    fourBarMotor2.moveVelocity(0);
+    fourBarMotor1.moveVoltage(0);
+    fourBarMotor2.moveVoltage(0);
   }
 }
 
