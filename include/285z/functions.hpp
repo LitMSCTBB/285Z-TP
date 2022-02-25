@@ -22,13 +22,16 @@ void redRightBlueRight(std::shared_ptr<okapi::AsyncMotionProfileController> med,
 void winPoint(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast);
 
-void neutralSide(std::shared_ptr<okapi::AsyncMotionProfileController> med,
+void neutralSideRight(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast);
 
-void neutralCenter(std::shared_ptr<okapi::AsyncMotionProfileController> med,
+void neutralSideLeft(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast);
 
-void neutralSideCenter(std::shared_ptr<okapi::AsyncMotionProfileController> med,
+void neutralCenterRight(std::shared_ptr<okapi::AsyncMotionProfileController> med,
+  std::shared_ptr<okapi::AsyncMotionProfileController> fast);
+
+void neutralSideCenterRight(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast);
 
 const bool fwd {false};

@@ -134,9 +134,10 @@ void autonomous()
     case (2): redLeftBlueLeft(normalAuto, fastAuto); break;
     case (3): redRightBlueRight(normalAuto, fastAuto); break;
     case (4): winPoint(normalAuto, fastAuto); break;
-    case (5): neutralSide(normalAuto, fastAuto); break;
-    case (6): neutralCenter(normalAuto, fastAuto); break;
-    case (7): neutralSideCenter(normalAuto, fastAuto); break;
+    case (5): neutralSideRight(normalAuto, fastAuto); break;
+    case (6): neutralSideLeft(normalAuto, fastAuto); break;
+    case (7): neutralCenterRight(normalAuto, fastAuto); break;
+    case (8): neutralSideCenterRight(normalAuto, fastAuto); break;
     default: noAuton();
 
   }
