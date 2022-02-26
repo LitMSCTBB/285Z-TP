@@ -9,6 +9,7 @@ okapi::ControllerButton fourBarReverse = okapi::ControllerDigital::L1;
 okapi::ControllerButton fourBarNormal = okapi::ControllerDigital::R1;
 okapi::ControllerButton twoBarButton = okapi::ControllerDigital::L2;
 okapi::ControllerButton resettwobarButton = okapi::ControllerDigital::up;
+okapi::ControllerButton parkingBrakeButton = okapi::ControllerDigital::X;
 
 
 //drive motor points
@@ -30,6 +31,7 @@ Motor fourBarMotor1(fourBarPortLeft);
 Motor fourBarMotor2(fourBarPortRight);
 Motor twoBarMotor(twoBarPort);
 Motor intakeMotor(intakePort);
+
 
 MotorGroup driveL({frontLeftPort, backLeftPort});
 MotorGroup driveR({frontRightPort, backRightPort});

@@ -46,6 +46,8 @@ double currentHeight2 = 0.0; // right lift motor
 void TwoBar::liftToggle()
 {
 
+  twoBarMotor.setBrakeMode(AbstractMotor::brakeMode::hold);
+
   if (twoBarButton.changedToPressed())
   {
     tbB = !tbB;
@@ -57,7 +59,8 @@ void TwoBar::liftToggle()
 
 void TwoBar::reset()
 {
-  if (resettwobarButton.changedToPressed()) twoBarController->setTarget(0);
+  if (resettwobarButton.changedToPressed())
+  twoBarController->setTarget(0);
 }
 
 
@@ -91,11 +94,8 @@ void fourbarLift(const double target) {
 void FourBar::liftToggle()
 {
 
-  fourBarMotor1.setBrakeMode(AbstractMotor::brakeMode::hold);  //left motor
-  fourBarMotor2.setBrakeMode(AbstractMotor::brakeMode::hold);  //right motor
-
-   // 0 : L 150 up : L 1120
-  double valL = autonPotL.get(); 
+  fourBarMotor1.setBrakeMode(AbstractMotor::brakeMode::hold);
+  fourBarMotor2.setBrakeMode(AbstractMotor::brakeMode::hold);
   double valLR = autonPotR.get();
 
   if (fourBarNormal.isPressed() && valLR > 130) //add pot limits 123
@@ -105,7 +105,7 @@ void FourBar::liftToggle()
   }
   else if (fourBarReverse.isPressed() && valLR < 785) //add pot limits 790
   {
-    fourBarMotor1.moveVoltage(-12000); 
+    fourBarMotor1.moveVoltage(-12000);
     fourBarMotor2.moveVoltage(-12000);
   }
   else

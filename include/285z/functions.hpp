@@ -45,3 +45,4 @@ const bool bwd {true};
 
 /*****************************   AUX AUTONS    **********************/
 void move(std::shared_ptr<okapi::AsyncMotionProfileController> profile, okapi::QLength distance, bool dir);
+void parkingBrake();

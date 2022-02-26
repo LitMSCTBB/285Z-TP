@@ -12,6 +12,7 @@ extern ControllerButton fourBarNormal;
 extern ControllerButton fourBarReverse;
 extern ControllerButton twoBarButton;
 extern ControllerButton resettwobarButton;
+extern ControllerButton parkingBrakeButton; 
 
 //drive motor points
 extern int frontLeftPort;
