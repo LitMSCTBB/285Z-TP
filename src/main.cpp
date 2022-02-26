@@ -104,6 +104,12 @@ void competition_initialize()
       "centerNeutral"
   );
 
+  fastAuto->generatePath({
+    {0_ft,0_ft,0_deg},
+    {7.8_ft, 0_ft, 0_deg}}, //test these values
+    "centerNeutralLeft"
+  );
+
   pros::lcd::set_text(6, "// All Initializations Complete //");
 
   int len = sizeof(autList)/sizeof(autList[0]);
@@ -111,7 +117,7 @@ void competition_initialize()
   while(true) {
 
       bool autval = autonSelector.get_value();
-      double fourBarVal = autonPotR.get(); //FOR TESTING POT VALUES
+      //double fourBarVal = autonPotR.get(); //FOR TESTING POT VALUES
 
       if (autval == 1) {
         pros::delay(200);
@@ -137,7 +143,9 @@ void autonomous()
     case (5): neutralSideRight(normalAuto, fastAuto); break;
     case (6): neutralSideLeft(normalAuto, fastAuto); break;
     case (7): neutralCenterRight(normalAuto, fastAuto); break;
-    case (8): neutralSideCenterRight(normalAuto, fastAuto); break;
+    case (8): neutralCenterLeft(normalAuto, fastAuto); break;
+    case (9): neutralSideCenterRight(normalAuto, fastAuto); break;
+    case (10): neutralSideCenterLeft(normalAuto, fastAuto); break;
     default: noAuton();
 
   }
@@ -149,7 +157,7 @@ void opcontrol()
   while (1) {
 
     model->tank(controller.getAnalog(okapi::ControllerAnalog::leftY),
-              controller.getAnalog(okapi::ControllerAnalog::rightY));        
+              controller.getAnalog(okapi::ControllerAnalog::rightY));
 
     tb.liftToggle(); tb.reset();
     fb.liftToggle();
