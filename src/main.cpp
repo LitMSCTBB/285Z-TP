@@ -17,11 +17,11 @@ std::string autList [] =
   "Right Side Winpoint",
   "Full Winpoint",
   "Neutral Side (Right)",
-  "Neutral Side (Left)", //new
+  "Neutral Side (Left)",
   "Neutral Center (Right)",
-  "Neutral Center (Left)", //new
+  "Neutral Center (Left)",
   "Neutral Side & Center (Right)",
-  "Neutral Side & Center (Left)" //new
+  "Neutral Side & Center (Left)"
 };
 
 TwoBar tb;
@@ -107,7 +107,7 @@ void competition_initialize()
 
   fastAuto->generatePath({
     {0_ft,0_ft,0_deg},
-    {7.8_ft, 0_ft, 0_deg}}, //test these values
+    {8.2_ft, 0_ft, 0_deg}}, //test these values
     "centerNeutralLeft"
   );
 
@@ -148,7 +148,6 @@ void autonomous()
     case (9): neutralSideCenterRight(normalAuto, fastAuto); break;
     case (10): neutralSideCenterLeft(normalAuto, fastAuto); break;
     default: noAuton();
-
   }
 }
 
