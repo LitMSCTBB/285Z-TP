@@ -10,7 +10,7 @@ std::shared_ptr<okapi::Potentiometer> potR_ptr = std::make_shared<okapi::Potenti
 std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarControllerL =
     AsyncPosControllerBuilder()
         .withMotor(fourBarPortLeft)
-        .withSensor(potL_ptr)
+        .withSensor(potR_ptr)
         .withMaxVelocity(100)
         .build();
 
