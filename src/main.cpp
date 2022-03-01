@@ -6,7 +6,7 @@
 #include "../include/285z/initSensors.hpp"
 #include "../include/pros/llemu.hpp"
 
-int autoIndex = 0;
+int autoIndex = 1;
 bool isPressed = 0;
 
 std::string autList [] =
@@ -110,6 +110,12 @@ void competition_initialize()
     {8.2_ft, 0_ft, 0_deg}}, //test these values
     "centerNeutralLeft"
   );
+
+  fastAuto->generatePath({
+    {0_ft, 0_ft, 0_deg},
+    {4.7_ft, 0_ft, 0_deg}}, 
+    "skillsPlat"
+    );
 
   pros::lcd::set_text(6, "// All Initializations Complete //");
 
