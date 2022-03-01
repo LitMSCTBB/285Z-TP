@@ -6,8 +6,8 @@
 #include "../include/285z/initSensors.hpp"
 #include "../include/pros/llemu.hpp"
 
-int autoIndex = 1;
-bool isPressed = 0;
+int autoIndex = 0;
+bool brake = false;
 
 std::string autList [] =
 {
@@ -170,6 +170,19 @@ void opcontrol()
     fb.claw();
     in.run();
     in.reverse();
+    if (parkingBrakeButton.changedToPressed()) {
+      brake = !brake;
+    
+    if (brake) {
+      driveL.moveVelocity(0);
+      driveR.moveVelocity(0);
+      driveL.setBrakeMode(AbstractMotor::brakeMode::hold);
+      driveR.setBrakeMode(AbstractMotor::brakeMode::hold);
+    } else {
+      driveL.setBrakeMode(AbstractMotor::brakeMode::coast);
+      driveR.setBrakeMode(AbstractMotor::brakeMode::coast);
+    }
+    }
 
     pros::delay(20);
 
