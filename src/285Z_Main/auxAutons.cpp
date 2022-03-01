@@ -49,7 +49,7 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   fourbarLift(1800);
   pros::delay(1000);
 
-  move(med, 2_ft, bwd);
+  move(med, 2_ft, bwd); //maybe tweak, could go further so 2bar doesn't hit plat
   twobarDown();
   pros::delay(800);
   fourbarLift(0);
@@ -58,12 +58,12 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   pros::delay(1000);
   twobarUp();
   pros::delay(800);
-  turn(150);
+  turn(150); //tweak
   move(med, 1.25_ft, fwd);
   clawPiston.set_value(true);
   fourbarLift(2000);
   pros::delay(800);
-  turn(340);
+  turn(340); //tweak
   move(med, 1.75_ft, fwd);
   fourbarLift(700);
   pros::delay(800);
