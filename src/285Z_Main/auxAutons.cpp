@@ -9,7 +9,11 @@
 void noAuton()
 {
 
-  pros::delay(15000);
+  fourbarLift(1600);
+  pros::delay(5000);
+  fourbarLift(0);
+  pros::delay(5000);
+  //pros::delay(15000);
 
 }
 

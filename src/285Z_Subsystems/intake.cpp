@@ -10,7 +10,8 @@ void Intake::run()
   intakeMotor.setBrakeMode(AbstractMotor::brakeMode::coast);
 
   if (intakeButton.changedToPressed()) intakeB = !intakeB;
-  intakeMotor.moveVelocity(intakeB ? -600 : 0);
+  intakeMotor.moveVoltage(intakeB ? -12000 : 0);
+  //intakeMotor.moveVelocity(intakeB ? -600 : 0);
 }
 
 void Intake::reverse() {

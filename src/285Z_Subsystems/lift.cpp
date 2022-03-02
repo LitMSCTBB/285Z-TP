@@ -3,21 +3,19 @@
 #include "../../include/285Z_Subsystems/lift.hpp"
 #include "../../include/285z/functions.hpp"
 
-std::shared_ptr<okapi::Potentiometer> potL_ptr = std::make_shared<okapi::Potentiometer>(autonPotL);
+//std::shared_ptr<okapi::Potentiometer> potL_ptr = std::make_shared<okapi::Potentiometer>(autonPotL);
 std::shared_ptr<okapi::Potentiometer> potR_ptr = std::make_shared<okapi::Potentiometer>(autonPotR);
 
 // AUTONOMOUS CONTROLLERS
 std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarControllerL =
     AsyncPosControllerBuilder()
         .withMotor(fourBarPortLeft)
-        .withSensor(potR_ptr)
         .withMaxVelocity(100)
         .build();
 
 std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarControllerR =
     AsyncPosControllerBuilder()
       .withMotor(fourBarPortRight)
-      .withSensor(potR_ptr)
       .withMaxVelocity(100)
       .build();
 
@@ -34,13 +32,15 @@ bool clawB = false;
 //two bar
 bool tbB = true;
 const int height0 = -3000;
-const int height1 = -1585; //decrease magnitude to go higher
+const int height1 = -1565; //decrease magnitude to go higher
 
 //four bar
 const double height0F = 0.0;
-const double height1F = 1630.0;
-double currentHeight1 = 0.0; // left lift motor
-double currentHeight2 = 0.0; // right lift motor
+const double height1F = 2800.0;
+
+double currentHeight = fourBarMotor1.getPosition();
+// double currentHeight1 = 0.0; // left lift motor
+// double currentHeight2 = 0.0; // right lift motor
 
 
 void TwoBar::liftToggle()
@@ -96,23 +96,27 @@ void FourBar::liftToggle()
 
   fourBarMotor1.setBrakeMode(AbstractMotor::brakeMode::hold);
   fourBarMotor2.setBrakeMode(AbstractMotor::brakeMode::hold);
-  double valLR = autonPotR.get();
+  //  double valLR = autonPotR.get();
 
-  if (fourBarNormal.isPressed() && valLR > 159) //add pot limits 123
+  // if (fourBarNormal.isPressed() && valLR > 159) //add pot limits 123
+  if (fourBarNormal.isPressed() && currentHeight <= height1F) //add pot limits 123
   {
-    fourBarMotor1.moveVoltage(12000);
-    fourBarMotor2.moveVoltage(12000);
+    fourBarMotor1.moveVelocity(200);
+    fourBarMotor2.moveVelocity(200);
   }
-  else if (fourBarReverse.isPressed() && valLR < 786) //add pot limits 790
+  // else if (fourBarReverse.isPressed() && valLR < 786) //add pot limits 790
+  else if (fourBarReverse.isPressed() && currentHeight >= height0F) //add pot limits 790
   {
-    fourBarMotor1.moveVoltage(-12000);
-    fourBarMotor2.moveVoltage(-12000);
+    fourBarMotor1.moveVelocity(-200);
+    fourBarMotor2.moveVelocity(-200);
   }
   else
   {
-    fourBarMotor1.moveVoltage(0);
-    fourBarMotor2.moveVoltage(0);
+    fourBarMotor1.moveVelocity(0);
+    fourBarMotor2.moveVelocity(0);
   }
+
+  currentHeight = fourBarMotor1.getPosition();
 }
 
 void FourBar::claw()

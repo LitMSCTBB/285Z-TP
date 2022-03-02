@@ -121,9 +121,12 @@ void competition_initialize()
 
   int len = sizeof(autList)/sizeof(autList[0]);
 
+  
+
   while(true) {
 
       bool autval = autonSelector.get_value();
+      double fourBarVal = autonPotR.get(); //FOR TESTING POT VALUES
 
       if (autval == 1) {
         pros::delay(200);
@@ -131,6 +134,7 @@ void competition_initialize()
       }
 
       pros::lcd::set_text(7, autList[autoIndex]);
+      pros::lcd::set_text(1, std::to_string(fourBarVal)); //FOR TESTING POT VALUES
       pros::delay(20);
     }
 
@@ -168,21 +172,21 @@ void opcontrol()
     fb.claw();
     in.run();
     in.reverse();
-    if (parkingBrakeButton.changedToPressed())
-      brake = !brake;
+    // if (parkingBrakeButton.changedToPressed())
+    //   brake = !brake;
     
-    if (brake) {
-      driveL.moveVelocity(0);
-      driveR.moveVelocity(0);
-      driveL.setBrakeMode(AbstractMotor::brakeMode::hold);
-      driveR.setBrakeMode(AbstractMotor::brakeMode::hold);
-    } else {
-      driveL.setBrakeMode(AbstractMotor::brakeMode::coast);
-      driveR.setBrakeMode(AbstractMotor::brakeMode::coast);
-    }
+    // if (brake) {
+    //   driveL.moveVelocity(0);
+    //   driveR.moveVelocity(0);
+    //   driveL.setBrakeMode(AbstractMotor::brakeMode::hold);
+    //   driveR.setBrakeMode(AbstractMotor::brakeMode::hold);
+    // } else {
+    //   driveL.setBrakeMode(AbstractMotor::brakeMode::coast);
+    //   driveR.setBrakeMode(AbstractMotor::brakeMode::coast);
+    // }
 
-    double fourBarVal = autonPotR.get();                // FOR TESTING POT VALUES
-    pros::lcd::set_text(1, std::to_string(fourBarVal)); // FOR TESTING POT VALUES
+    // double fourBarVal = autonPotR.get();                // FOR TESTING POT VALUES
+    // pros::lcd::set_text(1, std::to_string(fourBarVal)); // FOR TESTING POT VALUES
 
     // 786 159
 
