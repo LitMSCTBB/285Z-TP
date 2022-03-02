@@ -45,7 +45,14 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
 
   turn(324);
   move(fast, 7.3_ft, fwd);
-  //fast->setTarget("skillsPlat", fwd);
+  
+  fast->generatePath({
+    {0_ft, 0_ft, 0_deg},
+    {4.7_ft, 0_ft, 0_deg}}, 
+    "skillsPlat"
+    );
+  
+  fast->setTarget("skillsPlat", fwd);
   fourbarLift(700);
   pros::delay(800); //tweak
   clawPiston.set_value(false);

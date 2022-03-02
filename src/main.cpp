@@ -7,7 +7,6 @@
 #include "../include/pros/llemu.hpp"
 
 int autoIndex = 0;
-bool brake = false;
 
 std::string autList [] =
 {
@@ -51,8 +50,8 @@ std::shared_ptr<okapi::AsyncMotionProfileController> fastAuto = AsyncMotionProfi
 std::shared_ptr<okapi::AsyncMotionProfileController> normalAuto = AsyncMotionProfileControllerBuilder()
       .withLimits({
         2.0, //max linear velocity of Chassis in m/s
-        5, //max linear acceleration in m/s^2
-        10 //max linear jerk in m/s^3
+        5.0, //max linear acceleration in m/s^2
+        10.0 //max linear jerk in m/s^3
       })
       .withOutput(chassis)
       .buildMotionProfileController();
@@ -106,27 +105,19 @@ void competition_initialize()
   );
 
   fastAuto->generatePath({
-    {0_ft,0_ft,0_deg},
-    {8.2_ft, 0_ft, 0_deg}}, //test these values
-    "centerNeutralLeft"
+      {0_ft,0_ft,0_deg},
+      {8.2_ft, 0_ft, 0_deg}}, //test these values
+      "centerNeutralLeft"
   );
-
-  fastAuto->generatePath({
-    {0_ft, 0_ft, 0_deg},
-    {4.7_ft, 0_ft, 0_deg}}, 
-    "skillsPlat"
-    );
 
   pros::lcd::set_text(6, "// All Initializations Complete //");
 
   int len = sizeof(autList)/sizeof(autList[0]);
-
   
-
   while(true) {
 
       bool autval = autonSelector.get_value();
-      double fourBarVal = autonPotR.get(); //FOR TESTING POT VALUES
+      // double fourBarVal = autonPotR.get(); //FOR TESTING POT VALUES
 
       if (autval == 1) {
         pros::delay(200);
@@ -134,7 +125,7 @@ void competition_initialize()
       }
 
       pros::lcd::set_text(7, autList[autoIndex]);
-      pros::lcd::set_text(1, std::to_string(fourBarVal)); //FOR TESTING POT VALUES
+      // pros::lcd::set_text(1, std::to_string(fourBarVal)); //FOR TESTING POT VALUES
       pros::delay(20);
     }
 
@@ -167,11 +158,14 @@ void opcontrol()
     model->tank(controller.getAnalog(okapi::ControllerAnalog::leftY),
               controller.getAnalog(okapi::ControllerAnalog::rightY));
 
-    tb.liftToggle(); tb.reset();
-    fb.liftToggle();
     fb.claw();
+    tb.liftToggle(); 
+
+    fb.liftToggle();
     in.run();
     in.reverse();
+    tb.reset();
+    
     // if (parkingBrakeButton.changedToPressed())
     //   brake = !brake;
     
@@ -184,11 +178,6 @@ void opcontrol()
     //   driveL.setBrakeMode(AbstractMotor::brakeMode::coast);
     //   driveR.setBrakeMode(AbstractMotor::brakeMode::coast);
     // }
-
-    // double fourBarVal = autonPotR.get();                // FOR TESTING POT VALUES
-    // pros::lcd::set_text(1, std::to_string(fourBarVal)); // FOR TESTING POT VALUES
-
-    // 786 159
 
     pros::delay(20);
 

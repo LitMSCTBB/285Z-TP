@@ -3,20 +3,16 @@
 #include "../../include/285Z_Subsystems/lift.hpp"
 #include "../../include/285z/functions.hpp"
 
-//std::shared_ptr<okapi::Potentiometer> potL_ptr = std::make_shared<okapi::Potentiometer>(autonPotL);
-std::shared_ptr<okapi::Potentiometer> potR_ptr = std::make_shared<okapi::Potentiometer>(autonPotR);
 
 // AUTONOMOUS CONTROLLERS
 std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarControllerL =
     AsyncPosControllerBuilder()
         .withMotor(fourBarPortLeft)
-        .withMaxVelocity(100)
         .build();
 
 std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarControllerR =
     AsyncPosControllerBuilder()
       .withMotor(fourBarPortRight)
-      .withMaxVelocity(100)
       .build();
 
 std::shared_ptr<okapi::AsyncPositionController<double, double>> twoBarController =
@@ -32,11 +28,11 @@ bool clawB = false;
 //two bar
 bool tbB = true;
 const int height0 = -3000;
-const int height1 = -1565; //decrease magnitude to go higher
+const int height1 = -1560; //decrease magnitude to go higher
 
 //four bar
 const double height0F = 0.0;
-const double height1F = 2800.0;
+const double height1F = 2900.0;
 
 double currentHeight = fourBarMotor1.getPosition();
 // double currentHeight1 = 0.0; // left lift motor
@@ -60,7 +56,7 @@ void TwoBar::liftToggle()
 void TwoBar::reset()
 {
   if (resettwobarButton.changedToPressed())
-  twoBarController->setTarget(0);
+    twoBarController->setTarget(0);
 }
 
 
@@ -101,19 +97,19 @@ void FourBar::liftToggle()
   // if (fourBarNormal.isPressed() && valLR > 159) //add pot limits 123
   if (fourBarNormal.isPressed() && currentHeight <= height1F) //add pot limits 123
   {
-    fourBarMotor1.moveVelocity(200);
-    fourBarMotor2.moveVelocity(200);
+    fourBarMotor1.moveVoltage(12000);
+    fourBarMotor2.moveVoltage(12000);
   }
   // else if (fourBarReverse.isPressed() && valLR < 786) //add pot limits 790
   else if (fourBarReverse.isPressed() && currentHeight >= height0F) //add pot limits 790
   {
-    fourBarMotor1.moveVelocity(-200);
-    fourBarMotor2.moveVelocity(-200);
+    fourBarMotor1.moveVoltage(-12000);
+    fourBarMotor2.moveVoltage(-12000);
   }
   else
   {
-    fourBarMotor1.moveVelocity(0);
-    fourBarMotor2.moveVelocity(0);
+    fourBarMotor1.moveVoltage(0);
+    fourBarMotor2.moveVoltage(0);
   }
 
   currentHeight = fourBarMotor1.getPosition();
