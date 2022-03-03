@@ -106,18 +106,17 @@ void competition_initialize()
 
   fastAuto->generatePath({
       {0_ft,0_ft,0_deg},
-      {8.2_ft, 0_ft, 0_deg}}, //test these values
+      {11_ft, 0_ft, 0_deg}},
       "centerNeutralLeft"
   );
 
   pros::lcd::set_text(6, "// All Initializations Complete //");
 
   int len = sizeof(autList)/sizeof(autList[0]);
-  
+
   while(true) {
 
       bool autval = autonSelector.get_value();
-      // double fourBarVal = autonPotR.get(); //FOR TESTING POT VALUES
 
       if (autval == 1) {
         pros::delay(200);
@@ -125,7 +124,7 @@ void competition_initialize()
       }
 
       pros::lcd::set_text(7, autList[autoIndex]);
-      // pros::lcd::set_text(1, std::to_string(fourBarVal)); //FOR TESTING POT VALUES
+
       pros::delay(20);
     }
 
@@ -150,6 +149,8 @@ void autonomous()
   }
 }
 
+double fourBarVal = autonPotL.get();
+
 void opcontrol()
 {
 
@@ -158,17 +159,20 @@ void opcontrol()
     model->tank(controller.getAnalog(okapi::ControllerAnalog::leftY),
               controller.getAnalog(okapi::ControllerAnalog::rightY));
 
+    fourBarVal = autonPotL.get(); //FOR TESTING POT VALUES
+    pros::lcd::set_text(1, std::to_string(fourBarVal)); //FOR TESTING POT VALUES
+
     fb.claw();
-    tb.liftToggle(); 
+    tb.liftToggle();
 
     fb.liftToggle();
     in.run();
     in.reverse();
     tb.reset();
-    
+
     // if (parkingBrakeButton.changedToPressed())
     //   brake = !brake;
-    
+
     // if (brake) {
     //   driveL.moveVelocity(0);
     //   driveR.moveVelocity(0);

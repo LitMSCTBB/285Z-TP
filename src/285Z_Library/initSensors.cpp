@@ -3,5 +3,5 @@
 pros::ADIDigitalOut clawPiston('A');
 pros::Imu imuSensor(15);
 pros::ADIDigitalIn autonSelector ('B');
-// Potentiometer autonPotL('D');
+Potentiometer autonPotL('D');
 // Potentiometer autonPotR('E');

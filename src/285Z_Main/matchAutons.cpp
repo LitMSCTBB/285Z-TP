@@ -77,11 +77,11 @@ void winPoint(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
 {
 
-  fourbarLift(675);
+  fourbarLift(1050);
   move(fast, 0.3_ft, fwd);
   pros::delay(200);
   clawPiston.set_value(false);
-  pros::delay(900);
+  pros::delay(600);
   move(fast, 0.8_ft, bwd);
 
   turn(315);
@@ -122,10 +122,10 @@ void neutralSideRight(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   clawPiston.set_value(0);
   pros::delay(1180);
   clawPiston.set_value(true);
-  fourbarLift(200);
   fast->waitUntilSettled();
 
   fast->setTarget("sideRight", bwd);
+  fourbarLift(200);
   fast->waitUntilSettled();
 
 }
@@ -133,14 +133,15 @@ void neutralSideRight(std::shared_ptr<okapi::AsyncMotionProfileController> med,
 void neutralSideLeft(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
   {
+    //neutral rush
     fast->setTarget("sideLeft", fwd);
     clawPiston.set_value(0);
-    pros::delay(1180);
+    pros::delay(1300);
     clawPiston.set_value(true);
-    fourbarLift(200);
     fast->waitUntilSettled();
 
     fast->setTarget("sideLeft", bwd);
+    fourbarLift(200);
     fast->waitUntilSettled();
 
   }
@@ -153,13 +154,13 @@ void neutralCenterRight(std::shared_ptr<okapi::AsyncMotionProfileController> med
 
   fast->setTarget("centerNeutral", fwd);
   clawPiston.set_value(0);
-
   pros::delay(1420);
   clawPiston.set_value(true);
-  fourbarLift(600);
   fast->waitUntilSettled();
 
   fast->setTarget("centerNeutral", bwd);
+  fourbarLift(200);
+
   fast->waitUntilSettled();
 
   fourbarLift(0);
@@ -170,19 +171,22 @@ void neutralCenterRight(std::shared_ptr<okapi::AsyncMotionProfileController> med
 void neutralCenterLeft(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
   {
-    fast->setTarget("centralNeutralLeft", fwd);
+    fast->setTarget("centerNeutralLeft", fwd);
     clawPiston.set_value(0);
-
-    pros::delay(1420);
+    intakeMotor.moveVelocity(-600);
+    pros::delay(1520);
     clawPiston.set_value(true);
-    fourbarLift(600);
+
     fast->waitUntilSettled();
 
-    fast->setTarget("centralNeutralLeft", bwd);
+    fast->setTarget("centerNeutralLeft", bwd);
+    fourbarLift(200);
+    intakeMotor.moveVelocity(0);
     fast->waitUntilSettled();
 
     fourbarLift(0);
     clawPiston.set_value(false);
+
   }
 
 
