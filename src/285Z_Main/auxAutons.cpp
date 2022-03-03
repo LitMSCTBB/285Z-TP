@@ -8,12 +8,8 @@
 
 void noAuton()
 {
-
-  fourbarLift(2000);
-  pros::delay(5000);
-  fourbarLift(0);
-  pros::delay(5000);
-  //pros::delay(15000);
+  
+  pros::delay(15000);
 
 }
 
@@ -23,7 +19,7 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
 
   clawPiston.set_value(0);
 
-  move(med, 1.5_ft, fwd);
+  move(med, 1.7_ft, fwd);
   turn(270);
   twobarDown();
   pros::delay(900); //tweak?
@@ -43,17 +39,18 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   fourbarLift(2000);
   pros::delay(800); //tweak
 
-  turn(324);
-  move(fast, 7.3_ft, fwd);
+  turn(326);
+  // move(fast, 7.3_ft, fwd);
 
   fast->generatePath({
     {0_ft, 0_ft, 0_deg},
-    {4.7_ft, 0_ft, 0_deg}},
+    {7.3_ft, 0_ft, 0_deg}},
     "skillsPlat"
     );
 
   fast->setTarget("skillsPlat", fwd);
-  fourbarLift(700);
+  fast->waitUntilSettled();
+  fourbarLift(1000);
   pros::delay(800); //tweak
   clawPiston.set_value(false);
   pros::delay(850);
@@ -75,8 +72,8 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   clawPiston.set_value(true);
   fourbarLift(2000);
   pros::delay(800);
-  turn(340); //tweak
-  move(med, 1.75_ft, fwd);
+  turn(345); //tweak
+  move(med, 2.5_ft, fwd);
   fourbarLift(700);
   pros::delay(800);
   clawPiston.set_value(false);

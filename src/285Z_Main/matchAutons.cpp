@@ -197,24 +197,26 @@ void neutralSideCenterRight(std::shared_ptr<okapi::AsyncMotionProfileController>
   //neutral rush
   fast->setTarget("sideRight", fwd);
   clawPiston.set_value(0);
-  pros::delay(1160);
+  pros::delay(1180);
   clawPiston.set_value(true);
+  fast->waitUntilSettled();
+
+  fast->setTarget("sideRight", bwd);
   fourbarLift(200);
   fast->waitUntilSettled();
 
-
-  fast->setTarget("sideRight", bwd);
-  fast->waitUntilSettled();
-
-  turn(315);
+  turn(45);
+  clawPiston.set_value(false);
+  turn(330);
 
   fast->setTarget("centerNeutral", fwd);
   pros::delay(1420);
   clawPiston.set_value(true);
-  fourbarLift(600);
   fast->waitUntilSettled();
 
   fast->setTarget("centerNeutral", bwd);
+  fourbarLift(200);
+
   fast->waitUntilSettled();
 
   fourbarLift(0);
