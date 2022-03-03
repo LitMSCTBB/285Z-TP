@@ -17,15 +17,15 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
 {
 
-  clawPiston.set_value(0);
+ clawPiston.set_value(0);
 
-  move(med, 1.7_ft, fwd);
+  move(med, 1.5_ft, fwd);
   turn(270);
   twobarDown();
-  pros::delay(900); //tweak?
+  pros::delay(900);
   move(med, 0.8_ft, bwd);
   twobarUp();
-  pros::delay(1200); //tweak?
+  pros::delay(1200);
 
   intakeMotor.moveVelocity(-600);
   pros::delay(2000);
@@ -33,14 +33,11 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
 
   move(med, 1.3_ft, fwd);
   turn(358);
-
   move(med, 2.5_ft, fwd);
   clawPiston.set_value(true);
-  fourbarLift(2000);
-  pros::delay(800); //tweak
-
-  turn(326);
-  // move(fast, 7.3_ft, fwd);
+  fourbarLift(1600);
+  pros::delay(800);
+  turn(325);
 
   fast->generatePath({
     {0_ft, 0_ft, 0_deg},
@@ -50,33 +47,18 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
 
   fast->setTarget("skillsPlat", fwd);
   fast->waitUntilSettled();
-  fourbarLift(1000);
-  pros::delay(800); //tweak
-  clawPiston.set_value(false);
-  pros::delay(850);
-  fourbarLift(1800);
-  pros::delay(1000);
-
-  move(med, 2_ft, bwd); //maybe tweak, could go further so 2bar doesn't hit plat
-  twobarDown();
-  pros::delay(800);
-  fourbarLift(0);
-  pros::delay(800);
-
-  move(med, 1.25_ft, fwd);
-  pros::delay(1000);
-  twobarUp();
-  pros::delay(800);
-  turn(150); //tweak
-  move(med, 1.25_ft, fwd);
-  clawPiston.set_value(true);
-  fourbarLift(2000);
-  pros::delay(800);
-  turn(345); //tweak
-  move(med, 2.5_ft, fwd);
   fourbarLift(700);
   pros::delay(800);
   clawPiston.set_value(false);
+  pros::delay(800);
+  fourbarLift(1300);
+  pros::delay(800);
+  move(med, 1.25_ft, bwd);
+  turn(225);
+  twobarDown();
+  fourbarLift(0);
+  pros::delay(900);
+  move(med, 9_ft, fwd);
 
 
 /*
