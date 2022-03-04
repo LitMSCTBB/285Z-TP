@@ -55,7 +55,7 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   //(side) neutral scoring on platform
   fast->generatePath({
     {0_ft, 0_ft, 0_deg},
-    {7.5_ft, 0_ft, 0_deg}},
+    {7.7_ft, 0_ft, 0_deg}},
     "skillsPlat"
     );
 
@@ -71,7 +71,7 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   pros::delay(500);
   fourbarLift(1900);
   intakeMotor.moveVoltage(0);
-  move(fast, 3.25_ft, bwd);
+  move(fast, 2.3_ft, bwd);
   turn(230);
   twobarDown();
   fourbarLift(0);
@@ -84,7 +84,7 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   turn(180);
   med->generatePath({
     {0_ft, 0_ft, 0_deg},
-    {7.3_ft, 0_ft, 0_deg}},
+    {6_ft, 0_ft, 0_deg}},
     "secondpath"
     );
 
@@ -107,11 +107,11 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
 
 //next side neutralSideLeft
 
-  turn(315);
+  turn(310);
 
   fast->generatePath({
     {0_ft, 0_ft, 0_deg},
-    {3.2_ft, 0_ft, 0_deg}},
+    {3.7_ft, 0_ft, 0_deg}},
     "thirdPath"
   );
 
@@ -121,15 +121,16 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   pros::delay(1250);
   clawPiston.set_value(true);
   fast->waitUntilSettled();
-  fourbarLift(2200);
-  turn(38);
-  move(fast, 4_ft, fwd);
-  fourbarLift(1300);
+  fourbarLift(200);
+  turn(0);
+  move(fast, 3.5_ft, fwd);
+  fourbarLift(0);
   pros::delay(900);
   clawPiston.set_value(false);
   pros::delay(900);
   move(med, 0.5_ft, bwd);
-
+  pros::delay(1000);
+  intakeMotor.moveVoltage(0);
 /*
   turn(215);
   fourbarLift(0);
