@@ -6,7 +6,7 @@
 #include "../include/285z/initSensors.hpp"
 #include "../include/pros/llemu.hpp"
 
-int autoIndex = 1;
+int autoIndex = 0;
 
 std::string autList [] =
 {
