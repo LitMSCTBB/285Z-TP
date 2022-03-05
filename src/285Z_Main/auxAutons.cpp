@@ -103,7 +103,7 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   fourbarLift(1900);
   intakeMotor.moveVoltage(0);
   twoBarController->setTarget(0);
-  move(med, 1_ft, bwd);
+  move(med, 1.8_ft, bwd);
 
 //next side neutralSideLeft
 
