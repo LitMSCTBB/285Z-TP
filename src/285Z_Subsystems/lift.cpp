@@ -28,7 +28,7 @@ bool clawB = false;
 //two bar
 bool tbB = true;
 const int height0 = -3000;
-const int height1 = -1540; //decrease magnitude to go higher
+const int height1 = -1480; //decrease magnitude to go higher
 
 //four bar
 const double height0F = 0.0;

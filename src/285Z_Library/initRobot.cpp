@@ -14,7 +14,7 @@ okapi::ControllerButton parkingBrakeButton = okapi::ControllerDigital::X;
 
 //drive motor points
 int frontLeftPort = -18; //reversed
-int backLeftPort = -20; //reversed
+int backLeftPort = -16; //reversed
 int frontRightPort = 17;
 int backRightPort = 19;
 

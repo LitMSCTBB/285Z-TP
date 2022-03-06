@@ -123,14 +123,23 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   fast->waitUntilSettled();
   fourbarLift(200);
   turn(0);
-  move(fast, 3.5_ft, fwd);
+  move(fast, 4.3_ft,fwd);
   fourbarLift(0);
   pros::delay(900);
-  clawPiston.set_value(false);
+  clawPiston.set_value(false); //set down neutral
   pros::delay(900);
   move(med, 0.5_ft, bwd);
-  pros::delay(1000);
+
+  //pick up another alliance goal
+  turn(90);
+  move(med, 1.1_ft, bwd);
+  twobarUp();
+  pros::delay(900);
+  move(fast, 1.3_ft, fwd);
+  turn(180);
+  move(fast, 6_ft, fwd);
   intakeMotor.moveVoltage(0);
+
 /*
   turn(215);
   fourbarLift(0);

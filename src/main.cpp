@@ -6,7 +6,7 @@
 #include "../include/285z/initSensors.hpp"
 #include "../include/pros/llemu.hpp"
 
-int autoIndex = 1;
+int autoIndex = 0;
 
 std::string autList [] =
 {
@@ -159,8 +159,8 @@ void opcontrol()
     model->tank(controller.getAnalog(okapi::ControllerAnalog::leftY),
               controller.getAnalog(okapi::ControllerAnalog::rightY));
 
-    fourBarVal = autonPotL.get(); //FOR TESTING POT VALUES
-    pros::lcd::set_text(1, std::to_string(fourBarVal)); //FOR TESTING POT VALUES
+    //fourBarVal = autonPotL.get(); //FOR TESTING POT VALUES
+    //pros::lcd::set_text(1, std::to_string(fourBarVal)); //FOR TESTING POT VALUES
 
     fb.claw();
     tb.liftToggle();
