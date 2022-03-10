@@ -26,6 +26,7 @@ std::string autList [] =
 TwoBar tb;
 FourBar fb;
 Intake in;
+int len = sizeof(autList)/sizeof(autList[0]);
 
 //**************** INITIALIZE ALL CHASSIS FOR AUTON ********************//
 
@@ -75,7 +76,21 @@ std::shared_ptr<okapi::ChassisController> PIDchassis = okapi::ChassisControllerB
  */
 
 
-void disabled() {}
+void disabled() {
+  while(true) {
+
+      bool autval = autonSelector.get_value();
+
+      if (autval == 1) {
+        pros::delay(200);
+        autoIndex=(autoIndex + 1) % len;
+      }
+
+      pros::lcd::set_text(7, autList[autoIndex]);
+
+      pros::delay(20);
+    }
+}
 
 //
 /** Runs initialization code. This occurs as soon as the program is started.
@@ -120,8 +135,6 @@ void competition_initialize()
   );
 
   pros::lcd::set_text(6, "// All Initializations Complete //");
-
-  int len = sizeof(autList)/sizeof(autList[0]);
 
   while(true) {
 
