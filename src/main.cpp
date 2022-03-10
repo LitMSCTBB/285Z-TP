@@ -56,7 +56,16 @@ std::shared_ptr<okapi::AsyncMotionProfileController> normalAuto = AsyncMotionPro
       .withOutput(chassis)
       .buildMotionProfileController();
 
-
+std::shared_ptr<okapi::ChassisController> PIDchassis = okapi::ChassisControllerBuilder()
+    .withMotors(driveL, driveR)
+    .withDimensions({AbstractMotor::gearset::blue, (84.0 / 36.0)}, {{4.125_in, 14.5_in}, imev5BlueTPR})
+    .withMaxVoltage(12000)
+    .withGains(
+      {0.001, 0, 0.0001}, // Distance controller gains
+      {0.001, 0, 0.0001}, // Turn controller gains
+      {0.001, 0, 0.0001}  // Angle controller gains
+    )
+    .build();
 
 /**
  * Runs while the robot is in the disabled state of Field Management System or
