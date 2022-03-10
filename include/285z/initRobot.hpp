@@ -12,7 +12,7 @@ extern ControllerButton fourBarNormal;
 extern ControllerButton fourBarReverse;
 extern ControllerButton twoBarButton;
 extern ControllerButton resettwobarButton;
-extern ControllerButton parkingBrakeButton; 
+extern ControllerButton parkingBrakeButton;
 
 //drive motor points
 extern int frontLeftPort;
@@ -37,3 +37,7 @@ extern Motor intakeMotor;
 //Drive motor groups
 extern MotorGroup driveL;
 extern MotorGroup driveR;
+
+// extern std::shared_ptr<okapi::AsyncMotionProfileController> fastAuto;
+// extern std::shared_ptr<okapi::AsyncMotionProfileController> normalAuto;
+// extern okapi::ChassisControllerBuilder chassis;

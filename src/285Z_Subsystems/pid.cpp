@@ -47,8 +47,6 @@ void turn(double degrees){
   bool TURN_NOT_FINISH = true;
   while (TURN_NOT_FINISH) {
     sensorValue = imuSensor.get_heading();
-    printf("TARGET: %.4f\n", turnTarget);
-    printf("IMU: %.4f\n", sensorValue);
 
     if (deltaI > 180){
       if (sensorValue > 180) {
@@ -58,7 +56,6 @@ void turn(double degrees){
 
     //PROPORTIONAL
     error = turnTarget - sensorValue;
-    printf("ERROR: %.4f\n", error);
     //DERIVATIVE
     double changeInError = error - oldError;
     //INTEGRAL

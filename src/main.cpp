@@ -30,10 +30,10 @@ Intake in;
 //**************** INITIALIZE ALL CHASSIS FOR AUTON ********************//
 
 
-auto chassis = okapi::ChassisControllerBuilder()
+std::shared_ptr<ChassisController> chassis = okapi::ChassisControllerBuilder()
       .withMotors(driveL, driveR)
       .withDimensions({AbstractMotor::gearset::blue, (84.0 / 36.0)}, {{4.125_in, 14.5_in}, imev5BlueTPR})
-      .withMaxVelocity(600)
+      .withMaxVoltage(12000)
       .build();
 
 std::shared_ptr<okapi::ChassisModel> model = std::dynamic_pointer_cast<okapi::ChassisModel>(chassis->getModel());
@@ -49,9 +49,9 @@ std::shared_ptr<okapi::AsyncMotionProfileController> fastAuto = AsyncMotionProfi
 
 std::shared_ptr<okapi::AsyncMotionProfileController> normalAuto = AsyncMotionProfileControllerBuilder()
       .withLimits({
-        2.0, //max linear velocity of Chassis in m/s
-        5.0, //max linear acceleration in m/s^2
-        10.0 //max linear jerk in m/s^3
+        1.5, //max linear velocity of Chassis in m/s
+        4.0, //max linear acceleration in m/s^2
+        8.0 //max linear jerk in m/s^3
       })
       .withOutput(chassis)
       .buildMotionProfileController();
@@ -132,7 +132,6 @@ void competition_initialize()
 
 void autonomous()
 {
-
   switch(autoIndex) {
     case (0): noAuton(); break;
     case (1): skillsAuto(normalAuto, fastAuto); break;
@@ -149,7 +148,6 @@ void autonomous()
   }
 }
 
-double fourBarVal = autonPotL.get();
 
 void opcontrol()
 {
