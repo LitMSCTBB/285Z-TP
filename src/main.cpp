@@ -60,10 +60,17 @@ std::shared_ptr<okapi::AsyncMotionProfileController> normalAuto = AsyncMotionPro
 std::shared_ptr<okapi::ChassisController> PIDchassis = okapi::ChassisControllerBuilder()
     .withMotors(driveL, driveR)
     .withDimensions({AbstractMotor::gearset::blue, (84.0 / 36.0)}, {{4.125_in, 14.5_in}, imev5BlueTPR})
-    .withMaxVoltage(12000)
+    .withMaxVelocity(600)
     .withGains(
-      {.00185, 0, 0.000118} // Distance controller gains
+      {0.00182, 0.0, 0.000044}, // Distance controller gains
+      {0.001, 0, 0.0001}, // Turn controller gains
+      {0.001, 0, 0.0001}  // Angle controller gains (helps drive straight)
     )
+    .withClosedLoopControllerTimeUtil(50, 5, 250_ms)
+    .withDerivativeFilters(
+        std::make_unique<AverageFilter<3>>() // Distance controller filter
+    )
+
     .build();
 
 /**
