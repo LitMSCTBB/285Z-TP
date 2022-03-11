@@ -62,9 +62,7 @@ std::shared_ptr<okapi::ChassisController> PIDchassis = okapi::ChassisControllerB
     .withDimensions({AbstractMotor::gearset::blue, (84.0 / 36.0)}, {{4.125_in, 14.5_in}, imev5BlueTPR})
     .withMaxVoltage(12000)
     .withGains(
-      {.0019, 0, 0.0001}, // Distance controller gains
-      {0.001, 0, 0.0001}, // Turn controller gains
-      {0.001, 0, 0.0001}  // Angle controller gains
+      {.00185, 0, 0.000118} // Distance controller gains
     )
     .build();
 
@@ -154,7 +152,7 @@ void competition_initialize()
 
 void autonomous()
 {
-  
+
   PIDchassis->moveDistance(2_ft);
 
   /*
@@ -171,7 +169,7 @@ void autonomous()
     case (9): neutralSideCenterRight(normalAuto, fastAuto); break;
     case (10): neutralSideCenterLeft(normalAuto, fastAuto); break;
     default: noAuton();
-    
+
   }
   */
 }
