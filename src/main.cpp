@@ -60,11 +60,11 @@ std::shared_ptr<okapi::AsyncMotionProfileController> normalAuto = AsyncMotionPro
 std::shared_ptr<okapi::ChassisController> PIDchassis = okapi::ChassisControllerBuilder()
     .withMotors(driveL, driveR)
     .withDimensions({AbstractMotor::gearset::blue, (84.0 / 36.0)}, {{4.125_in, 14.5_in}, imev5BlueTPR})
-    .withMaxVelocity(600)
+    .withMaxVoltage(11500)
     .withGains(
-      {0.00182, 0.0, 0.000044}, // Distance controller gains
-      {0.001, 0, 0.0001}, // Turn controller gains
-      {0.001, 0, 0.0001}  // Angle controller gains (helps drive straight)
+      {0.00191, 0.0, 0.000050}, // Distance controller gains  KD is (probably) greater than this
+      {0.001, 0, 0.0001} // Turn controller gains
+      //{0.001, 0, 0.0001}  // Angle controller gains (helps drive straight)
     )
     .withClosedLoopControllerTimeUtil(50, 5, 250_ms)
     .withDerivativeFilters(
@@ -160,7 +160,14 @@ void competition_initialize()
 void autonomous()
 {
 
-  PIDchassis->moveDistance(2_ft);
+   clawPiston.set_value(0);
+   PIDchassis->moveDistanceAsync(5_ft);
+   pros::delay(1000);
+   clawPiston.set_value(true);
+   fourbarLift(200);
+   PIDchassis->moveDistance(-3.5_ft);
+
+
 
   /*
   switch(autoIndex) {
