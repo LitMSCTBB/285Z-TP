@@ -60,17 +60,16 @@ std::shared_ptr<okapi::AsyncMotionProfileController> normalAuto = AsyncMotionPro
 std::shared_ptr<okapi::ChassisController> PIDchassis = okapi::ChassisControllerBuilder()
     .withMotors(driveL, driveR)
     .withDimensions({AbstractMotor::gearset::blue, (84.0 / 36.0)}, {{4.125_in, 14.5_in}, imev5BlueTPR})
-    .withMaxVoltage(11500)
+    .withMaxVoltage(12000)
     .withGains(
-      {0.00191, 0.0, 0.000050}, // Distance controller gains  KD is (probably) greater than this
-      {0.001, 0, 0.0001} // Turn controller gains
-      //{0.001, 0, 0.0001}  // Angle controller gains (helps drive straight)
+      {0.00191, 0.0, 0.000048}, // Distance controller gains  KD is (probably) greater than this
+      {0.001, 0, 0.0001}, // Turn controller gains
+      {0.001, 0, 0.0001}  // Angle controller gains (helps drive straight)
     )
     .withClosedLoopControllerTimeUtil(50, 5, 250_ms)
     .withDerivativeFilters(
         std::make_unique<AverageFilter<3>>() // Distance controller filter
     )
-
     .build();
 
 /**
@@ -81,21 +80,7 @@ std::shared_ptr<okapi::ChassisController> PIDchassis = okapi::ChassisControllerB
  */
 
 
-void disabled() {
-  while(true) {
-
-      bool autval = autonSelector.get_value();
-
-      if (autval == 1) {
-        pros::delay(200);
-        autoIndex=(autoIndex + 1) % len;
-      }
-
-      pros::lcd::set_text(7, autList[autoIndex]);
-
-      pros::delay(20);
-    }
-}
+void disabled() {}
 
 //
 /** Runs initialization code. This occurs as soon as the program is started.
@@ -110,6 +95,9 @@ void competition_initialize()
   imuSensor.reset();
   while (imuSensor.is_calibrating())
     pros::delay(15);
+
+  driveR.setBrakeMode(AbstractMotor::brakeMode::hold);
+  driveL.setBrakeMode(AbstractMotor::brakeMode::hold);
 
   clawPiston.set_value(true);
 
@@ -160,14 +148,14 @@ void competition_initialize()
 void autonomous()
 {
 
-   clawPiston.set_value(0);
+
+
    PIDchassis->moveDistanceAsync(5_ft);
-   pros::delay(1000);
+   clawPiston.set_value(0);
+   pros::delay(980);
    clawPiston.set_value(true);
-   fourbarLift(200);
+   fourbarLift(150);
    PIDchassis->moveDistance(-3.5_ft);
-
-
 
   /*
   switch(autoIndex) {
@@ -193,6 +181,9 @@ void opcontrol()
 {
 
   while (1) {
+
+    driveR.setBrakeMode(AbstractMotor::brakeMode::coast);
+    driveL.setBrakeMode(AbstractMotor::brakeMode::coast);
 
     model->tank(controller.getAnalog(okapi::ControllerAnalog::leftY),
               controller.getAnalog(okapi::ControllerAnalog::rightY));
