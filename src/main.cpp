@@ -113,6 +113,8 @@ void competition_initialize()
 
   driveR.setBrakeMode(AbstractMotor::brakeMode::hold);
   driveL.setBrakeMode(AbstractMotor::brakeMode::hold);
+  fourBarMotor1.setBrakeMode(AbstractMotor::brakeMode::hold);
+  fourBarMotor2.setBrakeMode(AbstractMotor::brakeMode::hold);
 
   clawPiston.set_value(true);
 
@@ -163,18 +165,18 @@ void competition_initialize()
 void autonomous()
 {
 
-
+/*
   PIDchassis->moveDistanceAsync(3.75_ft);
 
-    clawPiston.set_value(0);
-    pros::delay(900);
-    clawPiston.set_value(true);
-    // fourbarLift(150);
+  clawPiston.set_value(0);
+  pros::delay(900);
+  clawPiston.set_value(true);
+  // fourbarLift(150);
 
   PIDchassis->stop();
   PIDchassisGoal->moveDistance(-3_ft);
-
-  /*
+*/
+  
   switch(autoIndex) {
     case (0): noAuton(); break;
     case (1): skillsAuto(normalAuto, fastAuto); break;
@@ -190,7 +192,7 @@ void autonomous()
     default: noAuton();
 
   }
-  */
+  
 }
 
 
