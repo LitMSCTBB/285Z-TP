@@ -60,7 +60,7 @@ std::shared_ptr<okapi::AsyncMotionProfileController> normalAuto = AsyncMotionPro
 std::shared_ptr<okapi::ChassisController> PIDchassis = okapi::ChassisControllerBuilder()
     .withMotors(driveL, driveR)
     .withDimensions({AbstractMotor::gearset::blue, (84.0 / 36.0)}, {{4.125_in, 14.5_in}, imev5BlueTPR})
-    .withMaxVoltage(11000)
+    .withMaxVoltage(12000)
     .withGains(
       {0.00191, 0.0, 0.00005}, // Distance controller gains  KD is (probably) greater than this
       {0.001, 0, 0.0001}, // Turn controller gains
@@ -75,7 +75,7 @@ std::shared_ptr<okapi::ChassisController> PIDchassis = okapi::ChassisControllerB
     std::shared_ptr<okapi::ChassisController> PIDchassisGoal = okapi::ChassisControllerBuilder()
     .withMotors(driveL, driveR)
     .withDimensions({AbstractMotor::gearset::blue, (84.0 / 36.0)}, {{4.125_in, 14.5_in}, imev5BlueTPR})
-    .withMaxVoltage(11000)
+    .withMaxVoltage(12000)
     .withGains(
       {0.0014, 0, 0.000007}, // Distance controller gains  KD is (probably) greater than this
       {0.001, 0, 0.0001}, // Turn controller gains
@@ -164,13 +164,15 @@ void autonomous()
 {
 
 
-   PIDchassis->moveDistanceAsync(4_ft);
+  PIDchassis->moveDistanceAsync(3.75_ft);
+
     clawPiston.set_value(0);
-    pros::delay(980);
+    pros::delay(900);
     clawPiston.set_value(true);
-    fourbarLift(150);
-    PIDchassis->stop();
-    PIDchassisGoal->moveDistance(-4_ft);
+    // fourbarLift(150);
+
+  PIDchassis->stop();
+  PIDchassisGoal->moveDistance(-3_ft);
 
   /*
   switch(autoIndex) {

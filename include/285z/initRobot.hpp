@@ -38,7 +38,5 @@ extern Motor intakeMotor;
 extern MotorGroup driveL;
 extern MotorGroup driveR;
 
-// extern std::shared_ptr<okapi::AsyncMotionProfileController> fastAuto;
-// extern std::shared_ptr<okapi::AsyncMotionProfileController> normalAuto;
-// extern okapi::ChassisControllerBuilder chassis;
 extern std::shared_ptr<okapi::ChassisController> PIDchassis;
+extern std::shared_ptr<okapi::ChassisController> PIDchassisGoal;
