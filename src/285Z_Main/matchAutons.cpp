@@ -13,15 +13,17 @@ void redLeftBlueLeft(std::shared_ptr<okapi::AsyncMotionProfileController> med,
 {
 
   //neutral rush
-  fast->setTarget("sideLeft", fwd);
+  //fast->setTarget("sideLeft", fwd);
+  PIDchassis->moveDistanceAsync(4.75_ft);
   clawPiston.set_value(0);
-  pros::delay(1300); //old value 1300
+  pros::delay(1300); //tune
   clawPiston.set_value(true);
   fourbarLift(200);
-  fast->waitUntilSettled();
+  //fast->waitUntilSettled();
 
-  fast->setTarget("sideLeft", bwd);
-  fast->waitUntilSettled();
+  // fast->setTarget("sideLeft", bwd);
+  // fast->waitUntilSettled();
+  PIDchassis->moveDistance(-4.75_ft);
 
   move(fast, 1_ft, fwd);
   turn(330);
@@ -41,15 +43,17 @@ void redRightBlueRight(std::shared_ptr<okapi::AsyncMotionProfileController> med,
 {
 
   //neutral rush
-  fast->setTarget("sideRight", fwd);
+  //fast->setTarget("sideRight", fwd);
+  PIDchassis->moveDistanceAsync(4.3_ft);
   clawPiston.set_value(0);
   pros::delay(1180); //old value: 1180
   clawPiston.set_value(true);
-  fast->waitUntilSettled();
-
-  fast->setTarget("sideRight", bwd);
   fourbarLift(200);
-  fast->waitUntilSettled();
+  //fast->waitUntilSettled();
+
+  //fast->setTarget("sideRight", bwd);
+  PIDchassis->moveDistance(-4.3_ft);
+  //fast->waitUntilSettled();
 
   //grab alliance
   move(fast, 0.8_ft, fwd);
@@ -128,14 +132,15 @@ void neutralSideRight(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   // fourbarLift(200);
   // fast->waitUntilSettled();
 
-  fast->setTarget("sideRight", fwd);
+  //fast->setTarget("sideRight", fwd);
+  PIDchassis->moveDistanceAsync(4.3_ft);
   clawPiston.set_value(0);
-  pros::delay(1180); //old value: 1180
+  pros::delay(1180); //tune
   clawPiston.set_value(true);
-  fast->waitUntilSettled();
-
-  fast->setTarget("sideRight", bwd);
   fourbarLift(200);
+  //fast->waitUntilSettled();
+
+PIDchassis->moveDistanceAsync(-4.3_ft);
   fast->waitUntilSettled();
 
 }
@@ -154,15 +159,17 @@ void neutralSideLeft(std::shared_ptr<okapi::AsyncMotionProfileController> med,
     // fourbarLift(200);
     // fast->waitUntilSettled();
 
-    fast->setTarget("sideLeft", fwd);
-  clawPiston.set_value(0);
-  pros::delay(1300); //old value 1300
-  clawPiston.set_value(true);
-  fourbarLift(200);
-  fast->waitUntilSettled();
+    //fast->setTarget("sideLeft", fwd);
+    PIDchassis->moveDistanceAsync(4.75_ft);
+    clawPiston.set_value(0);
+    pros::delay(1300); //tune
+    clawPiston.set_value(true);
+    fourbarLift(200);
+    //fast->waitUntilSettled();
 
-  fast->setTarget("sideLeft", bwd);
-  fast->waitUntilSettled();
+    // fast->setTarget("sideLeft", bwd);
+    // fast->waitUntilSettled();
+    PIDchassis->moveDistance(-4.75_ft);
 
   }
 
@@ -172,16 +179,18 @@ void neutralCenterRight(std::shared_ptr<okapi::AsyncMotionProfileController> med
   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
 {
 
-  fast->setTarget("centerNeutral", fwd);
+  //fast->setTarget("centerNeutral", fwd);
+  PIDchassis->moveDistanceAsync(7.5_ft);
   clawPiston.set_value(0);
   pros::delay(1420);
   clawPiston.set_value(true);
-  fast->waitUntilSettled();
-
-  fast->setTarget("centerNeutral", bwd);
   fourbarLift(200);
+  //fast->waitUntilSettled();
 
-  fast->waitUntilSettled();
+  // fast->setTarget("centerNeutral", bwd);
+  PIDchassis->moveDistance(-7.5_ft);
+
+  //fast->waitUntilSettled();
 
   fourbarLift(0);
   clawPiston.set_value(false);
@@ -191,18 +200,21 @@ void neutralCenterRight(std::shared_ptr<okapi::AsyncMotionProfileController> med
 void neutralCenterLeft(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
   {
-    fast->setTarget("centerNeutralLeft", fwd);
+    //fast->setTarget("centerNeutralLeft", fwd);
+    PIDchassis->moveDistanceAsync(11_ft);
     clawPiston.set_value(0);
     intakeMotor.moveVelocity(-600);
     pros::delay(1520);
     clawPiston.set_value(true);
-
-    fast->waitUntilSettled();
-
-    fast->setTarget("centerNeutralLeft", bwd);
     fourbarLift(200);
     intakeMotor.moveVelocity(0);
-    fast->waitUntilSettled();
+
+    //fast->waitUntilSettled();
+
+    //fast->setTarget("centerNeutralLeft", bwd);
+    PIDchassis->moveDistance(-11_ft);
+    
+    //fast->waitUntilSettled();
 
     fourbarLift(0);
     clawPiston.set_value(false);
@@ -215,15 +227,17 @@ void neutralSideCenterRight(std::shared_ptr<okapi::AsyncMotionProfileController>
 {
 
   //neutral rush
-  fast->setTarget("sideRight", fwd);
+  //fast->setTarget("sideRight", fwd);
+  PIDchassis->moveDistanceAsync(4.3_ft);
   clawPiston.set_value(0);
-  pros::delay(1180);
+  pros::delay(1180); //old value: 1180
   clawPiston.set_value(true);
-  fast->waitUntilSettled();
-
-  fast->setTarget("sideRight", bwd);
   fourbarLift(200);
-  fast->waitUntilSettled();
+  //fast->waitUntilSettled();
+
+  //fast->setTarget("sideRight", bwd);
+  PIDchassis->moveDistance(-4.3_ft);
+  //fast->waitUntilSettled();
 
   turn(45);
   clawPiston.set_value(false);
@@ -247,12 +261,18 @@ void neutralSideCenterRight(std::shared_ptr<okapi::AsyncMotionProfileController>
 void neutralSideCenterLeft(std::shared_ptr<okapi::AsyncMotionProfileController> med,
    std::shared_ptr<okapi::AsyncMotionProfileController> fast)
    {
-     fast->setTarget("sideLeft", fwd);
-     clawPiston.set_value(0);
-     pros::delay(1160);
-     clawPiston.set_value(true);
-     fourbarLift(200);
-     fast->waitUntilSettled();
+      //neutral rush
+    //fast->setTarget("sideLeft", fwd);
+    PIDchassis->moveDistanceAsync(4.75_ft);
+    clawPiston.set_value(0);
+    pros::delay(1300); //tune
+    clawPiston.set_value(true);
+    fourbarLift(200);
+    //fast->waitUntilSettled();
+
+    // fast->setTarget("sideLeft", bwd);
+    // fast->waitUntilSettled();
+    PIDchassis->moveDistance(-4.75_ft);
 
      fast->setTarget("centerNeutralLeft", fwd);
      pros::delay(1420);
