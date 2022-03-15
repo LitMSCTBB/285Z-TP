@@ -42,34 +42,51 @@ void redLeftBlueLeft(std::shared_ptr<okapi::AsyncMotionProfileController> med,
 void redRightBlueRight(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
 {
-//neutral rush
+
+  //neutral rush
   PIDchassis->moveDistanceAsync(4.3_ft);
 
-  clawPiston.set_value(0);
-  pros::delay(1000);
-  clawPiston.set_value(true);
+    clawPiston.set_value(0);
+    pros::delay(1000);
+    clawPiston.set_value(true);
 
   PIDchassis->stop();
   fourbarLift(150);
   PIDchassisGoal->moveDistance(-2.25_ft);
 
   //grab alliance
-  //move(fast, 2.5_ft, fwd);
-  turn(268);
-  //move(med, 1_ft, fwd);
-  //fourbarLift(0);
-  clawPiston.set_value(false);
+  turn(270);
   twobarDown();
   pros::delay(900);
-  move(med, 1_ft, bwd);
+  move(med, 0.75_ft, bwd);
   twobarUp();
-  pros::delay(1300);
+  pros::delay(950);
 
-  // scoring
+  // scoring preloads
+  fourbarLift(2000);
   intakeMotor.moveVelocity(-500);
-  pros::delay(3000);
+  pros::delay(950);
   intakeMotor.moveVelocity(0);
-  move(fast, 2_ft, fwd);
+  turn(0);
+
+
+  //more rings
+  med->generatePath({
+    {0_ft,0_ft, 0_deg},
+    {3_ft, 0_ft, 0_deg}},
+    "rightRings"
+  );
+  med->setTarget("rightRings", fwd);
+
+    intakeMotor.moveVelocity(-600);
+
+  med->waitUntilSettled();
+  intakeMotor.moveVelocity(0);
+
+  move(fast, 4.6_ft, bwd);
+  intakeMotor.moveVelocity(-600);
+  fourbarLift(0);
+
 
 }
 
@@ -209,7 +226,7 @@ void neutralCenterLeft(std::shared_ptr<okapi::AsyncMotionProfileController> med,
 
     //fast->setTarget("centerNeutralLeft", bwd);
     PIDchassis->moveDistance(-11_ft);
-    
+
     //fast->waitUntilSettled();
 
     fourbarLift(0);

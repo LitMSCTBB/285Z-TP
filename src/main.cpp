@@ -50,9 +50,9 @@ std::shared_ptr<okapi::AsyncMotionProfileController> fastAuto = AsyncMotionProfi
 
 std::shared_ptr<okapi::AsyncMotionProfileController> normalAuto = AsyncMotionProfileControllerBuilder()
       .withLimits({
-        1.5, //max linear velocity of Chassis in m/s
-        4.0, //max linear acceleration in m/s^2
-        8.0 //max linear jerk in m/s^3
+        0.5, //max linear velocity of Chassis in m/s
+        1.5, //max linear acceleration in m/s^2
+        3.5 //max linear jerk in m/s^3
       })
       .withOutput(chassis)
       .buildMotionProfileController();
@@ -176,7 +176,7 @@ void autonomous()
   PIDchassis->stop();
   PIDchassisGoal->moveDistance(-3_ft);
 */
-  
+
   switch(autoIndex) {
     case (0): noAuton(); break;
     case (1): skillsAuto(normalAuto, fastAuto); break;
@@ -192,7 +192,7 @@ void autonomous()
     default: noAuton();
 
   }
-  
+
 }
 
 
