@@ -72,7 +72,7 @@ std::shared_ptr<okapi::ChassisController> PIDchassis = okapi::ChassisControllerB
     )
     .build();
 
-    std::shared_ptr<okapi::ChassisController> PIDchassisGoal = okapi::ChassisControllerBuilder()
+std::shared_ptr<okapi::ChassisController> PIDchassisGoal = okapi::ChassisControllerBuilder()
     .withMotors(driveL, driveR)
     .withDimensions({AbstractMotor::gearset::blue, (84.0 / 36.0)}, {{4.125_in, 14.5_in}, imev5BlueTPR})
     .withMaxVoltage(12000)
@@ -107,12 +107,15 @@ void disabled() {}
 void competition_initialize()
 {
 
+
   imuSensor.reset();
   while (imuSensor.is_calibrating())
     pros::delay(15);
 
+
   driveR.setBrakeMode(AbstractMotor::brakeMode::hold);
   driveL.setBrakeMode(AbstractMotor::brakeMode::hold);
+
   fourBarMotor1.setBrakeMode(AbstractMotor::brakeMode::hold);
   fourBarMotor2.setBrakeMode(AbstractMotor::brakeMode::hold);
 
@@ -120,31 +123,7 @@ void competition_initialize()
 
   pros::lcd::initialize();
 
-  fastAuto->generatePath({
-      {0_ft,0_ft,0_deg},
-      {4.75_ft, 0_ft,0_deg}},
-      "sideLeft"
-  );
-
-  fastAuto->generatePath({
-      {0_ft,0_ft,0_deg},
-      {4.3_ft, 0_ft,0_deg}},
-      "sideRight"
-  );
-
-  fastAuto->generatePath({
-      {0_ft,0_ft,0_deg},
-      {7.5_ft, 0_ft,0_deg}},
-      "centerNeutral"
-  );
-
-  fastAuto->generatePath({
-      {0_ft,0_ft,0_deg},
-      {11_ft, 0_ft, 0_deg}},
-      "centerNeutralLeft"
-  );
-
-  pros::lcd::set_text(6, "// All Initializations Complete //");
+  pros::lcd::set_text(6, "// CALIBRATION COMPLETE //");
 
   while(true) {
 
@@ -164,19 +143,6 @@ void competition_initialize()
 
 void autonomous()
 {
-
-/*
-  PIDchassis->moveDistanceAsync(3.75_ft);
-
-  clawPiston.set_value(0);
-  pros::delay(900);
-  clawPiston.set_value(true);
-  // fourbarLift(150);
-
-  PIDchassis->stop();
-  PIDchassisGoal->moveDistance(-3_ft);
-*/
-
   switch(autoIndex) {
     case (0): noAuton(); break;
     case (1): skillsAuto(normalAuto, fastAuto); break;
@@ -190,19 +156,19 @@ void autonomous()
     case (9): neutralSideCenterRight(normalAuto, fastAuto); break;
     case (10): neutralSideCenterLeft(normalAuto, fastAuto); break;
     default: noAuton();
-
   }
-
 }
 
 
 void opcontrol()
 {
 
+  driveR.setBrakeMode(AbstractMotor::brakeMode::coast);
+  driveL.setBrakeMode(AbstractMotor::brakeMode::coast);
+
   while (1) {
 
-    driveR.setBrakeMode(AbstractMotor::brakeMode::coast);
-    driveL.setBrakeMode(AbstractMotor::brakeMode::coast);
+    fb.claw();
 
     model->tank(controller.getAnalog(okapi::ControllerAnalog::leftY),
               controller.getAnalog(okapi::ControllerAnalog::rightY));
@@ -210,26 +176,13 @@ void opcontrol()
     //fourBarVal = autonPotL.get(); //FOR TESTING POT VALUES
     //pros::lcd::set_text(1, std::to_string(fourBarVal)); //FOR TESTING POT VALUES
 
-    fb.claw();
+
     tb.liftToggle();
 
     fb.liftToggle();
     in.run();
     in.reverse();
     tb.reset();
-
-    // if (parkingBrakeButton.changedToPressed())
-    //   brake = !brake;
-
-    // if (brake) {
-    //   driveL.moveVelocity(0);
-    //   driveR.moveVelocity(0);
-    //   driveL.setBrakeMode(AbstractMotor::brakeMode::hold);
-    //   driveR.setBrakeMode(AbstractMotor::brakeMode::hold);
-    // } else {
-    //   driveL.setBrakeMode(AbstractMotor::brakeMode::coast);
-    //   driveR.setBrakeMode(AbstractMotor::brakeMode::coast);
-    // }
 
     pros::delay(20);
 
