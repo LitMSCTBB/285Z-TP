@@ -107,7 +107,6 @@ void disabled() {}
 void competition_initialize()
 {
 
-
   imuSensor.reset();
   while (imuSensor.is_calibrating())
     pros::delay(15);
