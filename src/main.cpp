@@ -62,7 +62,7 @@ std::shared_ptr<okapi::ChassisController> PIDchassis = okapi::ChassisControllerB
     .withDimensions({AbstractMotor::gearset::blue, (84.0 / 36.0)}, {{4.125_in, 14.5_in}, imev5BlueTPR})
     .withMaxVoltage(12000)
     .withGains(
-      {0.00191, 0.0, 0.00005}, // Distance controller gains  KD is (probably) greater than this
+      {0.00191, 0.0, 0.00005}, // Distance controller gains  
       {0.001, 0, 0.0001}, // Turn controller gains
       {0.001, 0, 0.0001}  // Angle controller gains (helps drive straight)
     )
@@ -77,7 +77,7 @@ std::shared_ptr<okapi::ChassisController> PIDchassisGoal = okapi::ChassisControl
     .withDimensions({AbstractMotor::gearset::blue, (84.0 / 36.0)}, {{4.125_in, 14.5_in}, imev5BlueTPR})
     .withMaxVoltage(12000)
     .withGains(
-      {0.0014, 0, 0.000007}, // Distance controller gains  KD is (probably) greater than this
+      {0.0014, 0, 0.000007}, // Distance controller gains 
       {0.001, 0, 0.0001}, // Turn controller gains
       {0.001, 0, 0.0001}  // Angle controller gains (helps drive straight)
     )
@@ -106,7 +106,6 @@ void disabled() {}
 
 void competition_initialize()
 {
-
   imuSensor.reset();
   while (imuSensor.is_calibrating())
     pros::delay(15);
@@ -125,7 +124,6 @@ void competition_initialize()
   pros::lcd::set_text(6, "// CALIBRATION COMPLETE //");
 
   while(true) {
-
       bool autval = autonSelector.get_value();
 
       if (autval == 1) {
@@ -166,7 +164,6 @@ void opcontrol()
   driveL.setBrakeMode(AbstractMotor::brakeMode::coast);
 
   while (1) {
-
     fb.claw();
 
     model->tank(controller.getAnalog(okapi::ControllerAnalog::leftY),
@@ -186,5 +183,4 @@ void opcontrol()
     pros::delay(20);
 
   }
-
 }
