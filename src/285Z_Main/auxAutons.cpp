@@ -17,7 +17,7 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
 {
 
-  clawPiston.set_value(0);
+  clawMech.set_value(0);
 
 
   //alliance grab + score
@@ -43,9 +43,9 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
     );
 
   fast->setTarget("first", fwd);
-  clawPiston.set_value(0);
+  clawMech.set_value(0);
   pros::delay(1100);
-  clawPiston.set_value(true);
+  clawMech.set_value(true);
   fourbarLift(200);
   fast->waitUntilSettled();
   fourbarLift(2200);
@@ -67,7 +67,7 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   intakeMotor.moveVoltage(-12000);
   fourbarLift(1300);
   pros::delay(500);
-  clawPiston.set_value(false);
+  clawMech.set_value(false);
   pros::delay(500);
   fourbarLift(1900);
   intakeMotor.moveVoltage(0);
@@ -79,7 +79,7 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
 
   //center neutral
   move(fast, 1.5_ft, fwd);
-  clawPiston.set_value(true);
+  clawMech.set_value(true);
   fourbarLift(2200);
   turn(180);
   med->generatePath({
@@ -96,7 +96,7 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   intakeMotor.moveVoltage(-12000);
   fourbarLift(1300);
   pros::delay(900);
-  clawPiston.set_value(false);
+  clawMech.set_value(false);
   pros::delay(900);
   move(med, 0.5_ft, bwd);
   pros::delay(700);
@@ -119,14 +119,14 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   intakeMotor.moveVoltage(-12000);
   fourbarLift(0);
   pros::delay(1250);
-  clawPiston.set_value(true);
+  clawMech.set_value(true);
   fast->waitUntilSettled();
   fourbarLift(200);
   turn(0);
   move(fast, 4.3_ft,fwd);
   fourbarLift(0);
   pros::delay(900);
-  clawPiston.set_value(false); //set down neutral
+  clawMech.set_value(false); //set down neutral
   pros::delay(900);
   move(med, 0.5_ft, bwd);
 

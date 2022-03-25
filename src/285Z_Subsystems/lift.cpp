@@ -121,7 +121,7 @@ void FourBar::claw()
   if (clawButton.changedToPressed())
   {
     clawB = !clawB;
-    clawPiston.set_value(clawB);
+    clawMech.set_value(clawB);
   }
 
 }

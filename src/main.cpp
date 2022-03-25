@@ -59,7 +59,7 @@ std::shared_ptr<okapi::AsyncMotionProfileController> normalAuto = AsyncMotionPro
 
 std::shared_ptr<okapi::ChassisController> PIDchassis = okapi::ChassisControllerBuilder()
     .withMotors(driveL, driveR)
-    .withDimensions({AbstractMotor::gearset::blue, (84.0 / 36.0)}, {{4.125_in, 14.5_in}, imev5BlueTPR})
+    .withDimensions({AbstractMotor::gearset::blue, (60.0 / 36.0)}, {{3.25_in, 14.5_in}, imev5BlueTPR})
     .withMaxVoltage(12000)
     .withGains(
       {0.00191, 0.0, 0.00005}, // Distance controller gains  
@@ -74,7 +74,7 @@ std::shared_ptr<okapi::ChassisController> PIDchassis = okapi::ChassisControllerB
 
 std::shared_ptr<okapi::ChassisController> PIDchassisGoal = okapi::ChassisControllerBuilder()
     .withMotors(driveL, driveR)
-    .withDimensions({AbstractMotor::gearset::blue, (84.0 / 36.0)}, {{4.125_in, 14.5_in}, imev5BlueTPR})
+    .withDimensions({AbstractMotor::gearset::blue, (60.0 / 36.0)}, {{3.25_in, 14.5_in}, imev5BlueTPR})
     .withMaxVoltage(12000)
     .withGains(
       {0.0014, 0, 0.000007}, // Distance controller gains 
@@ -117,7 +117,7 @@ void competition_initialize()
   fourBarMotor1.setBrakeMode(AbstractMotor::brakeMode::hold);
   fourBarMotor2.setBrakeMode(AbstractMotor::brakeMode::hold);
 
-  clawPiston.set_value(true);
+  clawMech.set_value(true);
 
   pros::lcd::initialize();
 
