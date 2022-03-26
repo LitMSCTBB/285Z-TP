@@ -13,25 +13,28 @@ okapi::ControllerButton parkingBrakeButton = okapi::ControllerDigital::X;
 
 
 //drive motor points
-int frontLeftPort = -18; //reversed
-int backLeftPort = -16; //reversed
-int frontRightPort = 17;
-int backRightPort = 19;
+int rightFrontPort = 18; 
+int rightMiddlePort = 16; 
+int rightBackPort = 17;
 
-int fourBarPortLeft = -13;
-int twoBarPort = 14;
-int fourBarPortRight = 12;
+int leftFrontPort = -19;
+int leftMiddlePort = -13;
+int leftBackPort = -14;
+
+int fourBarPort = 12;
 int intakePort = 11;
 
-Motor frontLeftMotor(frontLeftPort);
-Motor backLeftMotor(backLeftPort);
-Motor frontRightMotor(frontRightPort);
-Motor backRightMotor(backRightPort);
-Motor fourBarMotor1(fourBarPortLeft);
-Motor fourBarMotor2(fourBarPortRight);
-Motor twoBarMotor(twoBarPort);
+Motor rightFrontMotor(rightFrontPort);
+Motor rightMiddleMotor(rightMiddlePort);
+Motor rightBackMotor(rightBackPort);
+
+Motor leftFrontMotor(leftFrontPort);
+Motor leftMiddleMotor(leftMiddlePort);
+Motor leftBackMotor(leftBackPort);
+
+Motor fourBarMotor(fourBarPort);
 Motor intakeMotor(intakePort);
 
 
-MotorGroup driveL({frontLeftPort, backLeftPort});
-MotorGroup driveR({frontRightPort, backRightPort});
+MotorGroup driveL({leftFrontPort, leftMiddlePort, leftBackPort});
+MotorGroup driveR({rightFrontPort, rightMiddlePort, rightBackPort});

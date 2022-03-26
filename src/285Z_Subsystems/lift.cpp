@@ -5,21 +5,10 @@
 
 
 // AUTONOMOUS CONTROLLERS
-std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarControllerL =
+std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarController =
     AsyncPosControllerBuilder()
-        .withMotor(fourBarPortLeft)
+        .withMotor(fourBarPort)
         .build();
-
-std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarControllerR =
-    AsyncPosControllerBuilder()
-      .withMotor(fourBarPortRight)
-      .build();
-
-std::shared_ptr<okapi::AsyncPositionController<double, double>> twoBarController =
-    AsyncPosControllerBuilder()
-      .withMotor(twoBarPort)
-      .build();
-
 
 
 //claw
@@ -34,32 +23,9 @@ const int height1 = -1480; //decrease magnitude to go higher
 const double height0F = 0.0;
 const double height1F = 2900.0;
 
-double currentHeight = fourBarMotor1.getPosition();
+double currentHeight = fourBarMotor.getPosition();
 // double currentHeight1 = 0.0; // left lift motor
 // double currentHeight2 = 0.0; // right lift motor
-
-
-void TwoBar::liftToggle()
-{
-
-  twoBarMotor.setBrakeMode(AbstractMotor::brakeMode::hold);
-
-  if (twoBarButton.changedToPressed())
-  {
-    tbB = !tbB;
-    if (tbB) twobarUp();
-    else twobarDown();
-  }
-
-}
-
-void TwoBar::reset()
-{
-  if (resettwobarButton.changedToPressed())
-    twoBarController->setTarget(0);
-}
-
-
 
 //AUTON FUNCTIONS
 void twobarUp()
@@ -74,14 +40,12 @@ void twobarDown()
 
 void fourbarDown()
 {
-  fourBarControllerL->setTarget(0.0);
-  fourBarControllerR->setTarget(0.0);
+  fourBarController->setTarget(0.0);
 }
 
 void fourbarLift(const double target) {
 
-  fourBarControllerL->setTarget(target);
-  fourBarControllerR->setTarget(target);
+  fourBarController->setTarget(target);
 
 }
 
@@ -90,30 +54,27 @@ void fourbarLift(const double target) {
 void FourBar::liftToggle()
 {
 
-  fourBarMotor1.setBrakeMode(AbstractMotor::brakeMode::hold);
-  fourBarMotor2.setBrakeMode(AbstractMotor::brakeMode::hold);
+  fourBarMotor.setBrakeMode(AbstractMotor::brakeMode::hold);
   //  double valLR = autonPotR.get();
 
   // if (fourBarNormal.isPressed() && valLR > 159) //add pot limits 123
   if (fourBarNormal.isPressed() && currentHeight <= height1F) //add pot limits 123
   {
-    fourBarMotor1.moveVoltage(12000);
-    fourBarMotor2.moveVoltage(12000);
+    fourBarMotor.moveVoltage(12000);
   }
   // else if (fourBarReverse.isPressed() && valLR < 786) //add pot limits 790
   else if (fourBarReverse.isPressed() && currentHeight >= height0F) //add pot limits 790
   {
-    fourBarMotor1.moveVoltage(-12000);
-    fourBarMotor2.moveVoltage(-12000);
+    fourBarMotor.moveVoltage(-12000);
   }
   else
   {
-    fourBarMotor1.moveVoltage(0);
-    fourBarMotor2.moveVoltage(0);
+    fourBarMotor.moveVoltage(0);
   }
 
-  currentHeight = fourBarMotor1.getPosition();
+  currentHeight = fourBarMotor.getPosition();
 }
+
 
 void FourBar::claw()
 {

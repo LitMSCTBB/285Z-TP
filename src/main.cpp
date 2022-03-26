@@ -33,7 +33,7 @@ int len = sizeof(autList)/sizeof(autList[0]);
 
 std::shared_ptr<ChassisController> chassis = okapi::ChassisControllerBuilder()
       .withMotors(driveL, driveR)
-      .withDimensions({AbstractMotor::gearset::blue, (84.0 / 36.0)}, {{4.125_in, 14.5_in}, imev5BlueTPR})
+      .withDimensions({AbstractMotor::gearset::blue, (60.0 / 36.0)}, {{3.25_in, 14.5_in}, imev5BlueTPR})
       .withMaxVoltage(12000)
       .build();
 
@@ -114,8 +114,8 @@ void competition_initialize()
   driveR.setBrakeMode(AbstractMotor::brakeMode::hold);
   driveL.setBrakeMode(AbstractMotor::brakeMode::hold);
 
-  fourBarMotor1.setBrakeMode(AbstractMotor::brakeMode::hold);
-  fourBarMotor2.setBrakeMode(AbstractMotor::brakeMode::hold);
+  // fourBarMotor1.setBrakeMode(AbstractMotor::brakeMode::hold);
+  // fourBarMotor2.setBrakeMode(AbstractMotor::brakeMode::hold);
 
   clawMech.set_value(true);
 
@@ -172,13 +172,9 @@ void opcontrol()
     //fourBarVal = autonPotL.get(); //FOR TESTING POT VALUES
     //pros::lcd::set_text(1, std::to_string(fourBarVal)); //FOR TESTING POT VALUES
 
-
-    tb.liftToggle();
-
     fb.liftToggle();
     in.run();
     in.reverse();
-    tb.reset();
 
     pros::delay(20);
 

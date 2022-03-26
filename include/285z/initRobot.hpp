@@ -15,23 +15,23 @@ extern ControllerButton resettwobarButton;
 extern ControllerButton parkingBrakeButton;
 
 //drive motor points
-extern int frontLeftPort;
-extern int backLeftPort;
-extern int frontRightPort;
-extern int backRightPort;
-extern int fourBarPortLeft;
-extern int twoBarPort;
-extern int fourBarPortRight;
+extern int rightFrontPort;
+extern int rightMiddlePort;
+extern int rightBackPort;
+extern int leftFrontPort;
+extern int leftMiddlePort;
+extern int leftBackPort;
+extern int fourBarPort;
 extern int intakePort;
 
 //Motors
-extern Motor frontLeftMotor;
-extern Motor backLeftMotor;
-extern Motor frontRightMotor;
-extern Motor backRightMotor;
-extern Motor fourBarMotor1;
-extern Motor fourBarMotor2;
-extern Motor twoBarMotor;
+extern Motor rightFrontMotor;
+extern Motor rightMiddleMotor;
+extern Motor rightBackMotor;
+extern Motor leftFrontMotor;
+extern Motor leftMiddleMotor;
+extern Motor leftBackMotor;
+extern Motor fourBarMotor;
 extern Motor intakeMotor;
 
 //Drive motor groups
