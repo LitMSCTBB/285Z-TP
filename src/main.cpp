@@ -166,8 +166,8 @@ void opcontrol()
   while (1) {
     fb.claw();
 
-    model->tank(controller.getAnalog(okapi::ControllerAnalog::leftY),
-              controller.getAnalog(okapi::ControllerAnalog::rightY));
+    model->arcade(controller.getAnalog(okapi::ControllerAnalog::rightY),
+              controller.getAnalog(okapi::ControllerAnalog::rightX));
 
     //fourBarVal = autonPotL.get(); //FOR TESTING POT VALUES
     //pros::lcd::set_text(1, std::to_string(fourBarVal)); //FOR TESTING POT VALUES
