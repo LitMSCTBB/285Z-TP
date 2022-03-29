@@ -57,20 +57,13 @@ void FourBar::liftToggle()
   fourBarMotor.setBrakeMode(AbstractMotor::brakeMode::hold);
   //  double valLR = autonPotR.get();
 
-  // if (fourBarNormal.isPressed() && valLR > 159) //add pot limits 123
-  if (fourBarNormal.isPressed() && currentHeight <= height1F) //add pot limits 123
-  {
-    fourBarMotor.moveVoltage(12000);
-  }
-  // else if (fourBarReverse.isPressed() && valLR < 786) //add pot limits 790
-  else if (fourBarReverse.isPressed() && currentHeight >= height0F) //add pot limits 790
-  {
-    fourBarMotor.moveVoltage(-12000);
-  }
+  double targetVel = controller.getAnalog(okapi::ControllerAnalog::leftY);
+  if (targetVel < 0 && currentHeight >= height0F)
+    fourBarMotor.moveVelocity(targetVel);
+  else if (targetVel > 0 && currentHeight <= height1F)
+    fourBarMotor.moveVelocity(targetVel);
   else
-  {
-    fourBarMotor.moveVoltage(0);
-  }
+    fourBarMotor.moveVelocity(0);
 
   currentHeight = fourBarMotor.getPosition();
 }
