@@ -23,7 +23,7 @@ std::string autList [] =
   "Neutral Side & Center (Left)"
 };
 
-TwoBar tb;
+Tilter t;
 FourBar fb;
 Intake in;
 int len = sizeof(autList)/sizeof(autList[0]);

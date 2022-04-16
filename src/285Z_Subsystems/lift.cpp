@@ -15,9 +15,7 @@ std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarControlle
 bool clawB = false;
 
 //two bar
-bool tbB = true;
-const int height0 = -2970;
-const int height1 = -1480; //decrease magnitude to go higher
+bool tB = true;
 
 //four bar
 const double height0F = 0.0;
@@ -28,28 +26,38 @@ double currentHeight = fourBarMotor.getPosition();
 // double currentHeight2 = 0.0; // right lift motor
 
 //AUTON FUNCTIONS
-void twobarUp()
+
+void Tilter::up()
 {
-  twoBarController->setTarget(height1);
+  tilter1.set_value(true);
+  tilter2.set_value(true);
 }
 
-void twobarDown()
+void Tilter::down()
 {
-  twoBarController->setTarget(height0);
+  tilter1.set_value(false);
+  tilter2.set_value(false);
 }
 
-void fourbarDown()
+void FourBar::down()
 {
   fourBarController->setTarget(0.0);
 }
 
-void fourbarLift(const double target) {
-
+void FourBar::lift(const double target) {
   fourBarController->setTarget(target);
-
 }
 
+// opcontrol
 
+void Tilter::liftToggle()
+{
+  if (tilterButton.changedToPressed())
+  {
+    tB = !tB;
+    if (tB) this->up(); else this->down();
+  }
+}
 
 void FourBar::liftToggle()
 {

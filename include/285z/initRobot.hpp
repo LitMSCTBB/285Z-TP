@@ -10,7 +10,7 @@ extern ControllerButton intakeReverse;
 extern ControllerButton clawButton;
 extern ControllerButton fourBarNormal;
 extern ControllerButton fourBarReverse;
-extern ControllerButton twoBarButton;
+extern ControllerButton tilterButton;
 extern ControllerButton resettwobarButton;
 extern ControllerButton parkingBrakeButton;
 

@@ -6,15 +6,13 @@ extern std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarCo
 extern std::shared_ptr<okapi::AsyncPositionController<double, double>> fourBarControllerR;
 extern std::shared_ptr<okapi::AsyncPositionController<double, double>> twoBarController;
 
-class TwoBar
+class Tilter
 {
 
 public:
+  void up();
+  void down();
   void liftToggle();
-  void deploy();
-  void move(int);
-  void moveTo(int);
-  void reset();
 };
 
 class FourBar
@@ -26,4 +24,6 @@ public:
   void move(int);
   void moveTo(int);
   void claw();
+  void down();
+  void lift(double);
 };
