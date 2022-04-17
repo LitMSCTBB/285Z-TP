@@ -29,14 +29,12 @@ double currentHeight = fourBarMotor.getPosition();
 
 void Tilter::up()
 {
-  tilter1.set_value(true);
-  tilter2.set_value(true);
+  tilter.set_value(true);
 }
 
 void Tilter::down()
 {
-  tilter1.set_value(false);
-  tilter2.set_value(false);
+  tilter.set_value(false);
 }
 
 void FourBar::down()
