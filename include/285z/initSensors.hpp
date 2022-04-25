@@ -8,5 +8,5 @@ extern pros::ADIDigitalOut clawMech;
 extern pros::ADIDigitalOut tilter;
 extern pros::ADIDigitalOut cover;
 
-// extern Potentiometer autonPotL;
+extern Potentiometer pot;
 // extern Potentiometer autonPotR;

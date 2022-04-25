@@ -8,6 +8,8 @@ okapi::ControllerButton clawButton = okapi::ControllerDigital::Y;
 okapi::ControllerButton tilterButton = okapi::ControllerDigital::L2;
 okapi::ControllerButton resettwobarButton = okapi::ControllerDigital::up;
 okapi::ControllerButton parkingBrakeButton = okapi::ControllerDigital::X;
+okapi::ControllerButton fbUpButton = okapi::ControllerDigital::R1;
+okapi::ControllerButton fbDownButton = okapi::ControllerDigital::L1;
 
 
 //drive motor points

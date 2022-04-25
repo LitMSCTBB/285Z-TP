@@ -2,6 +2,7 @@
 #include "../../include/285z/initSensors.hpp"
 #include "../../include/285Z_Subsystems/lift.hpp"
 #include "../../include/285z/functions.hpp"
+#include "pros/llemu.hpp"
 
 
 // AUTONOMOUS CONTROLLERS
@@ -18,10 +19,12 @@ bool clawB = false;
 bool tB = true;
 
 //four bar
-const double height0F = 0.0;
-const double height1F = 2900.0;
+const double height0F = 0.0; const double potLB = 463;
+const double height1F = 2900.0; const double potUB = 1900;
 
-double currentHeight = fourBarMotor.getPosition();
+double potVal = pot.get();
+
+// double currentHeight = fourBarMotor.getPosition();
 // double currentHeight1 = 0.0; // left lift motor
 // double currentHeight2 = 0.0; // right lift motor
 
@@ -61,17 +64,19 @@ void FourBar::liftToggle()
 {
 
   fourBarMotor.setBrakeMode(AbstractMotor::brakeMode::hold);
-  //  double valLR = autonPotR.get();
 
-  double targetVel = controller.getAnalog(okapi::ControllerAnalog::leftY);
-  if (targetVel < 0 && currentHeight >= height0F)
-    fourBarMotor.moveVelocity(targetVel);
-  else if (targetVel > 0 && currentHeight <= height1F)
-    fourBarMotor.moveVelocity(targetVel);
+  // double targetVel = controller.getAnalog(okapi::ControllerAnalog::leftY);
+  
+  if (fbDownButton.isPressed() && potVal > potLB) // currentHeight >= height0F
+    fourBarMotor.moveVoltage(-12000);
+  else if (fbUpButton.isPressed() && potVal < potUB) // currentHeight <= height1F
+    fourBarMotor.moveVoltage(12000);
   else
-    fourBarMotor.moveVelocity(0);
+    fourBarMotor.moveVoltage(0);
 
-  currentHeight = fourBarMotor.getPosition();
+
+  potVal = pot.get();
+  pros::lcd::set_text(1, std::to_string(potVal));
 }
 
 
