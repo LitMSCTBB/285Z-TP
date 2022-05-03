@@ -4,8 +4,9 @@
 
 class Intake
 {
-
-public:
-  void run();
-  void reverse();
+  public:
+    void run();
+    void reverse();
 };
+
+extern Intake in;

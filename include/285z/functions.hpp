@@ -10,16 +10,14 @@ void fourbarLift(const double target);
 
 //   **AUTON FUNCTIONS**    //
 void noAuton();
-void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
+
+void leftSideWP(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast);
 
-void redLeftBlueLeft(std::shared_ptr<okapi::AsyncMotionProfileController> med,
+void rightSideWP(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast);
 
-void redRightBlueRight(std::shared_ptr<okapi::AsyncMotionProfileController> med,
-  std::shared_ptr<okapi::AsyncMotionProfileController> fast);
-
-void winPoint(std::shared_ptr<okapi::AsyncMotionProfileController> med,
+void fullWinPoint(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast);
 
 void neutralSideRight(std::shared_ptr<okapi::AsyncMotionProfileController> med,
@@ -37,7 +35,13 @@ void neutralCenterLeft(std::shared_ptr<okapi::AsyncMotionProfileController> med,
 void neutralSideCenterRight(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast);
 
-void neutralSideCenterLeft(std::shared_ptr<okapi::AsyncMotionProfileController> med,
+void rightWPNeutral(std::shared_ptr<okapi::AsyncMotionProfileController> med,
+    std::shared_ptr<okapi::AsyncMotionProfileController> fast);
+
+void leftWPNeutral(std::shared_ptr<okapi::AsyncMotionProfileController> med,
+    std::shared_ptr<okapi::AsyncMotionProfileController> fast);
+
+void rightWPTwoNeutrals(std::shared_ptr<okapi::AsyncMotionProfileController> med,
     std::shared_ptr<okapi::AsyncMotionProfileController> fast);
 
 const bool fwd {false};

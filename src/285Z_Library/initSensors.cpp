@@ -1,9 +1,13 @@
 #include "../include/285z/initRobot.hpp"
+#include "285z/initSensors.hpp"
 
-pros::ADIDigitalOut clawMech('A');
-pros::ADIDigitalOut tilter('B');
-pros::ADIDigitalOut cover('G');
-pros::Imu imuSensor(15);
-pros::ADIDigitalIn autonSelector ('D');
+pros::Imu imuSensor(6);
+
+pros::ADIDigitalIn autonSelectorA ('D');
+pros::ADIDigitalIn autonSelectorB ('F');
+
+pros::ADIDigitalOut clawMech('B');
+pros::ADIDigitalOut tilter('A');
+pros::ADIDigitalOut goalCover('E');
+
 Potentiometer pot('C');
-// Potentiometer autonPotR('E');

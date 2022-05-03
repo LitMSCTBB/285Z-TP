@@ -1,37 +1,49 @@
 #include "../include/285z/initRobot.hpp"
 #include "../include/285z/initSensors.hpp"
 #include "../include/285Z_Subsystems/lift.hpp"
+#include "../include/285Z_Subsystems/intake.hpp"
 #include "../include/285z/functions.hpp"
 #include "../include/285Z_Subsystems/pid.hpp"
 #include "../include/285z/initSensors.hpp"
 
+
+
 //***************************** RED/BLUE AUTONOMOUS PROGRAMS **********************//
 
-
-void redLeftBlueLeft(std::shared_ptr<okapi::AsyncMotionProfileController> med,
+void leftSideWP(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
 {
 
-  // //neutral rush
-  // PIDchassis->moveDistanceAsync(4.4_ft);
+  //neutral rush
+  
+  PIDchassis->moveDistanceAsync(4.4_ft);
 
-  // clawMech.set_value(0);
-  // pros::delay(1100);
-  // clawMech.set_value(true);
+  clawMech.set_value(false);
+  pros::delay(1100);
+  clawMech.set_value(true);
 
-  // PIDchassis->stop();
-  // fourbarLift(150);
-  // PIDchassisGoal->moveDistance(-3.5_ft);
+  PIDchassis->stop();
+  fb.lift(150);
+  PIDchassisGoal->moveDistance(-3.5_ft);
 
 
-  // //left win point
-  // turn(300);
-  // move(med, 1.5_ft, bwd);
+  //left win point
+  turn(300);
+  move(med, 1.5_ft, bwd);
+  t.grab();
 
-  // intakeMotor.moveVelocity(-500);
-  // pros::delay(2000);
-  // intakeMotor.moveVelocity(0);
-  // move(fast, 1_ft, fwd);
+  intakeMotor.moveVelocity(-500);
+  pros::delay(2000);
+  intakeMotor.moveVelocity(0);
+  move(fast, 1_ft, fwd);
+
+  // go for left cross
+  turn(90);
+  PIDchassisGoal->moveDistanceAsync(1.5_ft);
+  pros::delay(2000);
+  intakeMotor.moveVelocity(0);
+  PIDchassisGoal->stop();
+
 }
 
 
@@ -40,51 +52,50 @@ void redRightBlueRight(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
 {
 
-  // //neutral rush
-  // PIDchassis->moveDistanceAsync(4.3_ft);
+  //neutral rush
+  PIDchassis->moveDistanceAsync(4.3_ft);
 
-  //   clawMech.set_value(0);
-  //   pros::delay(1000);
-  //   clawMech.set_value(true);
+  clawMech.set_value(false);
+  pros::delay(1000);
+  clawMech.set_value(true);
 
-  // PIDchassis->stop();
-  // fourbarLift(150);
-  // PIDchassisGoal->moveDistance(-2.25_ft);
-
-
-  // //grab alliance
-  // turn(269);
-  // twobarDown();
-  // pros::delay(900);
-  // move(med, 0.8_ft, bwd);
-  // twobarUp();
-  // pros::delay(950);
+  PIDchassis->stop();
+  fb.lift(150);
+  PIDchassisGoal->moveDistance(-2.25_ft);
 
 
-  // // scoring preloads
-  // fourbarLift(2000);
-  // intakeMotor.moveVelocity(-500);
-  // pros::delay(950);
-  // intakeMotor.moveVelocity(0);
-  // turn(0);
+  //grab alliance
+  turn(269);
+  t.release();
+  pros::delay(900);
+  move(med, 0.8_ft, bwd);
+  t.grab();
+  pros::delay(950);
 
 
-  // //getting row of rings
-  // med->generatePath({
-  //   {0_ft,0_ft, 0_deg},
-  //   {3_ft, 0_ft, 0_deg}},
-  //   "rightRings"
-  // );
-  // med->setTarget("rightRings", fwd);
+  // scoring preloads
+  fb.lift(150);
+  intakeMotor.moveVelocity(-500);
+  pros::delay(950);
+  intakeMotor.moveVelocity(0);
+  turn(0);
 
-  //   intakeMotor.moveVelocity(-600);
 
-  // med->waitUntilSettled();
-  // intakeMotor.moveVelocity(0);
+  //getting row of rings
+  med->generatePath({
+    {0_ft,0_ft, 0_deg},
+    {3_ft, 0_ft, 0_deg}},
+    "rightRings"
+  );
+  med->setTarget("rightRings", fwd);
 
-  // move(fast, 4.6_ft, bwd);
-  // intakeMotor.moveVelocity(-600);
-  // fourbarLift(0);
+  intakeMotor.moveVelocity(-600);
+
+  med->waitUntilSettled();
+  intakeMotor.moveVelocity(0);
+
+  move(fast, 4.6_ft, bwd);
+  fb.lift(0);
 }
 
 

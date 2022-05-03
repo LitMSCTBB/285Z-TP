@@ -5,31 +5,74 @@
 #include "285Z_Subsystems/intake.hpp"
 #include "../include/285z/initSensors.hpp"
 #include "../include/pros/llemu.hpp"
+#include <array>
+
 
 int autoIndex = 0;
+int modeIndex = 0;
 
-std::string autList [] =
-{
-  "No Auton",
-  "Skills Auton",
-  "Left Side Winpoint",
-  "Right Side Winpoint",
-  "Full Winpoint",
-  "Neutral Side (Right)",
-  "Neutral Side (Left)",
-  "Neutral Center (Right)",
-  "Neutral Center (Left)",
-  "Neutral Side & Center (Right)",
-  "Neutral Side & Center (Left)"
+std::string modes [] = {
+
+  "WIN POINT",
+  "NEUTRAL",
+  "WIN POINT NEUTRAL"
+
 };
+
+std::string WP [] = {
+  
+  "No Auton",
+  "Left Side WP",
+  "Right Side WP",
+  "Full WP",
+
+};
+
+std::string Neutral [] = {
+
+  "N Side (Right)",
+  "N Side (Left)",
+  "N Center (Right)",
+  "N Center (Left)",
+  "N Side/Center (Right)",
+
+};
+
+std::string WPNeutral [] = {
+
+  "Right Side WP + N",
+  "Left Side WP + N",
+  "Right Side WP + N Side/Center"
+
+};
+
+// std::string functions [] = {
+  
+//   "No Auton",
+//   "Left Side WP",
+//   "Right Side WP",
+//   "Full WP",
+//   "N Side (Right)",
+//   "N Side (Left)",
+//   "N Center (Right)",
+//   "N Center (Left)",
+//   "N Side/Center (Right)",
+//   "Right Side WP + N",
+//   "Left Side WP + N",
+//   "Right Side WP + N Side/Center"
+
+// };
 
 Tilter t;
 FourBar fb;
 Intake in;
-int len = sizeof(autList)/sizeof(autList[0]);
+
+// int len = sizeof(autList)/sizeof(autList[0]);
+
+
+
 
 //**************** INITIALIZE ALL CHASSIS FOR AUTON ********************//
-
 
 std::shared_ptr<ChassisController> chassis = okapi::ChassisControllerBuilder()
       .withMotors(driveL, driveR)
@@ -41,18 +84,18 @@ std::shared_ptr<okapi::ChassisModel> model = std::dynamic_pointer_cast<okapi::Ch
 
 std::shared_ptr<okapi::AsyncMotionProfileController> fastAuto = AsyncMotionProfileControllerBuilder()
       .withLimits({
-        2.7, //max linear velocity of Chassis in m/s
-        9, //max linear acceleration in m/s^2
-        18.0 //max linear jerk in m/s^3
+        5.11, //max linear velocity of Chassis in m/s
+        10.0, //max linear acceleration in m/s^2
+        20.0 //max linear jerk in m/s^3
       })
       .withOutput(chassis)
       .buildMotionProfileController();
 
 std::shared_ptr<okapi::AsyncMotionProfileController> normalAuto = AsyncMotionProfileControllerBuilder()
       .withLimits({
-        0.5, //max linear velocity of Chassis in m/s
-        1.5, //max linear acceleration in m/s^2
-        3.5 //max linear jerk in m/s^3
+        2.7, //max linear velocity of Chassis in m/s
+        4, //max linear acceleration in m/s^2
+        6 //max linear jerk in m/s^3
       })
       .withOutput(chassis)
       .buildMotionProfileController();
@@ -106,32 +149,55 @@ void disabled() {}
 
 void competition_initialize()
 {
+
+  //IMU Calibration
   imuSensor.reset();
   while (imuSensor.is_calibrating())
     pros::delay(15);
 
-
-  driveR.setBrakeMode(AbstractMotor::brakeMode::hold);
-  driveL.setBrakeMode(AbstractMotor::brakeMode::hold);
-
-  // fourBarMotor1.setBrakeMode(AbstractMotor::brakeMode::hold);
-  // fourBarMotor2.setBrakeMode(AbstractMotor::brakeMode::hold);
+  //fb hold for auton 
+  fourBarMotor.setBrakeMode(AbstractMotor::brakeMode::hold);
 
   clawMech.set_value(true);
 
   pros::lcd::initialize();
+  pros::lcd::set_background_color(COLOR_BLACK);
+  pros::lcd::set_text_color(COLOR_WHITE);
 
-  pros::lcd::set_text(6, "// CALIBRATION COMPLETE //");
+  pros::lcd::set_text(1, "<< CALIBRATION COMPLETE >>");
+  pros::lcd::set_text(5, WP[autoIndex]);
+
 
   while(true) {
-      bool autval = autonSelector.get_value();
+      
+      bool mode = autonSelectorA.get_value();
+      bool selector = autonSelectorB.get_value();
 
-      if (autval == 1) {
-        pros::delay(200);
-        autoIndex=(autoIndex + 1) % len;
+      if (mode == 1) {
+        pros::delay(160);
+        modeIndex = (modeIndex + 1) % (sizeof(modes)/sizeof(modes[0]));
       }
 
-      pros::lcd::set_text(7, autList[autoIndex]);
+      if (selector == 1) {
+
+        pros::delay(160);
+    
+        if (modeIndex == 0){
+          autoIndex = (autoIndex + 1) % (sizeof(WP)/sizeof(WP[0]));
+          pros::lcd::set_text(5, WP[autoIndex]);
+        }
+        if (modeIndex == 1){
+          autoIndex = (autoIndex + 1) % (sizeof(Neutral)/sizeof(Neutral[0]));
+          pros::lcd::set_text(5, Neutral[autoIndex]);
+        }
+        if (modeIndex == 2){
+          autoIndex = (autoIndex + 1) % (sizeof(WPNeutral)/sizeof(WPNeutral[0]));
+          pros::lcd::set_text(5, WPNeutral[autoIndex]);
+        }
+      }
+
+      pros::lcd::set_text(3, modes[modeIndex]);
+
 
       pros::delay(20);
     }
@@ -140,42 +206,56 @@ void competition_initialize()
 
 void autonomous()
 {
-  switch(autoIndex) {
-    case (0): noAuton(); break;
-    case (1): skillsAuto(normalAuto, fastAuto); break;
-    case (2): redLeftBlueLeft(normalAuto, fastAuto); break;
-    case (3): redRightBlueRight(normalAuto, fastAuto); break;
-    case (4): winPoint(normalAuto, fastAuto); break;
-    case (5): neutralSideRight(normalAuto, fastAuto); break;
-    case (6): neutralSideLeft(normalAuto, fastAuto); break;
-    case (7): neutralCenterRight(normalAuto, fastAuto); break;
-    case (8): neutralCenterLeft(normalAuto, fastAuto); break;
-    case (9): neutralSideCenterRight(normalAuto, fastAuto); break;
-    case (10): neutralSideCenterLeft(normalAuto, fastAuto); break;
-    default: noAuton();
+  if (modeIndex == 0){
+    switch(autoIndex) {
+      case (0): noAuton(); break;
+      case (1): leftSideWP(normalAuto, fastAuto); break;
+      case (2): rightSideWP(normalAuto, fastAuto); break;
+      case (3): fullWinPoint(normalAuto, fastAuto); break;
+    }
+  } 
+
+  if (modeIndex == 1){
+    switch(autoIndex) {
+      case (0): neutralSideRight(normalAuto, fastAuto); break;
+      case (1): neutralSideLeft(normalAuto, fastAuto); break;
+      case (2): neutralCenterRight(normalAuto, fastAuto); break;
+      case (3): neutralCenterLeft(normalAuto, fastAuto); break;
+      case (4): neutralSideCenterRight(normalAuto, fastAuto); break;
+    }
+  } 
+
+  if (modeIndex == 2){
+    switch(autoIndex) {
+      case (0): rightWPNeutral(normalAuto, fastAuto); break;
+      case (1): leftWPNeutral(normalAuto, fastAuto); break;
+      case (2): rightWPTwoNeutrals(normalAuto, fastAuto); break;
+    }
   }
+  
+  noAuton();
 }
 
 
 void opcontrol()
 {
 
-  driveR.setBrakeMode(AbstractMotor::brakeMode::coast);
-  driveL.setBrakeMode(AbstractMotor::brakeMode::coast);
+  // driveR.setBrakeMode(AbstractMotor::brakeMode::coast);
+  // driveL.setBrakeMode(AbstractMotor::brakeMode::coast);
 
   while (1) {
-    fb.claw();
-
-    model->tank(controller.getAnalog(okapi::ControllerAnalog::leftY), controller.getAnalog(okapi::ControllerAnalog::rightY));
 
     //fourBarVal = autonPotL.get(); //FOR TESTING POT VALUES
     //pros::lcd::set_text(1, std::to_string(fourBarVal)); //FOR TESTING POT VALUES
 
+    model->tank(controller.getAnalog(okapi::ControllerAnalog::leftY), controller.getAnalog(okapi::ControllerAnalog::rightY));
+
+    fb.claw();
     fb.liftToggle();
+    t.lift2Toggle();
     in.run();
     in.reverse();
 
     pros::delay(20);
-
   }
 }

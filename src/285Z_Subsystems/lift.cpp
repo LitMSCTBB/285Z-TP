@@ -19,23 +19,21 @@ bool clawB = false;
 bool tB = true;
 
 //four bar
-const double height0F = 0.0; const double potLB = 463;
-const double height1F = 2900.0; const double potUB = 1900;
+const double potLB = 600;
+const double potUB = 1900;
 
 double potVal = pot.get();
 
-// double currentHeight = fourBarMotor.getPosition();
-// double currentHeight1 = 0.0; // left lift motor
-// double currentHeight2 = 0.0; // right lift motor
+
 
 //AUTON FUNCTIONS
 
-void Tilter::up()
+void Tilter::grab()
 {
   tilter.set_value(true);
 }
 
-void Tilter::down()
+void Tilter::release()
 {
   tilter.set_value(false);
 }
@@ -51,12 +49,12 @@ void FourBar::lift(const double target) {
 
 // opcontrol
 
-void Tilter::liftToggle()
+void Tilter::lift2Toggle()
 {
   if (tilterButton.changedToPressed())
   {
     tB = !tB;
-    if (tB) this->up(); else this->down();
+    if (tB) this->grab(); else this->release();
   }
 }
 
@@ -64,19 +62,19 @@ void FourBar::liftToggle()
 {
 
   fourBarMotor.setBrakeMode(AbstractMotor::brakeMode::hold);
-
-  // double targetVel = controller.getAnalog(okapi::ControllerAnalog::leftY);
   
-  if (fbDownButton.isPressed() && potVal > potLB) // currentHeight >= height0F
+  if (fbDownButton.isPressed() && potVal > potLB) 
     fourBarMotor.moveVoltage(-12000);
-  else if (fbUpButton.isPressed() && potVal < potUB) // currentHeight <= height1F
+  else if (fbUpButton.isPressed() && potVal < potUB) 
     fourBarMotor.moveVoltage(12000);
   else
     fourBarMotor.moveVoltage(0);
 
 
   potVal = pot.get();
-  pros::lcd::set_text(1, std::to_string(potVal));
+
+  fourBarMotor.setBrakeMode(AbstractMotor::brakeMode::hold);
+  
 }
 
 

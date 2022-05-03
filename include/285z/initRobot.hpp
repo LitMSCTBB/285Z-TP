@@ -1,5 +1,7 @@
 #pragma once
 #include "main.h"
+#include "285Z_Subsystems/lift.hpp"
+#include "285Z_Subsystems/intake.hpp"
 
 //Controller
 extern Controller controller;

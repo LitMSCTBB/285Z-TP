@@ -6,7 +6,6 @@ okapi::ControllerButton intakeButton = okapi::ControllerDigital::R2;
 okapi::ControllerButton intakeReverse = okapi::ControllerDigital::right;
 okapi::ControllerButton clawButton = okapi::ControllerDigital::Y;
 okapi::ControllerButton tilterButton = okapi::ControllerDigital::L2;
-okapi::ControllerButton resettwobarButton = okapi::ControllerDigital::up;
 okapi::ControllerButton parkingBrakeButton = okapi::ControllerDigital::X;
 okapi::ControllerButton fbUpButton = okapi::ControllerDigital::R1;
 okapi::ControllerButton fbDownButton = okapi::ControllerDigital::L1;
@@ -14,15 +13,15 @@ okapi::ControllerButton fbDownButton = okapi::ControllerDigital::L1;
 
 //drive motor points
 int rightFrontPort = 18; 
-int rightMiddlePort = 16; 
-int rightBackPort = 17;
+int rightMiddlePort = 7; 
+int rightBackPort = 8;
 
-int leftFrontPort = -19;
-int leftMiddlePort = -13;
-int leftBackPort = -14;
+int leftFrontPort = -20;
+int leftMiddlePort = -9;
+int leftBackPort = -10;
 
-int fourBarPort = 12;
-int intakePort = 11;
+int fourBarPort = 17;
+int intakePort = 16;
 
 Motor rightFrontMotor(rightFrontPort);
 Motor rightMiddleMotor(rightMiddlePort);
