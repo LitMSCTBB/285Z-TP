@@ -13,10 +13,6 @@ void noAuton()
 
 }
 
-void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
-  std::shared_ptr<okapi::AsyncMotionProfileController> fast)
-{
-
 //   clawMech.set_value(0);
 
 
@@ -146,5 +142,3 @@ void skillsAuto(std::shared_ptr<okapi::AsyncMotionProfileController> med,
 //   pros::delay(900);
 //   move(med, 9_ft, fwd);
 // */
-
-}

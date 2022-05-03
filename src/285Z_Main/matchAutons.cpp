@@ -48,7 +48,7 @@ void leftSideWP(std::shared_ptr<okapi::AsyncMotionProfileController> med,
 
 
 
-void redRightBlueRight(std::shared_ptr<okapi::AsyncMotionProfileController> med,
+void rightSideWP(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
 {
 
@@ -100,7 +100,7 @@ void redRightBlueRight(std::shared_ptr<okapi::AsyncMotionProfileController> med,
 
 
 
-void winPoint(std::shared_ptr<okapi::AsyncMotionProfileController> med,
+void fullWinPoint(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
 {
 
@@ -237,7 +237,7 @@ void neutralSideCenterRight(std::shared_ptr<okapi::AsyncMotionProfileController>
 //   clawMech.set_value(false);
 }
 
-void neutralSideCenterLeft(std::shared_ptr<okapi::AsyncMotionProfileController> med,
+void rightWPNeutral(std::shared_ptr<okapi::AsyncMotionProfileController> med,
    std::shared_ptr<okapi::AsyncMotionProfileController> fast)
 {
 
@@ -262,4 +262,16 @@ void neutralSideCenterLeft(std::shared_ptr<okapi::AsyncMotionProfileController> 
 
   // fourbarLift(0);
   // clawMech.set_value(0);
+}
+
+void leftWPNeutral(std::shared_ptr<okapi::AsyncMotionProfileController> med,
+   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
+{
+
+}
+
+  void rightWPTwoNeutrals(std::shared_ptr<okapi::AsyncMotionProfileController> med,
+   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
+{
+
 }
