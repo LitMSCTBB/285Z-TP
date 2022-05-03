@@ -161,8 +161,6 @@ void competition_initialize()
   clawMech.set_value(true);
 
   pros::lcd::initialize();
-  pros::lcd::set_background_color(COLOR_BLACK);
-  pros::lcd::set_text_color(COLOR_WHITE);
 
   pros::lcd::set_text(1, "<< CALIBRATION COMPLETE >>");
   pros::lcd::set_text(5, WP[autoIndex]);
@@ -174,13 +172,14 @@ void competition_initialize()
       bool selector = autonSelectorB.get_value();
 
       if (mode == 1) {
-        pros::delay(160);
+        pros::delay(200);
         modeIndex = (modeIndex + 1) % (sizeof(modes)/sizeof(modes[0]));
+        autoIndex = 0;
       }
 
       if (selector == 1) {
 
-        pros::delay(160);
+        pros::delay(200);
     
         if (modeIndex == 0){
           autoIndex = (autoIndex + 1) % (sizeof(WP)/sizeof(WP[0]));
