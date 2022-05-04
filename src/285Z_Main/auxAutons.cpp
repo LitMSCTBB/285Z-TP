@@ -9,7 +9,9 @@
 void noAuton()
 {
 
-  pros::delay(15000);
+  PIDchassis->moveDistance(2_ft);
+
+  //pros::delay(15000);
 
 }
 

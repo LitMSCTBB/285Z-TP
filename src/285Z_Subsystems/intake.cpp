@@ -15,7 +15,8 @@ void Intake::run()
 
 void Intake::reverse() {
   
-  if (intakeReverse.isPressed()) {
-    intakeMotor.moveVoltage(-12000);
+  if (intakeReverse.changedToPressed()) {
+    intakeB = !intakeB;
+    intakeMotor.moveVoltage(intakeB ? -12000 : 0);
   }
 }

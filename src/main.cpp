@@ -105,7 +105,7 @@ std::shared_ptr<okapi::ChassisController> PIDchassis = okapi::ChassisControllerB
     .withDimensions({AbstractMotor::gearset::blue, (60.0 / 36.0)}, {{3.25_in, 14.5_in}, imev5BlueTPR})
     .withMaxVoltage(12000)
     .withGains(
-      {0.00191, 0.0, 0.00005}, // Distance controller gains  
+      {0.00170, 0.0, 0.0000010}, // Distance controller gains  
       {0.001, 0, 0.0001}, // Turn controller gains
       {0.001, 0, 0.0001}  // Angle controller gains (helps drive straight)
     )
@@ -162,8 +162,8 @@ void competition_initialize()
 
   pros::lcd::initialize();
 
-  pros::lcd::set_text(1, "<< CALIBRATION COMPLETE >>");
-  pros::lcd::set_text(5, WP[autoIndex]);
+  pros::lcd::set_text(0, "<< CALIBRATION COMPLETE >>");
+  pros::lcd::set_text(2, WP[autoIndex]);
 
 
   while(true) {
@@ -183,19 +183,19 @@ void competition_initialize()
     
         if (modeIndex == 0){
           autoIndex = (autoIndex + 1) % (sizeof(WP)/sizeof(WP[0]));
-          pros::lcd::set_text(5, WP[autoIndex]);
+          pros::lcd::set_text(2, WP[autoIndex]);
         }
         if (modeIndex == 1){
           autoIndex = (autoIndex + 1) % (sizeof(Neutral)/sizeof(Neutral[0]));
-          pros::lcd::set_text(5, Neutral[autoIndex]);
+          pros::lcd::set_text(2, Neutral[autoIndex]);
         }
         if (modeIndex == 2){
           autoIndex = (autoIndex + 1) % (sizeof(WPNeutral)/sizeof(WPNeutral[0]));
-          pros::lcd::set_text(5, WPNeutral[autoIndex]);
+          pros::lcd::set_text(2, WPNeutral[autoIndex]);
         }
       }
 
-      pros::lcd::set_text(3, modes[modeIndex]);
+      pros::lcd::set_text(1, modes[modeIndex]);
 
 
       pros::delay(20);
@@ -205,34 +205,37 @@ void competition_initialize()
 
 void autonomous()
 {
-  if (modeIndex == 0){
-    switch(autoIndex) {
-      case (0): noAuton(); break;
-      case (1): leftSideWP(normalAuto, fastAuto); break;
-      case (2): rightSideWP(normalAuto, fastAuto); break;
-      case (3): fullWinPoint(normalAuto, fastAuto); break;
-    }
-  } 
 
-  if (modeIndex == 1){
-    switch(autoIndex) {
-      case (0): neutralSideRight(normalAuto, fastAuto); break;
-      case (1): neutralSideLeft(normalAuto, fastAuto); break;
-      case (2): neutralCenterRight(normalAuto, fastAuto); break;
-      case (3): neutralCenterLeft(normalAuto, fastAuto); break;
-      case (4): neutralSideCenterRight(normalAuto, fastAuto); break;
-    }
-  } 
 
-  if (modeIndex == 2){
-    switch(autoIndex) {
-      case (0): rightWPNeutral(normalAuto, fastAuto); break;
-      case (1): leftWPNeutral(normalAuto, fastAuto); break;
-      case (2): rightWPTwoNeutrals(normalAuto, fastAuto); break;
-    }
-  }
+
+  // if (modeIndex == 0){
+  //   switch(autoIndex) {
+  //     case (0): noAuton(); break;
+  //     case (1): leftSideWP(normalAuto, fastAuto); break;
+  //     case (2): rightSideWP(normalAuto, fastAuto); break;
+  //     case (3): fullWinPoint(normalAuto, fastAuto); break;
+  //   }
+  // } 
+
+  // if (modeIndex == 1){
+  //   switch(autoIndex) {
+  //     case (0): neutralSideRight(normalAuto, fastAuto); break;
+  //     case (1): neutralSideLeft(normalAuto, fastAuto); break;
+  //     case (2): neutralCenterRight(normalAuto, fastAuto); break;
+  //     case (3): neutralCenterLeft(normalAuto, fastAuto); break;
+  //     case (4): neutralSideCenterRight(normalAuto, fastAuto); break;
+  //   }
+  // } 
+
+  // if (modeIndex == 2){
+  //   switch(autoIndex) {
+  //     case (0): rightWPNeutral(normalAuto, fastAuto); break;
+  //     case (1): leftWPNeutral(normalAuto, fastAuto); break;
+  //     case (2): rightWPTwoNeutrals(normalAuto, fastAuto); break;
+  //   }
+  // }
   
-  noAuton();
+  // noAuton();
 }
 
 
