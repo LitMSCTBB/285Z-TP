@@ -105,7 +105,7 @@ std::shared_ptr<okapi::ChassisController> PIDchassis = okapi::ChassisControllerB
     .withDimensions({AbstractMotor::gearset::blue, (60.0 / 36.0)}, {{3.25_in, 14.5_in}, imev5BlueTPR})
     .withMaxVoltage(12000)
     .withGains(
-      {0.00170, 0.0, 0.0000010}, // Distance controller gains  
+      {0.0012, 0.00012, 0.0000000}, // Distance controller gains  old: 0.00170, 0.0, 0.0000010
       {0.001, 0, 0.0001}, // Turn controller gains
       {0.001, 0, 0.0001}  // Angle controller gains (helps drive straight)
     )

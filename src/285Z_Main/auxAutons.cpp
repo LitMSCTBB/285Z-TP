@@ -9,14 +9,15 @@
 void noAuton()
 {
 
- PIDchassis->moveDistanceAsync(3.9_ft);
+  PIDchassis->moveDistanceAsync(4.4_ft);
   clawMech.set_value(false);
   goalCover.set_value(true);
   pros::delay(860);
   clawMech.set_value(true);
   PIDchassis->stop();
-  PIDchassis->moveDistance(-4.6_ft);
-  PIDchassis->stop();;
+  PIDchassis->moveDistance(-4_ft);
+  PIDchassis->stop();
+  goalCover.set_value(false);
 
   //pros::delay(15000);
 

@@ -19,7 +19,7 @@ bool clawB = false;
 bool tB = true;
 
 //four bar
-const double potLB = 600;
+const double potLB = 580;
 const double potUB = 1900;
 
 double potVal = pot.get();
