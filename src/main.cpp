@@ -159,6 +159,7 @@ void competition_initialize()
   fourBarMotor.setBrakeMode(AbstractMotor::brakeMode::hold);
 
   clawMech.set_value(true);
+  goalCover.set_value(false);
 
   pros::lcd::initialize();
 
@@ -208,34 +209,34 @@ void autonomous()
 
 
 
-  // if (modeIndex == 0){
-  //   switch(autoIndex) {
-  //     case (0): noAuton(); break;
-  //     case (1): leftSideWP(normalAuto, fastAuto); break;
-  //     case (2): rightSideWP(normalAuto, fastAuto); break;
-  //     case (3): fullWinPoint(normalAuto, fastAuto); break;
-  //   }
-  // } 
+  if (modeIndex == 0){
+    switch(autoIndex) {
+      case (0): noAuton(); break;
+      case (1): leftSideWP(normalAuto, fastAuto); break;
+      case (2): rightSideWP(normalAuto, fastAuto); break;
+      case (3): fullWinPoint(normalAuto, fastAuto); break;
+    }
+  } 
 
-  // if (modeIndex == 1){
-  //   switch(autoIndex) {
-  //     case (0): neutralSideRight(normalAuto, fastAuto); break;
-  //     case (1): neutralSideLeft(normalAuto, fastAuto); break;
-  //     case (2): neutralCenterRight(normalAuto, fastAuto); break;
-  //     case (3): neutralCenterLeft(normalAuto, fastAuto); break;
-  //     case (4): neutralSideCenterRight(normalAuto, fastAuto); break;
-  //   }
-  // } 
+  if (modeIndex == 1){
+    switch(autoIndex) {
+      case (0): neutralSideRight(normalAuto, fastAuto); break;
+      case (1): neutralSideLeft(normalAuto, fastAuto); break;
+      case (2): neutralCenterRight(normalAuto, fastAuto); break;
+      case (3): neutralCenterLeft(normalAuto, fastAuto); break;
+      case (4): neutralSideCenterRight(normalAuto, fastAuto); break;
+    }
+  } 
 
-  // if (modeIndex == 2){
-  //   switch(autoIndex) {
-  //     case (0): rightWPNeutral(normalAuto, fastAuto); break;
-  //     case (1): leftWPNeutral(normalAuto, fastAuto); break;
-  //     case (2): rightWPTwoNeutrals(normalAuto, fastAuto); break;
-  //   }
-  // }
+  if (modeIndex == 2){
+    switch(autoIndex) {
+      case (0): rightWPNeutral(normalAuto, fastAuto); break;
+      case (1): leftWPNeutral(normalAuto, fastAuto); break;
+      case (2): rightWPTwoNeutrals(normalAuto, fastAuto); break;
+    }
+  }
   
-  // noAuton();
+  //noAuton();
 }
 
 

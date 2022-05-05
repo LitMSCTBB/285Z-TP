@@ -14,37 +14,34 @@ void leftSideWP(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
 {
 
-  PIDchassis->moveDistanceAsync(2_ft);
-
-  // //neutral rush
-  
-  // PIDchassis->moveDistanceAsync(4.4_ft);
-
-  // clawMech.set_value(false);
-  // pros::delay(1100);
-  // clawMech.set_value(true);
-
-  // PIDchassis->stop();
-  // fb.lift(150);
-  // PIDchassisGoal->moveDistance(-3.5_ft);
+  // neutral rush
+  PIDchassis->moveDistanceAsync(4.3_ft);
+  clawMech.set_value(false);
+  goalCover.set_value(true);
+  pros::delay(1000);
+  clawMech.set_value(true);
+  PIDchassis->stop();
+  PIDchassis->moveDistance(-4.6_ft);
 
 
-  // //left win point
-  // turn(300);
-  // move(med, 1.5_ft, bwd);
-  // t.grab();
+  //left win point
+  turn(300);
+  move(med, 1.5_ft, bwd);
+  t.grab();
 
-  // intakeMotor.moveVelocity(-500);
-  // pros::delay(2000);
-  // intakeMotor.moveVelocity(0);
-  // move(fast, 1_ft, fwd);
+  intakeMotor.moveVelocity(-500);
+  pros::delay(2000);
+  intakeMotor.moveVelocity(0);
+  move(fast, 1_ft, fwd);
 
-  // // go for left cross
-  // turn(90);
-  // PIDchassisGoal->moveDistanceAsync(1.5_ft);
-  // pros::delay(2000);
-  // intakeMotor.moveVelocity(0);
-  // PIDchassisGoal->stop();
+  // go for left cross
+  turn(90);
+  PIDchassisGoal->moveDistanceAsync(1.5_ft);
+  pros::delay(2000);
+  intakeMotor.moveVelocity(0);
+  PIDchassisGoal->stop();
+
+  goalCover.set_value(0);
 
 }
 
@@ -145,23 +142,16 @@ void neutralSideRight(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
 {
 
-    PIDchassis->moveDistanceAsync(4.3_ft);
+// neutral rush
+  PIDchassis->moveDistanceAsync(3.6_ft);
   clawMech.set_value(false);
-  pros::delay(1000);
+  goalCover.set_value(true);
+  pros::delay(800);
   clawMech.set_value(true);
   PIDchassis->stop();
   PIDchassis->moveDistance(-4.6_ft);
+  PIDchassis->stop();
 
-  // //neutral rush
-  // PIDchassis->moveDistanceAsync(4.3_ft);
-
-  // clawMech.set_value(0);
-  // pros::delay(1000);
-  // clawMech.set_value(true);
-
-  // PIDchassis->stop();
-  // fourbarLift(150);
-  // PIDchassisGoal->moveDistance(-4.6_ft);
 }
 
 void neutralSideLeft(std::shared_ptr<okapi::AsyncMotionProfileController> med,
