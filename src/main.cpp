@@ -49,17 +49,17 @@ std::string WPNeutral [] = {
 // std::string functions [] = {
   
 //   "No Auton",
-//   "Left Side WP",
-//   "Right Side WP",
-//   "Full WP",
-//   "N Side (Right)",
-//   "N Side (Left)",
-//   "N Center (Right)",
+//   "Left Side WP", done
+//   "Right Side WP", done
+//   "Full WP", done (?)
+//   "N Side (Right)", done
+//   "N Side (Left)", ***
+//   "N Center (Right)", ***
 //   "N Center (Left)",
-//   "N Side/Center (Right)",
-//   "Right Side WP + N",
-//   "Left Side WP + N",
-//   "Right Side WP + N Side/Center"
+//   "N Side/Center (Right)", ***
+//   "Right Side WP + N", *** ezpz
+//   "Left Side WP + N",  *** ezpz
+//   "Right Side WP + N Side/Center" idk lol
 
 // };
 
@@ -93,9 +93,9 @@ std::shared_ptr<okapi::AsyncMotionProfileController> fastAuto = AsyncMotionProfi
 
 std::shared_ptr<okapi::AsyncMotionProfileController> normalAuto = AsyncMotionProfileControllerBuilder()
       .withLimits({
-        2.7, //max linear velocity of Chassis in m/s
-        4, //max linear acceleration in m/s^2
-        6 //max linear jerk in m/s^3
+        0.6, //max linear velocity of Chassis in m/s
+        2, //max linear acceleration in m/s^2
+        4 //max linear jerk in m/s^3
       })
       .withOutput(chassis)
       .buildMotionProfileController();
@@ -160,6 +160,7 @@ void competition_initialize()
 
   clawMech.set_value(true);
   goalCover.set_value(false);
+  t.grab();
 
   pros::lcd::initialize();
 
@@ -235,8 +236,6 @@ void autonomous()
       case (2): rightWPTwoNeutrals(normalAuto, fastAuto); break;
     }
   }
-  
-  //noAuton();
 }
 
 
