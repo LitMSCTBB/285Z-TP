@@ -282,18 +282,18 @@ void leftWPNeutral(std::shared_ptr<okapi::AsyncMotionProfileController> med,
 
   PIDchassis->stop();
 
-  PIDchassisGoal->moveDistance(-3_ft); //mess with this
+  PIDchassisGoal->moveDistance(-4_ft); //mess with this
   PIDchassisGoal->stop();
   goalCover.set_value(0);
 
-  turn(330); //tweak
+  turn(260); //tweak
   t.release();
-  move(med, 2.2_ft, bwd);
+  move(med, 2.5_ft, bwd); //tweak too probably
   t.grab();
   pros::delay(600);
   intakeMotor.moveVelocity(600);
   pros::delay(700);
-  move(med, 0.5_ft, fwd);
+  move(med, 1_ft, fwd);
 }
 
   void rightWPTwoNeutrals(std::shared_ptr<okapi::AsyncMotionProfileController> med,
