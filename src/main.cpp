@@ -42,7 +42,8 @@ std::string WPNeutral [] = {
 
   "Right Side WP + N",
   "Left Side WP + N",
-  "Right Side WP + N Side/Center"
+  "Right Side WP + N Side/Center",
+  "Center Neutral + WP"
 
 };
 
@@ -234,13 +235,18 @@ void autonomous()
       case (0): rightWPNeutral(normalAuto, fastAuto); break;
       case (1): leftWPNeutral(normalAuto, fastAuto); break;
       case (2): rightWPTwoNeutrals(normalAuto, fastAuto); break;
+      case(3): neutralCenterWP(normalAuto, fastAuto); break;
     }
   }
+
+  noAuton();
 }
 
 
 void opcontrol()
 {
+
+goalCover.set_value(false);
 
   // driveR.setBrakeMode(AbstractMotor::brakeMode::coast);
   // driveL.setBrakeMode(AbstractMotor::brakeMode::coast);

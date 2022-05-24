@@ -123,7 +123,7 @@ void neutralSideRight(std::shared_ptr<okapi::AsyncMotionProfileController> med,
 {
 
 // neutral rush
-  PIDchassis->moveDistanceAsync(4.4_ft);
+  PIDchassis->moveDistanceAsync(4.2_ft);
   clawMech.set_value(false);
   goalCover.set_value(true);
   pros::delay(860);
@@ -162,7 +162,7 @@ void neutralCenterRight(std::shared_ptr<okapi::AsyncMotionProfileController> med
 
   //neutral rush
   intakeMotor.moveVelocity(600);
-  PIDchassis->moveDistanceAsync(6.4_ft); //maybe 5.7_ft?
+  PIDchassis->moveDistanceAsync(7_ft); //maybe 5.7_ft?
 
   clawMech.set_value(0);
   pros::delay(1270);
@@ -170,7 +170,7 @@ void neutralCenterRight(std::shared_ptr<okapi::AsyncMotionProfileController> med
 
   PIDchassis->stop();
   fb.lift(200);
-  PIDchassisGoal->moveDistance(-6.5_ft);
+  PIDchassisGoal->moveDistance(-7.2_ft);
   intakeMotor.moveVelocity(0);
 }
 
@@ -261,7 +261,7 @@ void rightWPNeutral(std::shared_ptr<okapi::AsyncMotionProfileController> med,
   //getting row of rings
   intakeMotor.moveVelocity(600);
   move(med, 4.5_ft, fwd);
-  move(fast, 7.5_ft, bwd);
+  move(fast, 10_ft, bwd);
   intakeMotor.moveVelocity(0);
 
   t.release();
@@ -273,27 +273,32 @@ void leftWPNeutral(std::shared_ptr<okapi::AsyncMotionProfileController> med,
    std::shared_ptr<okapi::AsyncMotionProfileController> fast)
 {
    //neutral rush
-  PIDchassis->moveDistanceAsync(4.2_ft);
+  PIDchassis->moveDistanceAsync(4.5_ft);
 
   goalCover.set_value(1);
   clawMech.set_value(0);
-  pros::delay(970);
+  pros::delay(950);
   clawMech.set_value(true);
 
   PIDchassis->stop();
 
-  PIDchassisGoal->moveDistance(-4_ft); //mess with this
+  fb.lift(200);
+  PIDchassisGoal->moveDistance(-4.6_ft); //mess with this
   PIDchassisGoal->stop();
   goalCover.set_value(0);
 
-  turn(260); //tweak
+  
+
+  turn(270); //tweak
   t.release();
-  move(med, 2.5_ft, bwd); //tweak too probably
+  move(med, 1.5_ft, bwd); //tweak too probably
   t.grab();
   pros::delay(600);
   intakeMotor.moveVelocity(600);
   pros::delay(700);
-  move(med, 1_ft, fwd);
+  move(med, 1.7_ft, fwd);
+  t.release();
+  intakeMotor.moveVelocity(0);
 }
 
   void rightWPTwoNeutrals(std::shared_ptr<okapi::AsyncMotionProfileController> med,
@@ -301,3 +306,43 @@ void leftWPNeutral(std::shared_ptr<okapi::AsyncMotionProfileController> med,
 {
 
 }
+
+void neutralCenterWP(std::shared_ptr<okapi::AsyncMotionProfileController> med,
+   std::shared_ptr<okapi::AsyncMotionProfileController> fast)
+   {
+
+     PIDchassis->moveDistanceAsync(6.5_ft);
+     goalCover.set_value(true);
+     clawMech.set_value(false);
+     pros::delay(1050);
+     clawMech.set_value(true);
+     PIDchassis->stop();
+
+     PIDchassis->moveDistance(-3.0_ft);
+     turn(315);
+     t.release();
+  
+    move(fast, 3.8_ft, bwd); //old is 4.4_ft
+    t.grab();
+    pros::delay(700);
+    move(med, 1.7_ft, fwd);
+    intakeMotor.moveVelocity(600);
+    pros::delay(700);
+    t.release();
+    intakeMotor.moveVelocity(0);
+
+    goalCover.set_value(false);
+
+    // turn(30);
+    // fb.lift(600);
+
+    // //getting row of rings
+    // intakeMotor.moveVelocity(600);
+    // move(med, 4.5_ft, fwd);
+    // move(fast, 5.7_ft, bwd);
+    // intakeMotor.moveVelocity(0);
+
+    // t.release();
+    // pros::delay(500);
+    // move(fast, 0.5_ft, fwd);
+   }

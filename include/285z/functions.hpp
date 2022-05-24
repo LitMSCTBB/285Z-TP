@@ -44,6 +44,9 @@ void leftWPNeutral(std::shared_ptr<okapi::AsyncMotionProfileController> med,
 void rightWPTwoNeutrals(std::shared_ptr<okapi::AsyncMotionProfileController> med,
     std::shared_ptr<okapi::AsyncMotionProfileController> fast);
 
+void neutralCenterWP(std::shared_ptr<okapi::AsyncMotionProfileController> med,
+    std::shared_ptr<okapi::AsyncMotionProfileController> fast);
+
 const bool fwd {false};
 const bool bwd {true};
 
